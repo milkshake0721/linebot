@@ -57,12 +57,21 @@ def gettwstock(stockID):
     # 標註今日日期
     data['日期'] = date_get_today()
     stock_num = str(stockID)
-    
     cols = data.columns.tolist()
     cols = cols[-1:] + cols[:-1]
     data = data[cols]
     # 除了證券代號外，其他欄位都是str，且部份資料中有''
     data = data.replace('', np.nan, regex=True)
     ans = (data.loc[(data['證券代號'] == stock_num)])
-    return ans
-    
+    ans = ans.set_index('日期')
+    # ans = ans.drop(ans.columns[[0]], axis=1)
+    return ans.T     # T表示行列互換
+
+# def makepretty(ans):
+#     a = 0
+# num = '2330'
+# a = gettwstock(num)
+
+# print (a)
+# print(a['證券代號'] == num)
+# print(a['證券名稱'])
