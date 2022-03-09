@@ -1,4 +1,4 @@
-from twstock import gettwstock
+from .twstock import gettwstock
 import pprint
 def wtd(query):
     if query[0:2] == '！ ' or query[0:2] == '! ':
