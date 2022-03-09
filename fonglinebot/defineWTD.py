@@ -1,4 +1,4 @@
-from .twstock import gettwstock
+from twstock import gettwstock
 import pprint
 def wtd(query):
     if query[0:2] == '！ ' or query[0:2] == '! ':
@@ -12,11 +12,13 @@ def wtd(query):
         query.split()
         ans = gettwstock(query)
         ans = str(ans)
-
-        return ans
+        if 'Empty DataFrame' in ans:
+            pass
+        else:
+            return ans
     else:
         ans = None
-        return ans
+        pass
 
 # if __name__ == '__main__':
 
