@@ -17,5 +17,5 @@ def stockapi(ID):
     finnhub_client = finnhub.Client(api_key="c8k6sqaad3i8fk1kn8ag")
     ans = finnhub_client.quote(ID)
     ans.pop('t')
-    all = '1. 現在價格 : ' + str(ans['c']) + '\n2. 變動價格 : ' + str(ans['d']) + '\n3. 變動趴數 : ' + str(ans['dp']) + '\n4. 今日最高 : ' + str(ans['h']) + '\n5. 今日最低 : '+ str(ans['l']) + '\n6. 開市價格 : '+ str(ans['o']) + '\n7. 上次閉市 : '+ str(ans['pc'])
+    all = '現在價格 : ' + str(ans['c']) + '\n變動價格 : ' + str(ans['d']) + '\n變動趴數 : ' + str(ans['dp']) + '\n今日最高 : ' + str(ans['h']) + '\n今日最低 : '+ str(ans['l']) + '\n開市價格 : '+ str(ans['o']) + '\n上次閉市 : '+ str(ans['pc'])
     return all
