@@ -1,4 +1,4 @@
-from .twstock import gettwstock
+from twstock import gettwstock
 import pprint
 def wtd(query):
     if query[0:2] == '！ ' or query[0:2] == '! ':
@@ -11,14 +11,16 @@ def wtd(query):
         query = str(query)
         query.split()
         ans = gettwstock(query)
+        ans = str(ans)
+        
         return ans
     else:
         ans = None
         return ans
 
-# if __name__ == '__main__':
+if __name__ == '__main__':
 
-#     dis = wtd('tw 2330')
-#     print(dis)
+    dis = wtd('tw 2330')
+    print(dis)
 
-#     pass
+    pass
