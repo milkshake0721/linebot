@@ -12,15 +12,15 @@ def wtd(query):
         query.split()
         ans = gettwstock(query)
         ans = str(ans)
-        
+
         return ans
     else:
         ans = None
         return ans
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
 
-    dis = wtd('tw 2330')
-    print(dis)
+#     dis = wtd('tw 2330')
+#     print(dis)
 
-    pass
+#     pass
