@@ -6,9 +6,9 @@ def wtd(query):
         ans = 'c'
         return ans
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
 
-    dis = wtd('ja')
-    print(dis)
+#     dis = wtd('ja')
+#     print(dis)
 
-    pass
+#     pass
