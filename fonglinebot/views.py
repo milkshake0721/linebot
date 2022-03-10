@@ -49,7 +49,7 @@ def callback(request):
                         TextSendMessage(text=com)
                     )
                 if '美股貪婪' in ask :
-                    url = 'http://markets.money.cnn.com/Marketsdata/uploadhandler/z718f7d0az3bfb3a28b08e419f881d624e475a574e.png'
+                    url = 'https://markets.money.cnn.com/Marketsdata/Api/Chart/FearGreedHistoricalImage?chartType=AvgPtileModel'
                     line_bot_api.reply_message(  # 回復圖片
                         event.reply_token,
                         ImageSendMessage(original_content_url = url, preview_image_url = url)
