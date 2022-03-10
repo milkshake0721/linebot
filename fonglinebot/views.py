@@ -9,7 +9,7 @@ from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import MessageEvent, TextSendMessage, ImageSendMessage
 
 from .defineWTD import wtd
-from .meme import memepic
+import random
  
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
@@ -33,12 +33,13 @@ def callback(request):
             if isinstance(event, MessageEvent):  # 如果有訊息事件
                 ask = event.message.text
                 ans = wtd(ask)
-                pic = memepic(ask)
 
                 if ask == '啪':
+                    pa_list = ['https://i.imgur.com/E7SYgOa.jpeg','https://i.imgur.com/ah7Ubom.jpeg','https://i.imgur.com/EEA8c3n.jpg']
+                    pa = random.choice(pa_list)
                     line_bot_api.reply_message(  # 回復圖片
                         event.reply_token,
-                        ImageSendMessage(original_content_url = 'https://i.imgur.com/E7SYgOa.jpeg', preview_image_url = 'https://i.imgur.com/E7SYgOa.jpeg')
+                        ImageSendMessage(original_content_url = pa, preview_image_url = pa)
                     )
                 else:
                     line_bot_api.reply_message(  # 回復訊息文字
