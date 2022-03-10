@@ -1,9 +1,12 @@
+from tkinter import END
 import requests
 import pandas as pd
 import numpy as np
 import datetime
 from bs4 import BeautifulSoup
 import soupsieve
+import json
+import csv
 
 def conv_to_list(obj):
     '''
@@ -48,29 +51,29 @@ def date_get_today(with_time=False):
 
 
 def gettwstock(stockID):
-    # 下載證交所資料 ------
-    link = 'https://www.twse.com.tw/exchangeReport/STOCK_DAY_ALL?response=open_data'
-    data = pd.read_csv(link)
-
-    # ['證券代號', '證券名稱', '成交股數', '成交金額', '開盤價',
-    #  '最高價', '最低價', '收盤價', '漲跌價差', '成交筆數']
-    data.columns =  ['證券代號', '證券名稱', '成交股數', '成交金額', '開盤價',
-    '最高價', '最低價', '收盤價', '漲跌價差', '成交筆數']  
-    # 標註今日日期
-    data['日期'] = date_get_today()
-    stock_num = str(stockID)
-    cols = data.columns.tolist()
-    cols = cols[-1:] + cols[:-1]
-    data = data[cols]
-    # 除了證券代號外，其他欄位都是str，且部份資料中有''
-    data = data.replace('', np.nan, regex=True)
-    if stock_num > '9999':
-        ans = (data.loc[(data['證券名稱'] == stock_num)])
+    if stockID[0] <= '9':
+        pass
     else:
-        ans = (data.loc[(data['證券代號'] == stock_num)])
-    ans = ans.set_index('日期')
-    # ans = ans.drop(ans.columns[[0]], axis=1)
-    return ans.T     # T表示行列互換
+        with open('fonglinebot/stocks.csv', mode='r') as infile:
+            reader = csv.reader(infile)
+            with open('coors_new.csv', mode='w') as outfile:
+                writer = csv.writer(outfile)
+                mydict = {rows[1]:rows[0] for rows in reader}
+        stockID = mydict[stockID]
+
+    link = 'http://mis.twse.com.tw/stock/api/getStockInfo.jsp?json=1&delay=0&ex_ch=tse_'+ stockID +'.tw'
+    # link = 'http://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch=tse_2330.tw&json=1&delay=0'
+    # print(link)
+    r = requests.post(link)
+    sel = r.json()['msgArray'][0]
+    change = float(sel['z']) - float(sel['o'])
+    change = round(change, 2)
+    change_p = (float(sel['z']) - float(sel['o'])) / float(sel['o']) * 100
+    change_p = round(change_p, 2)
+    all = stockID + '  \n'+ sel['n'] + '\n\n' + str(round(float(sel['z']),2)) + ' (' + str(change_p) + '%)' + '\n\n===================\n' + '開盤價格 : '+ str(round(float(sel['o']),2)) + '\n===================' + '\n\n價格變動 : ' + str(change) + '\n昨日收盤 : '+ str(round(float(sel['y']),2)) + '\n今日最高 : ' + str(round(float(sel['h']),2)) + '\n今日最低 : '+ str(round(float(sel['l']),2)) + '\n\n===================\n '
+
+    print(all)
+    return     # T表示行列互換
 
 # def makepretty(ans):
 #     a = 0
@@ -80,3 +83,5 @@ def gettwstock(stockID):
 # print (a)
 # print(a['證券代號'] == num)
 # print(a['證券名稱'])
+
+gettwstock('富邦公司治理')
