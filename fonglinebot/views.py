@@ -34,7 +34,7 @@ def callback(request):
                 ask = event.message.text
                 ans = wtd(ask)
 
-                if ask == '啪':
+                if '啪' in ask :
                     pa_list = ['https://i.imgur.com/E7SYgOa.jpeg','https://i.imgur.com/ah7Ubom.jpeg','https://i.imgur.com/EEA8c3n.jpg']
                     pa = random.choice(pa_list)
                     line_bot_api.reply_message(  # 回復圖片
