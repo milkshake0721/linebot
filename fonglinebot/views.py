@@ -56,7 +56,8 @@ def callback(request):
                         ImageSendMessage(original_content_url = url, preview_image_url = url)
                     )
                 if '幣圈貪婪' in ask :
-                    url = 'https://alternative.me/crypto/fear-and-greed-index.png'
+                    url = 'http://alternative.me/crypto/fear-and-greed-index.png'
+                    #https://alternative.me/crypto/fear-and-greed-index.png
                     line_bot_api.reply_message(  # 回復圖片
                         event.reply_token,
                         ImageSendMessage(original_content_url = url, preview_image_url = url)

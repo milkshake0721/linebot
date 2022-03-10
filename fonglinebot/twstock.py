@@ -81,4 +81,4 @@ def gettwstock(stockID):
 # print(a['證券代號'] == num)
 # print(a['證券名稱'])
 
-gettwstock('富邦公司治理')
+# gettwstock('富邦公司治理')
