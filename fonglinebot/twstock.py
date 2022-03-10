@@ -1,4 +1,3 @@
-from tkinter import END
 import requests
 import pandas as pd
 import numpy as np
