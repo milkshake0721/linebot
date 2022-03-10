@@ -38,7 +38,7 @@ def callback(request):
                 if ask == '啪':
                     line_bot_api.reply_message(  # 回復圖片
                         event.reply_token,
-                        ImageSendMessage(original_content_url = 'https://imgur.com/a/CRVJzZG', preview_image_url = 'https://imgur.com/a/CRVJzZG')
+                        ImageSendMessage(original_content_url = 'https://i.imgur.com/E7SYgOa.jpeg', preview_image_url = 'https://i.imgur.com/E7SYgOa.jpeg')
                     )
                 else:
                     line_bot_api.reply_message(  # 回復訊息文字
