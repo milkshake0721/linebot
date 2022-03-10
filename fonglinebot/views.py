@@ -6,10 +6,10 @@ from django.conf import settings
  
 from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
-from linebot.models import MessageEvent, TextSendMessage
+from linebot.models import MessageEvent, TextSendMessage, ImageSendMessage
 
 from .defineWTD import wtd
-
+from .meme import memepic
  
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
@@ -33,10 +33,16 @@ def callback(request):
             if isinstance(event, MessageEvent):  # 如果有訊息事件
                 ask = event.message.text
                 ans = wtd(ask)
+                pic = memepic(ask)
                 if ans == None:
                     pass
+                elif pic != None:
+                    line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        ImageSendMessage(original_content_url = pic)
+                    )
                 else:
-                    line_bot_api.reply_message(  # 回復傳入的訊息文字
+                    line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
                         TextSendMessage(text=ans)
                     )
