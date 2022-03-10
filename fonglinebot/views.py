@@ -34,9 +34,8 @@ def callback(request):
                 ask = event.message.text
                 ans = wtd(ask)
                 pic = memepic(ask)
-                if ans == None:
-                    pass
-                elif pic != None:
+
+                if ask == '啪':
                     line_bot_api.reply_message(  # 回復圖片
                         event.reply_token,
                         ImageSendMessage(original_content_url = 'https://imgur.com/a/CRVJzZG', preview_image_url = 'https://imgur.com/a/CRVJzZG')
