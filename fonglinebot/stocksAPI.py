@@ -1,21 +1,32 @@
 import finnhub
 import pprint
-
-'''
-{'c': 824.4,
- 'd': 19.82,
- 'dp': 2.4634,
- 'h': 849.99,
- 'l': 782.17,
- 'o': 795.53,
- 'pc': 804.58,
- 't': 1646773204}
- '''
+import datetime
 
 def stockapi(ID):
     ID = ID.upper()
+    datetime_dt = datetime.datetime.today()
+    today = datetime_dt.strftime("%Y-%m-%d")
+    oneday = datetime.timedelta(days=1)
+    yesterday = datetime_dt - oneday
+    tomarrow = datetime_dt + oneday
+    yesterday = yesterday.strftime("%Y-%m-%d")
+    tomarrow = tomarrow.strftime("%Y-%m-%d")
     finnhub_client = finnhub.Client(api_key="c8k6sqaad3i8fk1kn8ag")
     ans = finnhub_client.quote(ID)
+    news = finnhub_client.company_news(ID, _from = yesterday , to = today)
     ans.pop('t')
-    all = '個股代號 : ' + ID + '\n現在價格 : ' + str(ans['c']) + '\n變動價格 : ' + str(ans['d']) + '\n變動趴數 : ' + str(ans['dp']) + '\n今日最高 : ' + str(ans['h']) + '\n今日最低 : '+ str(ans['l']) + '\n開市價格 : '+ str(ans['o']) + '\n上次閉市 : '+ str(ans['pc'])
+    # all = news[0]['url']
+    all = ID + ' ( ' +str(ans['dp']) + '% )\n現在價格 : ' + str(ans['c']) + '\n-------------------\n\n變動價格 : ' + str(ans['d']) + '\n今日最高 : ' + str(ans['h']) + '\n今日最低 : '+ str(ans['l']) + '\n開市價格 : '+ str(ans['o']) + '\n上次閉市 : '+ str(ans['pc']) + '\n\n-------------------\n新聞 : '+ news[0]['headline']+ '\n' + news[0]['url']
     return all
+
+# print(stockapi('AAPL'))
+
+def currency():
+    finnhub_client = finnhub.Client(api_key="sandbox_c8k6qfaad3i8fk1kn7c0")
+    _currency = finnhub_client.forex_rates(base = 'TWD')
+    qu = _currency['quote']
+    usd = str(round(1/qu['USD'],3))
+    jpy = str(round(1/qu['JPY'],3))
+    eur = str(round(1/qu['EUR'],3))
+    print('美金 : ' + usd + '\n日幣 : '+ jpy +'\n歐元 : ' + eur )
+# currency()

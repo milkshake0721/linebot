@@ -2,6 +2,8 @@ import requests
 import pandas as pd
 import numpy as np
 import datetime
+from bs4 import BeautifulSoup
+import soupsieve
 
 def conv_to_list(obj):
     '''
@@ -62,14 +64,17 @@ def gettwstock(stockID):
     data = data[cols]
     # 除了證券代號外，其他欄位都是str，且部份資料中有''
     data = data.replace('', np.nan, regex=True)
-    ans = (data.loc[(data['證券代號'] == stock_num)])
+    if stock_num > '9999':
+        ans = (data.loc[(data['證券名稱'] == stock_num)])
+    else:
+        ans = (data.loc[(data['證券代號'] == stock_num)])
     ans = ans.set_index('日期')
     # ans = ans.drop(ans.columns[[0]], axis=1)
     return ans.T     # T表示行列互換
 
 # def makepretty(ans):
 #     a = 0
-# num = '2330'
+# num = '富邦公司治理'
 # a = gettwstock(num)
 
 # print (a)
