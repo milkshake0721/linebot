@@ -37,9 +37,9 @@ def callback(request):
                 if ans == None:
                     pass
                 elif pic != None:
-                    line_bot_api.reply_message(  # 回復訊息文字
+                    line_bot_api.reply_message(  # 回復圖片
                         event.reply_token,
-                        ImageSendMessage(original_content_url = pic)
+                        ImageSendMessage(original_content_url = 'https://imgur.com/a/CRVJzZG', preview_image_url = 'https://imgur.com/a/CRVJzZG')
                     )
                 else:
                     line_bot_api.reply_message(  # 回復訊息文字
