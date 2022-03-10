@@ -41,6 +41,26 @@ def callback(request):
                         event.reply_token,
                         ImageSendMessage(original_content_url = pa, preview_image_url = pa)
                     )
+                if '孟霖啊' in ask :
+                    command_list = ['小雞雞怎麼了?','脖子出來','脖子還舒服嗎？','2030之前都單身吧']
+                    com = random.choice(command_list)
+                    line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=com)
+                    )
+                if '美股貪婪' in ask :
+                    url = 'http://markets.money.cnn.com/Marketsdata/uploadhandler/z718f7d0az3bfb3a28b08e419f881d624e475a574e.png'
+                    line_bot_api.reply_message(  # 回復圖片
+                        event.reply_token,
+                        ImageSendMessage(original_content_url = url, preview_image_url = url)
+                    )
+                if '幣圈貪婪' in ask :
+                    url = 'https://alternative.me/crypto/fear-and-greed-index.png'
+                    line_bot_api.reply_message(  # 回復圖片
+                        event.reply_token,
+                        ImageSendMessage(original_content_url = url, preview_image_url = url)
+                    )
+                
                 else:
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
