@@ -76,7 +76,13 @@ def callback(request):
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
                         TextSendMessage(text=ans)
-                    )    
+                    )
+                if ask == '腳麻了' :
+                    url = 'https://i.imgur.com/fzUAf7h.jpeg'
+                    line_bot_api.reply_message(  # 回復圖片
+                        event.reply_token,
+                        ImageSendMessage(original_content_url = url, preview_image_url = url)
+                    )   
                 if '美股貪婪' in ask :
                     url = 'https://markets.money.cnn.com/Marketsdata/Api/Chart/FearGreedHistoricalImage?chartType=AvgPtileModel'
                     line_bot_api.reply_message(  # 回復圖片
