@@ -62,12 +62,17 @@ def all_spot_margin():
     r = requests.post(url)
     sel = r.json()['result']
     find = ['USDT','USD','BTC','ETH','BNB']
+    spot = {}
     for i in range(len(sel)):
-            if sel[i]['coin'] == 'USDT' :
-                spot = sel[i]
-    print(spot)
-    rate = str(spot['rate']*24*365*100) + '%'
+        for k in range(len(find)):
+            if sel[i]['coin'] == find[k] :
+                spot[find[k]] = sel[i]
+
+    # rate = str(spot['rate']*24*365*100) + '%'
+    # return rate
+    rate = '|USDT|' + str(round(spot['USDT']['rate']*24*365*100,1)) + '%\n|USD |' +str(round(spot['USD']['rate']*24*365*100,1)) +  '%\n|BTC |' +str(round(spot['BTC']['rate']*24*365*100,1)) +  '%\n|ETH |' + str(round(spot['ETH']['rate']*24*365*100,1)) +  '%\n|BNB |' + str(round(spot['BNB']['rate']*24*365*100,1)) + '%'
+
     return rate
 
-# all_spot_margin()
 # spot_margin('貸出Btc')
+# all_spot_margin()
