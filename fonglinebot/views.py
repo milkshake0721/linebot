@@ -48,10 +48,12 @@ def callback(request):
                         event.reply_token,
                         TextSendMessage(text=com)
                     )
-                if  ask == '香瓜' and person == '15724266270250' :
+                if  ask == '香瓜'  :
+                    print(person)
+                    ans = 'this is for test'
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
-                        TextSendMessage(text = 'this is for test')
+                        TextSendMessage(text = ans )
                     )
                     
                 if  ask == '並沒有' :
