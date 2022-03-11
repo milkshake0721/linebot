@@ -57,12 +57,12 @@ def callback(request):
                         event.reply_token,
                         TextSendMessage(text = str(ans) )
                     )
-                if  ask == 'Nick好帥' or ask == 'nick好帥' or ask == '我是台中金城武' or ask == '我是金城武' or '跟金城武一樣' in ask or '我金城武' in ask:
+                if  ask == 'Nick好帥' or ask == 'nick好帥' or ask == '我好帥' or ask == '我是台中金城武' or ask == '我是金城武' or '跟金城武一樣' in ask or '我金城武' in ask:
                     bullshit_list = ['笑死','屁','噁心死了','嘔嘔嘔嘔','你想太多了','Bullshit','夠囉','...','幽默','蛤?','我聽不見','3小']
                     no = random.choice(bullshit_list)
                     line_bot_api.reply_message(  # 回復圖片
                         event.reply_token,
-                        ImageSendMessage(original_content_url = no, preview_image_url = no)
+                        TextSendMessage(text=no)
                     )    
                 if  ask == '並沒有' :
                     no_list = ['https://cdn2.ettoday.net/images/3420/d3420288.jpg','https://i.imgur.com/SzAHxWh.jpg','https://cdn2.ettoday.net/images/3420/3420289.jpg','https://i.imgur.com/k4IWCTYh.jpg']
@@ -127,7 +127,7 @@ def callback(request):
                         event.reply_token,
                         TextSendMessage(text=ans)
                     )
-                if ask[0:3] == 'av ':
+                if ask[0:3] == 'av ' or ask[0:3] == 'Av ' or ask[0:3] == 'AV ':
                     ask = ask[3:]
                     ans = 'https://jable.tv/search/' + ask + '/'
                     line_bot_api.reply_message(  # 回復訊息文字
