@@ -50,7 +50,7 @@ def callback(request):
                         TextSendMessage(text=com)
                     )
                 if  ask == '並沒有' :
-                    no_list = ['https://cdn2.ettoday.net/images/3420/d3420288.jpg','http://i.imgur.com/SzAHxWh.jpg','https://cdn2.ettoday.net/images/3420/3420289.jpg','http://i.imgur.com/k4IWCTYh.jpg']
+                    no_list = ['https://cdn2.ettoday.net/images/3420/d3420288.jpg','https://i.imgur.com/SzAHxWh.jpg','https://cdn2.ettoday.net/images/3420/3420289.jpg','https://i.imgur.com/k4IWCTYh.jpg']
                     no = random.choice(no_list)
                     line_bot_api.reply_message(  # 回復圖片
                         event.reply_token,
