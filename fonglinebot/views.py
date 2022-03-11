@@ -33,7 +33,6 @@ def callback(request):
         for event in events:
             if isinstance(event, MessageEvent):  # 如果有訊息事件
                 ask = event.message.text
-                ans = wtd(ask)
                 person = event.message.id
                 if '啪' in ask :
                     pa_list = ['https://i.imgur.com/E7SYgOa.jpeg','https://i.imgur.com/ah7Ubom.jpeg','https://i.imgur.com/EEA8c3n.jpg']
@@ -50,13 +49,10 @@ def callback(request):
                         TextSendMessage(text=com)
                     )
                 if  ask == '香瓜' and person == '15724266270250' :
-                    try:
-                        line_bot_api.reply_message(  # 回復訊息文字
+                    line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
                         TextSendMessage(text = 'this is for test')
                     )
-                    except LineBotApiError :
-                        return HttpResponseBadRequest()
                     
                 if  ask == '並沒有' :
                     no_list = ['https://cdn2.ettoday.net/images/3420/d3420288.jpg','https://i.imgur.com/SzAHxWh.jpg','https://cdn2.ettoday.net/images/3420/3420289.jpg','https://i.imgur.com/k4IWCTYh.jpg']
@@ -98,7 +94,16 @@ def callback(request):
                         event.reply_token,
                         TextSendMessage(text=ans)
                     )
-
+                if ask[0:3] == 'tw ' or ask[0:3] == 'TW ' or ask[0:3] == 'Tw ':
+                    line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=wtd(ask))
+                    )
+                if ask[0:3] == 'us ' or ask[0:3] == 'US ' or ask[0:3] == 'Us ':
+                    line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=wtd(ask))
+                    )
                 else:
                     pass
         return HttpResponse()
