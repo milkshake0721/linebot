@@ -9,7 +9,7 @@ from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import MessageEvent, TextSendMessage, ImageSendMessage
 
 from .defineWTD import wtd
-from .crypto_get import crypto,gasfee
+from .crypto_get import crypto,gasfee,spot_margin,all_spot_margin
 from .stocksAPI import stockapi,currency
 import random
  
@@ -78,6 +78,18 @@ def callback(request):
                         event.reply_token,
                         TextSendMessage(text=ans)
                     )
+                if  ask[0:2] == '貸出' :
+                    ans = spot_margin()
+                    line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=ans)
+                    )  
+                if  ask[0:2] == '放貸利率' :
+                    ans = all_spot_margin()
+                    line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=ans)
+                    )  
                 if ask == '腳麻了' :
                     url = 'https://i.imgur.com/fzUAf7h.jpeg'
                     line_bot_api.reply_message(  # 回復圖片

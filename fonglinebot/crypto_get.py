@@ -22,7 +22,7 @@ def crypto(coin):
 
     history_high2now = (float(sel['price']) - float(history_high)) / history_high *100
 
-    all = sel['name'] + '\n| 現價 | ' + str(sel['price']) + ' (' + str(round(float(sel['change24h'])*100,2)) + '%)' + '\n-------------------\n' + '| 最高回落 | ' + str(round(float(history_high2now),3)) + '%\n| 一小變動 | ' + str(round(float(sel['change1h'])*100,3)) + '%\n| 歷史高點 | ' + str(round(float(history_high),3)) + '\n| 歷史低點 | ' + str(round(float(history_low),3)) +  '\n-------------------\n\nUSD volume in past 24 hours : '+ str(round(float(sel['volumeUsd24h']),0)) 
+    all = sel['name'] + '\n| 現價 | ' + str(sel['price']) + ' (' + str(round(float(sel['change24h'])*100,2)) + '%)' + '\n-------------------\n' + '| 最高回落 | ' + str(round(float(history_high2now),3)) + '%\n| 一小變動 | ' + str(round(float(sel['change1h'])*100,3)) + '%\n| 歷史高點 | ' + str(round(float(history_high),3)) + '\n| 歷史低點 | ' + str(round(float(history_low),3)) +  '\n-------------------\nUSD volume in past 24 hours : '+ str(round(float(sel['volumeUsd24h']),0)) 
 
     return all
 
@@ -38,3 +38,36 @@ def gasfee():
     sel = r.json()
     fee = '|平均| ' + str(sel['average']/10) + '\n|最快| ' + str(sel['fastest']/10) + '\n|最慢| ' + str(sel['safeLow']/10)
     return fee
+
+def spot_margin(coin):
+    coin = coin[2:]
+    coin = coin.upper()
+    url = 'http://ftx.com/api/spot_margin/history'
+    r = requests.post(url)
+    sel = r.json()['result']
+
+    for i in range(len(sel)):
+        if sel[i]['coin'] == coin :
+            spot = sel[i]
+            break
+
+    # print(spot['rate']*24*365*100)
+
+    rate = str(spot['rate']*24*365*100) + '%'
+
+    return rate
+
+def all_spot_margin():
+    url = 'http://ftx.com/api/spot_margin/history'
+    r = requests.post(url)
+    sel = r.json()['result']
+    find = ['USDT','USD','BTC','ETH','BNB']
+    for i in range(len(sel)):
+            if sel[i]['coin'] == 'USDT' :
+                spot = sel[i]
+    print(spot)
+    rate = str(spot['rate']*24*365*100) + '%'
+    return rate
+
+# all_spot_margin()
+# spot_margin('貸出Btc')
