@@ -79,12 +79,12 @@ def callback(request):
                         TextSendMessage(text=ans)
                     )
                 if  ask[0:2] == '貸出' :
-                    ans = spot_margin()
+                    ans = spot_margin(ask)
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
                         TextSendMessage(text=ans)
                     )  
-                if  ask[0:2] == '放貸利率' :
+                if  ask[0:4] == '放貸利率' :
                     ans = all_spot_margin()
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
