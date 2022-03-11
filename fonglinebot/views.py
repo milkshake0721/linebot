@@ -34,7 +34,7 @@ def callback(request):
             if isinstance(event, MessageEvent):  # 如果有訊息事件
                 ask = event.message.text
                 ans = wtd(ask)
-                print(event.message)
+                person = event.message.id
                 if '啪' in ask :
                     pa_list = ['https://i.imgur.com/E7SYgOa.jpeg','https://i.imgur.com/ah7Ubom.jpeg','https://i.imgur.com/EEA8c3n.jpg']
                     pa = random.choice(pa_list)
@@ -49,16 +49,14 @@ def callback(request):
                         event.reply_token,
                         TextSendMessage(text=com)
                     )
-                if  ask == '香瓜' :
+                if  ask == '香瓜' and person == '15724266270250' :
                     try:
-                        profile = line_bot_api.get_profile('<user_id>')
                         line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
-                        TextSendMessage(text = str(profile))
+                        TextSendMessage(text = 'this is for test')
                     )
                     except LineBotApiError :
                         return HttpResponseBadRequest()
-                    com = random.choice(command_list)
                     
                 if  ask == '並沒有' :
                     no_list = ['https://cdn2.ettoday.net/images/3420/d3420288.jpg','https://i.imgur.com/SzAHxWh.jpg','https://cdn2.ettoday.net/images/3420/3420289.jpg','https://i.imgur.com/k4IWCTYh.jpg']
