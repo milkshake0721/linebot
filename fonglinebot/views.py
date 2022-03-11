@@ -23,7 +23,6 @@ def callback(request):
         signature = request.META['HTTP_X_LINE_SIGNATURE']
         body = request.body.decode('utf-8')
         
-
         try:
             events = parser.parse(body, signature)  # 傳入的事件
         except InvalidSignatureError:
