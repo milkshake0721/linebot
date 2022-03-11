@@ -49,12 +49,12 @@ def callback(request):
                         event.reply_token,
                         TextSendMessage(text=com)
                     )
-                if  ask == '笑死' :
+                if  ask == '香瓜' :
                     try:
                         profile = line_bot_api.get_profile('<user_id>')
                         line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
-                        TextSendMessage(text=profile)
+                        TextSendMessage(text = str(profile))
                     )
                     except LineBotApiError :
                         return HttpResponseBadRequest()
@@ -102,10 +102,7 @@ def callback(request):
                     )
 
                 else:
-                    line_bot_api.reply_message(  # 回復訊息文字
-                        event.reply_token,
-                        TextSendMessage(text=ans)
-                    )
+                    pass
         return HttpResponse()
     else:
         return HttpResponseBadRequest()
