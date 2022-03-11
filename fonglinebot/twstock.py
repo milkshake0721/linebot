@@ -66,7 +66,10 @@ def gettwstock(stockID):
     r = requests.post(link)
     sel = r.json()['msgArray'][0]
     print(sel)
-    now = sel['a'][:6]
+    if sel['z'] == '-' :
+        now = now = sel['a'][:6]
+    else:
+        now = sel['z']
     change = (float(now)) - (float(sel['o']))
     change = round(change, 2)
     change_p = (float(now) - float(sel['o'])) / float(sel['o']) * 100

@@ -49,6 +49,17 @@ def callback(request):
                         event.reply_token,
                         TextSendMessage(text=com)
                     )
+                if  ask == '笑死' :
+                    try:
+                        profile = line_bot_api.get_profile('<user_id>')
+                        line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=profile)
+                    )
+                    except LineBotApiError :
+                        return HttpResponseBadRequest()
+                    com = random.choice(command_list)
+                    
                 if  ask == '並沒有' :
                     no_list = ['https://cdn2.ettoday.net/images/3420/d3420288.jpg','https://i.imgur.com/SzAHxWh.jpg','https://cdn2.ettoday.net/images/3420/3420289.jpg','https://i.imgur.com/k4IWCTYh.jpg']
                     no = random.choice(no_list)
