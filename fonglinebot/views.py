@@ -22,8 +22,8 @@ def callback(request):
     if request.method == 'POST':
         signature = request.META['HTTP_X_LINE_SIGNATURE']
         body = request.body.decode('utf-8')
-        userid = event.source.user_id
-        print(userid,'say',)
+        
+
         try:
             events = parser.parse(body, signature)  # 傳入的事件
         except InvalidSignatureError:
@@ -34,6 +34,7 @@ def callback(request):
         for event in events:
             if isinstance(event, MessageEvent):  # 如果有訊息事件
                 ask = event.message.text
+                userid = event.source.user_id
                 print(userid,'say',ask)
                 if '啪' in ask :
                     pa_list = ['https://i.imgur.com/E7SYgOa.jpeg','https://i.imgur.com/ah7Ubom.jpeg','https://i.imgur.com/EEA8c3n.jpg']
