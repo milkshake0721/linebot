@@ -33,7 +33,7 @@ def callback(request):
         for event in events:
             if isinstance(event, MessageEvent):  # 如果有訊息事件
                 ask = event.message.text
-                person = event.message.id
+                user_id = event.source.userId
                 if '啪' in ask :
                     pa_list = ['https://i.imgur.com/E7SYgOa.jpeg','https://i.imgur.com/ah7Ubom.jpeg','https://i.imgur.com/EEA8c3n.jpg']
                     pa = random.choice(pa_list)
@@ -48,13 +48,12 @@ def callback(request):
                         event.reply_token,
                         TextSendMessage(text=com)
                     )
-                if  ask == '香瓜'  :
-                    user_id = event.source
+                if  ask == '香瓜' and user_id == 'U1c1925ccd29c125ed845cc2db637f39b' :
                     print(user_id)
                     ans = 'Your ID is :' + user_id
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
-                        TextSendMessage(text = ans )
+                        TextSendMessage(text = str(ans) )
                     )
                     
                 if  ask == '並沒有' :
