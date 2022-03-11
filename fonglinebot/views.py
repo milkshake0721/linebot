@@ -10,6 +10,7 @@ from linebot.models import MessageEvent, TextSendMessage, ImageSendMessage
 
 from .defineWTD import wtd
 from .crypto_get import crypto,gasfee
+from .stocksAPI import stockapi,currency
 import random
  
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
@@ -96,6 +97,11 @@ def callback(request):
                         event.reply_token,
                         ImageSendMessage(original_content_url = url, preview_image_url = url)
                     )
+                if ask == '匯率' :
+                    line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=currency())
+                    )    
                 if ask[0:2] == '$ ':
                     ask = ask[2:]
                     ans = crypto(ask)
