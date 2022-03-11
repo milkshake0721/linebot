@@ -50,7 +50,7 @@ def callback(request):
                     )
                 if  ask == '香瓜'  :
                     print(person)
-                    ans = 'this is for test'
+                    ans = 'Your ID is :' + person
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
                         TextSendMessage(text = ans )
