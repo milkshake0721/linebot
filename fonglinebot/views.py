@@ -9,7 +9,7 @@ from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import MessageEvent, TextSendMessage, ImageSendMessage
 
 from .defineWTD import wtd
-from .crypto_get import crypto
+from .crypto_get import crypto,gasfee
 import random
  
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
@@ -42,20 +42,26 @@ def callback(request):
                         event.reply_token,
                         ImageSendMessage(original_content_url = pa, preview_image_url = pa)
                     )
-                if '孟霖啊' in ask :
+                if  ask == '孟霖啊' :
                     command_list = ['小雞雞怎麼了?','脖子出來','脖子還舒服嗎？','2030之前都單身吧']
                     com = random.choice(command_list)
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
                         TextSendMessage(text=com)
                     )
-                if '並沒有' in ask :
-                    no_list = ['https://cdn2.ettoday.net/images/3420/d3420288.jpg','https://memeprod.sgp1.digitaloceanspaces.com/user-template/9f3c589172fd5419f8fce8d80da5d5d4.png','https://c.tenor.com/1n9G2NPUFFgAAAAC/不要瞎掰好嗎.gif']
+                if  ask == '並沒有' :
+                    no_list = ['https://cdn2.ettoday.net/images/3420/d3420288.jpg','http://i.imgur.com/SzAHxWh.jpg','https://cdn2.ettoday.net/images/3420/3420289.jpg','http://i.imgur.com/k4IWCTYh.jpg']
                     no = random.choice(no_list)
                     line_bot_api.reply_message(  # 回復圖片
                         event.reply_token,
                         ImageSendMessage(original_content_url = no, preview_image_url = no)
                     )
+                if  ask == 'gas' or ask == 'gas fee' :
+                    ans = gasfee()
+                    line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=ans)
+                    )    
                 if '美股貪婪' in ask :
                     url = 'https://markets.money.cnn.com/Marketsdata/Api/Chart/FearGreedHistoricalImage?chartType=AvgPtileModel'
                     line_bot_api.reply_message(  # 回復圖片
