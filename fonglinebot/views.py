@@ -49,7 +49,7 @@ def callback(request):
                         TextSendMessage(text=com)
                     )
                 if  ask == '香瓜'  :
-                    user_id = event.source.user
+                    user_id = event.source
                     print(user_id)
                     ans = 'Your ID is :' + user_id
                     line_bot_api.reply_message(  # 回復訊息文字
