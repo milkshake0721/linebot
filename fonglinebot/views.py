@@ -49,8 +49,9 @@ def callback(request):
                         TextSendMessage(text=com)
                     )
                 if  ask == '香瓜'  :
-                    print(person)
-                    ans = 'Your ID is :' + person
+                    profile = line_bot_api.get_profile('<user_id>')
+                    print(profile)
+                    ans = 'Your ID is :' + profile
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
                         TextSendMessage(text = ans )
