@@ -50,7 +50,7 @@ def callback(request):
                     )
                 if  ask == '香瓜' :
                     userid = event.source.user_id
-                    print(userid)
+                    print(userid,type(userid))
                     
                     ans = 'Your ID is :' + userid
                     line_bot_api.reply_message(  # 回復訊息文字
