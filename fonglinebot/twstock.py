@@ -65,11 +65,13 @@ def gettwstock(stockID):
     # print(link)
     r = requests.post(link)
     sel = r.json()['msgArray'][0]
-    change = float(sel['z']) - float(sel['o'])
+    print(sel)
+    now = sel['a'][:6]
+    change = (float(now)) - (float(sel['o']))
     change = round(change, 2)
-    change_p = (float(sel['z']) - float(sel['o'])) / float(sel['o']) * 100
+    change_p = (float(now) - float(sel['o'])) / float(sel['o']) * 100
     change_p = round(change_p, 2)
-    all = stockID + '  \n'+ sel['n'] + '\n\n' + str(round(float(sel['z']),2)) + ' (' + str(change_p) + '%)' + '\n\n===================\n' + '開盤價格 : '+ str(round(float(sel['o']),2)) + '\n===================' + '\n\n價格變動 : ' + str(change) + '\n昨日收盤 : '+ str(round(float(sel['y']),2)) + '\n今日最高 : ' + str(round(float(sel['h']),2)) + '\n今日最低 : '+ str(round(float(sel['l']),2)) + '\n\n===================\n '
+    all = stockID + '  \n'+ sel['n'] + '\n\n' + str(round(float(now),2)) + ' (' + str(change_p) + '%)' + '\n\n===================\n' + '開盤價格 : '+ str(round(float(sel['o']),2)) + '\n===================' + '\n\n價格變動 : ' + str(change) + '\n昨日收盤 : '+ str(round(float(sel['y']),2)) + '\n今日最高 : ' + str(round(float(sel['h']),2)) + '\n今日最低 : '+ str(round(float(sel['l']),2)) + '\n\n===================\n '
     return all    
 
 # def makepretty(ans):
@@ -81,4 +83,4 @@ def gettwstock(stockID):
 # print(a['證券代號'] == num)
 # print(a['證券名稱'])
 
-# gettwstock('富邦公司治理')
+# print(gettwstock('富邦公司治理'))

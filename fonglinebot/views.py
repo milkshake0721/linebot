@@ -63,7 +63,7 @@ def callback(request):
                         event.reply_token,
                         ImageSendMessage(original_content_url = no, preview_image_url = no)
                     )
-                if  ask == 'gas' or ask == 'gas fee' :
+                if  ask == 'gas' or ask == 'gas fee' or ask == 'gasfee':
                     ans = gasfee()
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
