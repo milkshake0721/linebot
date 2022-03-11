@@ -49,6 +49,13 @@ def callback(request):
                         event.reply_token,
                         TextSendMessage(text=com)
                     )
+                if '並沒有' in ask :
+                    no_list = ['https://cdn2.ettoday.net/images/3420/d3420288.jpg','https://memeprod.sgp1.digitaloceanspaces.com/user-template/9f3c589172fd5419f8fce8d80da5d5d4.png','https://c.tenor.com/1n9G2NPUFFgAAAAC/不要瞎掰好嗎.gif']
+                    no = random.choice(no_list)
+                    line_bot_api.reply_message(  # 回復圖片
+                        event.reply_token,
+                        ImageSendMessage(original_content_url = no, preview_image_url = no)
+                    )
                 if '美股貪婪' in ask :
                     url = 'https://markets.money.cnn.com/Marketsdata/Api/Chart/FearGreedHistoricalImage?chartType=AvgPtileModel'
                     line_bot_api.reply_message(  # 回復圖片
