@@ -36,6 +36,7 @@ def callback(request):
                 ask = event.message.text
                 userid = event.source.user_id
                 print(userid,'say',ask,'\n')
+                
                 if '啪' in ask :
                     pa_list = ['https://i.imgur.com/E7SYgOa.jpeg','https://i.imgur.com/ah7Ubom.jpeg','https://i.imgur.com/EEA8c3n.jpg']
                     pa = random.choice(pa_list)
@@ -51,9 +52,13 @@ def callback(request):
                         TextSendMessage(text=com)
                     )
                 if  ask == '香瓜' and userid == 'U1c1925ccd29c125ed845cc2db637f39b' :
+                    ask_type = event.source.type
+                    print(ask_type)
+                    if ask_type == 'group':
+                        group_id = event.source.group_id
                     print(userid,type(userid))
-                    roomid = event.source
-                    print(userid,'say',ask,'\n\nRoomID : ',roomid)
+
+                    print(userid,'say',ask,'\n\nRoomID : ',group_id)
                     ans = 'Your ID is :' + userid
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
