@@ -76,5 +76,5 @@ def all_spot_margin():
 
     return rate
 
-spot_margin('貸出 Btc')
+# spot_margin('貸出 Btc')
 # all_spot_margin()

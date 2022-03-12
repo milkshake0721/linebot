@@ -5,7 +5,7 @@ def wtd(query):
     if query[0:3] == 'tw ' or query[0:3] == 'TW ' or query[0:3] == 'Tw ':
         query = query[3:]
         query = str(query)
-        query = query.split()
+
         ans = gettwstock(query)
         ans = str(ans)
         if 'Empty DataFrame' in ans:

@@ -60,7 +60,7 @@ def gettwstock(stockID):
                 mydict = {rows[1]:rows[0] for rows in reader}
         stockID = mydict[stockID]
 
-    link = 'http://mis.twse.com.tw/stock/api/getStockInfo.jsp?json=1&delay=0&ex_ch=tse_'+ stockID +'.tw'
+    link = 'http://mis.twse.com.tw/stock/api/getStockInfo.jsp?json=1&delay=0&ex_ch=tse_'+ str(stockID) +'.tw'
     # link = 'http://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch=tse_2330.tw&json=1&delay=0'
     # print(link)
     r = requests.post(link)
@@ -85,5 +85,5 @@ def gettwstock(stockID):
 # print (a)
 # print(a['證券代號'] == num)
 # print(a['證券名稱'])
-
+# print(gettwstock('2330'))
 # print(gettwstock('富邦公司治理'))
