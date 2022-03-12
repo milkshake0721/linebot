@@ -40,7 +40,7 @@ def gasfee():
     return fee
 
 def spot_margin(coin):
-    coin = coin[2:]
+    coin = coin[3:]
     coin = coin.upper()
     url = 'http://ftx.com/api/spot_margin/history'
     r = requests.post(url)
@@ -53,7 +53,7 @@ def spot_margin(coin):
 
     # print(spot['rate']*24*365*100)
 
-    rate = str(spot['rate']*24*365*100) + '%'
+    rate = str(round(spot['rate']*24*365*100),1) + '%'
 
     return rate
 

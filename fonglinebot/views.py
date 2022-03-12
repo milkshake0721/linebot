@@ -57,14 +57,21 @@ def callback(request):
                         event.reply_token,
                         TextSendMessage(text = str(ans) )
                     )
-                if  ask == 'Nick好帥' or ask == 'nick好帥' or ask == '我好帥' or ask == '我是台中金城武' or ask == '我是金城武' or '跟金城武一樣' in ask or '我金城武' in ask:
-                    bullshit_list = ['笑死','屁','噁心死了','嘔嘔嘔嘔','你想太多了','Bullshit','夠囉','...','幽默','蛤?','我聽不見','3小']
+                if  '逢好帥' in ask :
+                    print(userid,type(userid))
+                    ans = '沒綽'
+                    line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text = str(ans) )
+                    )
+                if  ask == 'Nick好帥' or ask == 'nick好帥' or ask == '我好帥' or ask == '我是台中金城武' or ask == '我是金城武' or '跟金城武一樣' in ask or '我金城武' in ask or '尼克好帥' in ask:
+                    bullshit_list = ['笑死','屁','噁心死了','嘔嘔嘔嘔','你想太多了','Bullshit','夠囉','...','幽默','蛤?','我聽不見','3小','呵']
                     no = random.choice(bullshit_list)
                     line_bot_api.reply_message(  # 回復圖片
                         event.reply_token,
                         TextSendMessage(text=no)
                     )    
-                if  ask == '並沒有' :
+                if  ask == '並沒有' or ask == '不要瞎掰好嗎':
                     no_list = ['https://cdn2.ettoday.net/images/3420/d3420288.jpg','https://i.imgur.com/SzAHxWh.jpg','https://cdn2.ettoday.net/images/3420/3420289.jpg','https://i.imgur.com/k4IWCTYh.jpg']
                     no = random.choice(no_list)
                     line_bot_api.reply_message(  # 回復圖片
@@ -84,7 +91,7 @@ def callback(request):
                         event.reply_token,
                         TextSendMessage(text=ans)
                     )
-                if  ask[0:2] == '貸出' :
+                if  ask[0:3] == '貸出 ' :
                     ans = spot_margin(ask)
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
