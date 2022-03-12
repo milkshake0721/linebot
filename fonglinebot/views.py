@@ -35,7 +35,8 @@ def callback(request):
             if isinstance(event, MessageEvent):  # 如果有訊息事件
                 ask = event.message.text
                 userid = event.source.user_id
-                print(userid,'say',ask)
+                # roomid = event.source.room_id
+                # print(userid,'say',ask,'\n\nRoomID : ',roomid)
                 if '啪' in ask :
                     pa_list = ['https://i.imgur.com/E7SYgOa.jpeg','https://i.imgur.com/ah7Ubom.jpeg','https://i.imgur.com/EEA8c3n.jpg']
                     pa = random.choice(pa_list)
@@ -52,6 +53,8 @@ def callback(request):
                     )
                 if  ask == '香瓜' and userid == 'U1c1925ccd29c125ed845cc2db637f39b' :
                     print(userid,type(userid))
+                    roomid = event.source.room_id
+                    print(userid,'say',ask,'\n\nRoomID : ',roomid)
                     ans = 'Your ID is :' + userid
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
