@@ -35,7 +35,7 @@ def callback(request):
             if isinstance(event, MessageEvent):  # 如果有訊息事件
                 ask = event.message.text
                 userid = event.source.user_id
-                print(userid,'say',ask,'\n\nRoomID : ',roomid)
+                print(userid,'say',ask,'\n')
                 if '啪' in ask :
                     pa_list = ['https://i.imgur.com/E7SYgOa.jpeg','https://i.imgur.com/ah7Ubom.jpeg','https://i.imgur.com/EEA8c3n.jpg']
                     pa = random.choice(pa_list)
