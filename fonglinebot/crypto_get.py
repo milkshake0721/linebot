@@ -40,21 +40,23 @@ def gasfee():
     return fee
 
 def spot_margin(coin):
-    coin = coin[3:]
+    # print (coin)
+    coin = coin[2:]
     coin = coin.upper()
+    coin = coin.split()
+    # print(type(coin))
     url = 'http://ftx.com/api/spot_margin/history'
     r = requests.post(url)
     sel = r.json()['result']
-
+    spot = None
     for i in range(len(sel)):
-        if sel[i]['coin'] == coin :
+        if sel[i]['coin'] == coin[0] :
             spot = sel[i]
-            break
 
     # print(spot['rate']*24*365*100)
-
-    rate = str(round(spot['rate']*24*365*100),1) + '%'
-
+    # rate = spot
+    rate = str(round((spot['rate']*24*365*100),2)) + '%'
+    print(rate)
     return rate
 
 def all_spot_margin():
@@ -74,5 +76,5 @@ def all_spot_margin():
 
     return rate
 
-# spot_margin('貸出Btc')
+spot_margin('貸出 Btc')
 # all_spot_margin()

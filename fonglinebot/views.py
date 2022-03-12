@@ -50,7 +50,7 @@ def callback(request):
                         event.reply_token,
                         TextSendMessage(text=com)
                     )
-                if  ask == '香瓜' :
+                if  ask == '香瓜' and userid == 'U1c1925ccd29c125ed845cc2db637f39b' :
                     print(userid,type(userid))
                     ans = 'Your ID is :' + userid
                     line_bot_api.reply_message(  # 回復訊息文字
@@ -65,7 +65,7 @@ def callback(request):
                         TextSendMessage(text = str(ans) )
                     )
                 if  ask == 'Nick好帥' or ask == 'nick好帥' or ask == '我好帥' or ask == '我是台中金城武' or ask == '我是金城武' or '跟金城武一樣' in ask or '我金城武' in ask or '尼克好帥' in ask:
-                    bullshit_list = ['笑死','屁','噁心死了','嘔嘔嘔嘔','你想太多了','Bullshit','夠囉','...','幽默','蛤?','我聽不見','3小','呵']
+                    bullshit_list = ['笑死','屁','噁心死了','嘔嘔嘔嘔','你想太多了','Bullshit','夠囉','...','幽默','蛤?','我聽不見','3小','呵','你夠囉','媽媽說不能騙人']
                     no = random.choice(bullshit_list)
                     line_bot_api.reply_message(  # 回復圖片
                         event.reply_token,
