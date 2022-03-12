@@ -52,7 +52,7 @@ def callback(request):
                     )
                 if  ask == '香瓜' and userid == 'U1c1925ccd29c125ed845cc2db637f39b' :
                     print(userid,type(userid))
-                    roomid = event.source.room_id
+                    roomid = event.source
                     print(userid,'say',ask,'\n\nRoomID : ',roomid)
                     ans = 'Your ID is :' + userid
                     line_bot_api.reply_message(  # 回復訊息文字
