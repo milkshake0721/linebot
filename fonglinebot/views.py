@@ -35,6 +35,10 @@ def callback(request):
             if isinstance(event, MessageEvent):  # 如果有訊息事件
                 ask = event.message.text
                 userid = event.source.user_id
+                ask_type = event.source.type
+                if ask_type == 'group':
+                        group_id = event.source.group_id
+                        print(userid,'say',ask,'\n\nRoomID : ',group_id)
                 print(userid,'say',ask,'\n')
                 
                 if '啪' in ask :
@@ -52,13 +56,12 @@ def callback(request):
                         TextSendMessage(text=com)
                     )
                 if  ask == '香瓜' and userid == 'U1c1925ccd29c125ed845cc2db637f39b' :
-                    ask_type = event.source.type
-                    print(ask_type)
-                    if ask_type == 'group':
-                        group_id = event.source.group_id
+                    # ask_type = event.source.type
+                    # print(ask_type)
+                    # if ask_type == 'group':
+                    #     group_id = event.source.group_id
+                    #     print(userid,'say',ask,'\n\nRoomID : ',group_id)
                     print(userid,type(userid))
-
-                    print(userid,'say',ask,'\n\nRoomID : ',group_id)
                     ans = 'Your ID is :' + userid
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
