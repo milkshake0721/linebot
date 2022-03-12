@@ -61,7 +61,7 @@ def callback(request):
                     # if ask_type == 'group':
                     #     group_id = event.source.group_id
                     #     print(userid,'say',ask,'\n\nRoomID : ',group_id)
-                    print(userid,type(userid))
+                    # print(userid,type(userid))
                     ans = 'Your ID is :' + userid
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
