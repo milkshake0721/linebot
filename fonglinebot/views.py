@@ -11,6 +11,7 @@ from linebot.models import MessageEvent, TextSendMessage, ImageSendMessage
 from .defineWTD import wtd
 from .crypto_get import crypto,gasfee,spot_margin,all_spot_margin
 from .stocksAPI import stockapi,currency
+from .do_excel import Nick_lmao_time,check_Nick_lmao_time
 import random
  
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
@@ -48,6 +49,14 @@ def callback(request):
                     line_bot_api.reply_message(  # 回復圖片
                         event.reply_token,
                         ImageSendMessage(original_content_url = pa, preview_image_url = pa)
+                    )
+                if ask == '笑死' and userid == 'U0bdb890d03a5b755f3dbb67eafa74f5d' :
+                    Nick_lmao_time()
+                if ask == '尼克笑死幾次' and userid == 'U1c1925ccd29c125ed845cc2db637f39b' :
+                    com = check_Nick_lmao_time()
+                    line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=com)
                     )
                 if  ask == '孟霖啊' :
                     command_list = ['小雞雞怎麼了?','脖子出來','脖子還舒服嗎？','2030之前都單身吧']
