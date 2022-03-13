@@ -80,9 +80,10 @@ def callback(request):
                         event.reply_token,
                         TextSendMessage(text = str(ans) )
                     )
-                if  '逢好帥' in ask or ('我好帥' in ask and userid != 'U0bdb890d03a5b755f3dbb67eafa74f5d' ):
-                    print(userid,type(userid))
+                if  '逢好帥' in ask or '我好帥' in ask :
                     good_list = ['沒綽','對的','我也這麼認為','你多說幾次也不會有人反駁你','沒有錯','我贊同你的想法']
+                    if  userid == 'U0bdb890d03a5b755f3dbb67eafa74f5d' :
+                        good_list = ['笑死','屁','噁心死了','嘔嘔嘔嘔','你想太多了','Bullshit','夠囉','...','幽默','蛤?','我聽不見','3小','呵','你夠囉','媽媽說不能騙人','你好意思?']
                     ans = random.choice(good_list)
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
