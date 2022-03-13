@@ -65,7 +65,6 @@ def gettwstock(stockID):
     # print(link)
     r = requests.post(link)
     sel = r.json()['msgArray'][0]
-    print(sel)
     if sel['z'] == '-' :
         now = now = sel['a'][:6]
     else:
