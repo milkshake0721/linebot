@@ -72,15 +72,10 @@ def callback(request):
                     #     group_id = event.source.group_id
                     #     print(userid,'say',ask,'\n\nRoomID : ',group_id)
                     # print(userid,type(userid))
-                    url = 'https://api.nmb.show/xiaojiejie1.php'
                     ans = 'Your ID is :' + userid
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
                         TextSendMessage(text = str(ans) )
-                    )
-                    line_bot_api.reply_message(  # 回復圖片
-                        event.reply_token,
-                        ImageSendMessage(original_content_url = url, preview_image_url = url)
                     )
                 if  '逢好帥' in ask :
                     print(userid,type(userid))
