@@ -42,7 +42,7 @@ def callback(request):
                 ask_type = event.source.type
                 if ask_type == 'group':
                         group_id = event.source.group_id
-                        print(userid,'say',ask,'\n\nRoomID : ',group_id)
+                        print('\n\nRoomID : ',group_id)
                 print(userid,'say',ask,'\n')
                 if ask == None :
                     break

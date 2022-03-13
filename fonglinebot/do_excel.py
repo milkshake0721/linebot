@@ -26,4 +26,3 @@ def check_Nick_lmao_time():
     all = '今日笑死 : ' + str(sht.sheet1.cell('C2').value) + '次\n總共笑死 : ' + str(sht.sheet1.cell('C3').value) + '次'
     return all
 
-print(check_Nick_lmao_time())
