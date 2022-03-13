@@ -40,7 +40,8 @@ def callback(request):
                         group_id = event.source.group_id
                         print(userid,'say',ask,'\n\nRoomID : ',group_id)
                 print(userid,'say',ask,'\n')
-                
+                if ask == None :
+                    break
                 if '啪' in ask :
                     pa_list = ['https://i.imgur.com/E7SYgOa.jpeg','https://i.imgur.com/ah7Ubom.jpeg','https://i.imgur.com/EEA8c3n.jpg']
                     pa = random.choice(pa_list)
