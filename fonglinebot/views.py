@@ -55,7 +55,7 @@ def callback(request):
                     )
                 if ask == '笑死' and userid == 'U0bdb890d03a5b755f3dbb67eafa74f5d' :
                     Nick_lmao_time()
-                if ask == '尼克笑死幾次' and userid == 'U1c1925ccd29c125ed845cc2db637f39b' :
+                if ask == '尼克笑死幾次' :
                     com = check_Nick_lmao_time()
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
