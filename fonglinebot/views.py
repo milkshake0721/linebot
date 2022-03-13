@@ -34,7 +34,10 @@ def callback(request):
  
         for event in events:
             if isinstance(event, MessageEvent):  # 如果有訊息事件
-                ask = event.message.text
+                try :
+                    ask = event.message.text
+                except:
+                    break
                 userid = event.source.user_id
                 ask_type = event.source.type
                 if ask_type == 'group':
