@@ -5,9 +5,9 @@ def crypto(coin):
     # url = 'http://ftx.com/api/markets/ETH/USDT'
     url_history = 'http://ftx.com/api/markets/' + coin + '/USD/candles?resolution=2592000'
     r = requests.post(url)
-    if r.json()['success'] == False:
+    if r.json()['success'] != True :
         all = gate_io(coin)
-
+        return all
     else:
         sel = r.json()['result']
         # print (sel)
@@ -28,8 +28,7 @@ def crypto(coin):
         history_high2now = (float(sel['price']) - float(history_high)) / history_high *100
 
         all = sel['name'] + '\n| 現價 | ' + str(sel['price']) + ' (' + str(round(float(sel['change24h'])*100,2)) + '%)' + '\n-------------------\n' + '| 最高回落 | ' + str(round(float(history_high2now),3)) + '%\n| 一小變動 | ' + str(round(float(sel['change1h'])*100,3)) + '%\n| 歷史高點 | ' + str(round(float(history_high),3)) + '\n| 歷史低點 | ' + str(round(float(history_low),3)) +  '\n-------------------\nUSD volume in past 24 hours : '+ str(round(float(sel['volumeUsd24h']),0)) 
-
-    return all
+        return all
 
 
 def gasfee():
@@ -95,6 +94,5 @@ def gate_io(coin):
     r = requests.get(url)
     sel = r.json()
 
-    all = coin + '/USDT\n| 現價 | ' + str(sel['last']) + ' (' + sel['percentChange'] + '%)' + '\n-------------------\n' + '| high24hr | ' + sel['high24hr'] + '\n|  low24hr | ' + sel['low24hr'] + '\n-------------------\nUSD volume in past 24 hours : '+ sel['baseVolume']
-    return all
-
+    ans = coin + '/USDT\n| 現價 | ' + str(sel['last']) + ' (' + sel['percentChange'] + '%)' + '\n-------------------\n' + '| high24hr | ' + sel['high24hr'] + '\n|  low24hr | ' + sel['low24hr'] + '\n-------------------\nUSD volume in past 24 hours : '+ sel['baseVolume']
+    return ans
