@@ -62,7 +62,16 @@ def callback(request):
                         TextSendMessage(text=com)
                     )
                 if  ask == '孟霖啊' :
-                    command_list = ['小雞雞怎麼了?','脖子出來','脖子還舒服嗎？','2030之前都單身吧']
+                    command_list = ['小雞雞怎麼了?','脖子出來','脖子還舒服嗎？','2030之前都單身吧','脊椎脊椎脊椎脊椎脊椎脊椎']
+                    com = random.choice(command_list)
+                    line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=com)
+                    )
+                if  ask == '戒指' :
+                    if group_id != 'C7e2649b69e0ab80f01262051a886d96d':
+                        break
+                    command_list = ['振宇?','振宇該買了吧','差不多了吧，振宇','可以刷下去了，振宇','該買給可潔囉']
                     com = random.choice(command_list)
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
