@@ -5,7 +5,7 @@ def crypto(coin):
     # url = 'http://ftx.com/api/markets/ETH/USDT'
     url_history = 'http://ftx.com/api/markets/' + coin + '/USD/candles?resolution=2592000'
     r = requests.post(url)
-    if r.json()['success'] == 'false':
+    if r.json()['success'] == False:
         all = gate_io(coin)
 
     else:
