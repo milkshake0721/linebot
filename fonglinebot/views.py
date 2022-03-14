@@ -69,12 +69,6 @@ def callback(request):
                         TextSendMessage(text=com)
                     )
                 if  ask == '香瓜' and userid == 'U1c1925ccd29c125ed845cc2db637f39b' :
-                    # ask_type = event.source.type
-                    # print(ask_type)
-                    # if ask_type == 'group':
-                    #     group_id = event.source.group_id
-                    #     print(userid,'say',ask,'\n\nRoomID : ',group_id)
-                    # print(userid,type(userid))
                     ans = 'Your ID is :' + userid
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,

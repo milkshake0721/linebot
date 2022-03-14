@@ -23,6 +23,9 @@ def Nick_lmao_time():
     sht.sheet1.cell('C3').value = int(sht.sheet1.cell('C3').value) + 1
 
 def check_Nick_lmao_time():
+    if str(sht.sheet1.cell('A2').value) != str(tday)  :
+        sht.sheet1.cell('A2').value = str(tday)
+        sht.sheet1.cell('C2').value = int(0)
     all = '今日笑死 : ' + str(sht.sheet1.cell('C2').value) + '次\n總共笑死 : ' + str(sht.sheet1.cell('C3').value) + '次'
     return all
 
