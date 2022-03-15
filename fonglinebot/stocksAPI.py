@@ -48,8 +48,8 @@ def metal():
     me = requests.get(url)
 
     p = me.json()
-    print(p[0])
+    print(p)
     all = '黃金 : ' + str(p[0]['gold']) + '\n白銀 : ' + str(p[1]['silver']) + '\n白金 : ' + str(p[2]['platinum']) + '\n鈀鈀 : ' + str(p[3]['palladium'])
     return all
 
-# print(metal())
+print(metal())
