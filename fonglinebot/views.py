@@ -169,7 +169,7 @@ def callback(request):
                 if ask == '我要黃金' :
                     ran = [0,1]
                     cho = random.choices(ran,weights=(90,10))
-                    if cho == 1:
+                    if cho[0] == 1:
                         poop = '💩'
                         line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
