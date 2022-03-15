@@ -78,7 +78,8 @@ def callback(request):
                         TextSendMessage(text=com)
                     )
                 if  ask == '香瓜' and userid == 'U1c1925ccd29c125ed845cc2db637f39b' :
-                    ans = 'Your ID is :' + userid
+                    ans = 'Your ID is :' + userid + '💩'
+
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
                         TextSendMessage(text = str(ans) )
