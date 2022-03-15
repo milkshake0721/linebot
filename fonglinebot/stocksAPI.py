@@ -28,7 +28,9 @@ def currency():
     usd = str(round(1/qu['USD'],3))
     jpy = str(round(1/qu['JPY'],3))
     eur = str(round(1/qu['EUR'],3))
-    all = '美金 : ' + usd + '\n日幣 : '+ jpy +'\n歐元 : ' + eur 
+    rmb = str(round(1/qu['CNY'],3))
+    rub = str(round(1/qu['RUB'],3))
+    all = '美金 : ' + usd + '\n日幣 : '+ jpy +'\n歐元 : ' + eur + '\n人民幣:' + rmb  + '\n盧布 : ' + rub
     # print('美金 : ' + usd + '\n日幣 : '+ jpy +'\n歐元 : ' + eur )
     return all
-# currency()
+print(currency())
