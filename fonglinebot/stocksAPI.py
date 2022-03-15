@@ -16,7 +16,7 @@ def stockapi(ID):
     ans = finnhub_client.quote(ID)
     # print(ans)
     news = finnhub_client.company_news(ID, _from = yesterday , to = today)
-    print(news)
+    # print(news)
     if news == []:
         news = [{'headline':'','url':''}]
         news[0]['headline'] = 'N/A'
@@ -26,7 +26,7 @@ def stockapi(ID):
     all = ID + ' ( ' +str(ans['dp']) + '% )\n現在價格 : ' + str(ans['c']) + '\n-------------------\n\n變動價格 : ' + str(ans['d']) + '\n今日最高 : ' + str(ans['h']) + '\n今日最低 : '+ str(ans['l']) + '\n開市價格 : '+ str(ans['o']) + '\n上次閉市 : '+ str(ans['pc']) + '\n\n-------------------\n新聞 : '+ news[0]['headline']+ '\n' + news[0]['url']
     return all
 
-print(stockapi('hl'))
+# print(stockapi('hl'))
 
 def currency():
     finnhub_client = finnhub.Client(api_key="sandbox_c8k6qfaad3i8fk1kn7c0")
