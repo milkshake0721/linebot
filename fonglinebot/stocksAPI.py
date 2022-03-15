@@ -1,3 +1,4 @@
+from genericpath import exists
 from re import A
 from aiohttp import request
 import finnhub
@@ -46,10 +47,20 @@ def currency():
 def metal():
     url = 'https://api.metals.live/v1/spot'
     me = requests.get(url)
-
+    met = ['gold','silver','platinum','palladium','']
     p = me.json()
-    print(p)
-    all = '黃金 : ' + str(p[0]['gold']) + '\n白銀 : ' + str(p[1]['silver']) + '\n白金 : ' + str(p[2]['platinum']) + '\n鈀鈀 : ' + str(p[3]['palladium'])
+    
+    for i in range(len(p)):
+        if met[i] in p[0]:
+            gold = p[i]['gold']
+        elif met[i] in p[1]:
+            silver = p[i]['silver']
+        elif met[i] in p[2]:
+            platinum = p[i]['platinum']
+        elif met[i] in p[3]:
+            palladium = p[i]['palladium']
+
+    all = '黃金 : ' + str(gold) + '\n白銀 : ' + str(silver) + '\n白金 : ' + str(platinum) + '\n鈀鈀 : ' + str(palladium)
     return all
 
-# print(metal())
+print(metal())
