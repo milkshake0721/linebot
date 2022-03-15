@@ -53,7 +53,7 @@ def callback(request):
                         event.reply_token,
                         ImageSendMessage(original_content_url = pa, preview_image_url = pa)
                     )
-                if ask == '笑死' and userid == 'U0bdb890d03a5b755f3dbb67eafa74f5d' :
+                if '笑死' in ask and userid == 'U0bdb890d03a5b755f3dbb67eafa74f5d' and ask != '尼克笑死幾次':
                     Nick_lmao_time()
                 if ask == '尼克笑死幾次' :
                     com = check_Nick_lmao_time()
