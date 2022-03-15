@@ -1,6 +1,7 @@
 from re import A
+from aiohttp import request
 import finnhub
-import pprint
+import requests
 import datetime
 
 def stockapi(ID):
@@ -23,7 +24,7 @@ def stockapi(ID):
         news[0]['url'] = 'N/A'
     ans.pop('t')
     # all = news[0]['url']
-    all = ID + ' ( ' +str(ans['dp']) + '% )\n現在價格 : ' + str(ans['c']) + '\n-------------------\n\n變動價格 : ' + str(ans['d']) + '\n今日最高 : ' + str(ans['h']) + '\n今日最低 : '+ str(ans['l']) + '\n開市價格 : '+ str(ans['o']) + '\n上次閉市 : '+ str(ans['pc']) + '\n\n-------------------\n新聞 : '+ news[0]['headline']+ '\n' + news[0]['url']
+    all = ID + ' ( ' +str(ans['dp']) + '% )\n現在價格 : ' + str(ans['c']) + '\n-------------------\n變動價格 : ' + str(ans['d']) + '\n今日最高 : ' + str(ans['h']) + '\n今日最低 : '+ str(ans['l']) + '\n開市價格 : '+ str(ans['o']) + '\n上次閉市 : '+ str(ans['pc']) + '\n-------------------\n新聞 : '+ news[0]['headline']+ '\n' + news[0]['url']
     return all
 
 # print(stockapi('hl'))
@@ -41,3 +42,14 @@ def currency():
     # print('美金 : ' + usd + '\n日幣 : '+ jpy +'\n歐元 : ' + eur )
     return all
 # print(currency())
+
+def metal():
+    url = 'https://api.metals.live/v1/spot'
+    me = requests.get(url)
+
+    p = me.json()
+    print(p[0])
+    all = '黃金 : ' + str(p[0]['gold']) + '\n白銀 : ' + str(p[1]['silver']) + '\n白金 : ' + str(p[2]['platinum']) + '\n鈀鈀 : ' + str(p[3]['palladium'])
+    return all
+
+# print(metal())

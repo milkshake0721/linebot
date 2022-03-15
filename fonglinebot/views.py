@@ -10,7 +10,7 @@ from linebot.models import MessageEvent, TextSendMessage, ImageSendMessage
 
 from .defineWTD import wtd
 from .crypto_get import crypto,gasfee,spot_margin,all_spot_margin
-from .stocksAPI import stockapi,currency
+from .stocksAPI import stockapi,currency,metal
 from .do_excel import Nick_lmao_time,check_Nick_lmao_time
 import random
  
@@ -165,6 +165,20 @@ def callback(request):
                         event.reply_token,
                         TextSendMessage(text=currency())
                     )    
+                if ask == '我要黃金' :
+                    ran = [0,1]
+                    cho = random.choices(ran,weights=(90,10))
+                    if cho == 1:
+                        poop = '💩'
+                        line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=poop)
+                        )
+                    else:
+                        line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=metal())
+                        )
                 if ask[0:2] == '$ ':
                     ask = ask[2:]
                     ans = crypto(ask)
