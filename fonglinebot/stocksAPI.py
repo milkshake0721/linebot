@@ -49,18 +49,34 @@ def metal():
     me = requests.get(url)
     met = ['gold','silver','platinum','palladium','']
     p = me.json()
-    
+    all = ''
     for i in range(len(p)):
         if met[i] in p[0]:
-            gold = p[i]['gold']
+            try:
+                gold = p[i]['gold']
+                all += '黃金 : ' + str(gold)
+            except:
+                continue
         elif met[i] in p[1]:
-            silver = p[i]['silver']
+            try:
+                silver = p[i]['silver']
+                all += '\n白銀 : ' + str(silver)
+            except:
+                continue
         elif met[i] in p[2]:
-            platinum = p[i]['platinum']
+            try:
+                platinum = p[i]['platinum']
+                all += '\n白金 : ' + str(platinum)
+            except:
+                continue
         elif met[i] in p[3]:
-            palladium = p[i]['palladium']
+            try:
+                palladium = p[i]['palladium']
+                all += '\n鈀鈀 : ' + str(palladium)
+            except:
+                continue
 
-    all = '黃金 : ' + str(gold) + '\n白銀 : ' + str(silver) + '\n白金 : ' + str(platinum) + '\n鈀鈀 : ' + str(palladium)
+    # all = '黃金 : ' + str(gold) + '\n白銀 : ' + str(silver) + '\n白金 : ' + str(platinum) + '\n鈀鈀 : ' + str(palladium)
     return all
 
 print(metal())
