@@ -10,7 +10,7 @@ from linebot.models import MessageEvent, TextSendMessage, ImageSendMessage
 
 from .defineWTD import wtd
 from .crypto_get import crypto,gasfee,spot_margin,all_spot_margin
-from .stocksAPI import stockapi,currency,metal
+from .stocksAPI import stockapi,currency,metal,get_greed_pic
 from .do_excel import Nick_lmao_time,check_Nick_lmao_time
 import random
  
@@ -79,11 +79,11 @@ def callback(request):
                     )
                 if  ask == '香瓜' and userid == 'U1c1925ccd29c125ed845cc2db637f39b' :
                     # ans = 'Your ID is :' + userid + '💩'
-                    url = 'https://alternative.me/crypto/fear-and-greed-index.png'
+                    url = 'https://markets.money.cnn.com/Marketsdata/uploadhandler/z678f7d0azd283da5dca51434aad5398d0938eb5f4.png'
                     #https://alternative.me/crypto/fear-and-greed-index.png
                     line_bot_api.reply_message(  # 回復圖片
                         event.reply_token,
-                        ImageSendMessage(original_content_url = url)
+                        ImageSendMessage(original_content_url = url, preview_image_url = url)
                     )
                     # line_bot_api.reply_message(  # 回復訊息文字
                     #     event.reply_token,
@@ -146,7 +146,7 @@ def callback(request):
                         ImageSendMessage(original_content_url = url, preview_image_url = url)
                     )   
                 if '美股貪婪' in ask :
-                    url = 'https://markets.money.cnn.com/Marketsdata/Api/Chart/FearGreedHistoricalImage?chartType=AvgPtileModel'
+                    url = get_greed_pic()
                     line_bot_api.reply_message(  # 回復圖片
                         event.reply_token,
                         ImageSendMessage(original_content_url = url, preview_image_url = url)
