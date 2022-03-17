@@ -103,8 +103,6 @@ def crypto_greed():
     url = 'https://api.alternative.me/fng/'
     r = requests.get(url)
     dt = r.json()['data'][0]
-    
-    all = ' 貪婪恐慌\n|   ' + str(dt['value'])+'   | \n'+dt['value_classification']
-    return all
 
-print(crypto_greed())
+    all = '貪婪恐慌\n|   ' + str(dt['value'])+'   | \n'+dt['value_classification']
+    return all
