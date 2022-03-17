@@ -9,7 +9,7 @@ from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import MessageEvent, TextSendMessage, ImageSendMessage
 
 from .defineWTD import wtd
-from .crypto_get import crypto,gasfee,spot_margin,all_spot_margin
+from .crypto_get import crypto,gasfee,spot_margin,all_spot_margin,crypto_greed
 from .stocksAPI import stockapi,currency,metal,get_greed_pic
 from .do_excel import Nick_lmao_time,check_Nick_lmao_time
 import random
@@ -162,9 +162,10 @@ def callback(request):
                 if '幣圈貪婪' in ask :
                     url = 'https://alternative.me/crypto/fear-and-greed-index.png'
                     #https://alternative.me/crypto/fear-and-greed-index.png
-                    line_bot_api.reply_message(  # 回復圖片
+                    ans = crypto_greed()
+                    line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
-                        ImageSendMessage(original_content_url = url, preview_image_url = url)
+                        TextSendMessage(text=ans)
                     )
                 if ask == '匯率' :
                     line_bot_api.reply_message(  # 回復訊息文字

@@ -93,4 +93,4 @@ def get_greed_pic():
     # print(pic_url)
     return pic_url
 
-# get_greed_pic()
+# print(get_greed_pic())

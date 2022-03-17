@@ -1,4 +1,5 @@
 import requests
+from bs4 import BeautifulSoup
 
 def crypto(coin):
     url = 'http://ftx.com/api/markets/'+ coin +'/USD'
@@ -97,3 +98,13 @@ def gate_io(coin):
 
     ans = coin + '/USDT\n| 現價 | ' + str(sel['last']) + ' (' + sel['percentChange'] + '%)' + '\n-------------------\n' + '| high24hr | ' + sel['high24hr'] + '\n|  low24hr | ' + sel['low24hr'] + '\n-------------------\nUSD volume in past 24 hours : '+ sel['baseVolume']
     return ans
+
+def crypto_greed():
+    url = 'https://api.alternative.me/fng/'
+    r = requests.get(url)
+    dt = r.json()['data'][0]
+    
+    all = ' 貪婪恐慌\n|   ' + str(dt['value'])+'   | \n'+dt['value_classification']
+    return all
+
+print(crypto_greed())
