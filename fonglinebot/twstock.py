@@ -73,7 +73,7 @@ def gettwstock(stockID):
     change = round(change, 2)
     change_p = (float(now) - float(sel['o'])) / float(sel['o']) * 100
     change_p = round(change_p, 2)
-    all = stockID + '  \n'+ sel['n'] + '\n\n' + str(round(float(now),2)) + ' (' + str(change_p) + '%)' + '\n\n===================\n' + '開盤價格 : '+ str(round(float(sel['o']),2)) + '\n===================' + '\n\n價格變動 : ' + str(change) + '\n昨日收盤 : '+ str(round(float(sel['y']),2)) + '\n今日最高 : ' + str(round(float(sel['h']),2)) + '\n今日最低 : '+ str(round(float(sel['l']),2)) + '\n\n===================\n '
+    all = stockID + '  \n'+ sel['n'] + '\n' + str(round(float(now),2)) + ' (' + str(change_p) + '%)' + '\n===================\n' + '開盤價格 : '+ str(round(float(sel['o']),2)) + '\n===================' + '\n價格變動 : ' + str(change) + '\n昨日收盤 : '+ str(round(float(sel['y']),2)) + '\n今日最高 : ' + str(round(float(sel['h']),2)) + '\n今日最低 : '+ str(round(float(sel['l']),2)) + '\n==================='
     return all    
 
 # def makepretty(ans):
