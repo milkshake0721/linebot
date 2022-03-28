@@ -115,7 +115,7 @@ def callback(request):
                         ImageSendMessage(original_content_url = no, preview_image_url = no)
                     )
                 if  ask == '分' :
-                    no_list = ['https://i.imgur.com/24BomXy.jpeg']
+                    no_list = ['https://i.imgur.com/fTPyUxt.jpeg']
                     no = random.choice(no_list)
                     line_bot_api.reply_message(  # 回復圖片
                         event.reply_token,
