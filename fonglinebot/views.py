@@ -114,6 +114,12 @@ def callback(request):
                         event.reply_token,
                         ImageSendMessage(original_content_url = no, preview_image_url = no)
                     )
+                if ask == '請打到以下地址':
+                    adress = 'SOL-Chain :\n4NJX81MbG2nf6oVydJqD9Qoot6ekEDsEjh2c96LZc6ZQ'
+                    line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=adress)
+                    )
                 if  ask == '分' :
                     no_list = ['https://i.imgur.com/fTPyUxt.jpeg','https://i.imgur.com/T6rpwPA.jpeg','https://i.imgur.com/WTLsPY4.jpeg']
                     no = random.choice(no_list)
