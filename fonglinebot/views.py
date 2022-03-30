@@ -12,6 +12,7 @@ from .defineWTD import wtd
 from .crypto_get import crypto,gasfee,spot_margin,all_spot_margin,crypto_greed
 from .stocksAPI import stockapi,currency,metal,get_greed_pic
 from .do_excel import Nick_lmao_time,check_Nick_lmao_time
+from .twstock import oil_price
 import random
  
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
@@ -61,6 +62,12 @@ def callback(request):
                         event.reply_token,
                         TextSendMessage(text=com)
                     )
+                if ask == '我想學英文' :
+                    com = 'Let me speak 學英文來賺錢！\nhttps://www.rayskyinvest.com/64390/let-me-speak-lms'
+                    line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=com)
+                    )
                 if  ask == '孟霖啊' :
                     command_list = ['小雞雞怎麼了?','脖子出來','脖子還舒服嗎？','2030之前都單身吧','脊椎脊椎脊椎脊椎脊椎脊椎']
                     com = random.choice(command_list)
@@ -89,7 +96,7 @@ def callback(request):
                     #     event.reply_token,
                     #     TextSendMessage(text = str(ans) )
                     # )
-                if  '逢好帥' in ask or ask == '我好帥' or '尼克好醜' in ask :
+                if  '逢好帥' in ask or ask == '我好帥' or ask == '我好漂亮' or ask == '我好美' or '尼克好醜' in ask :
                     good_list = ['沒綽','對的','我也這麼認為','你多說幾次也不會有人反駁你','沒有錯','我贊同你的想法']
                     if  userid == 'U0bdb890d03a5b755f3dbb67eafa74f5d' and ask != '尼克好醜'  :
                         good_list = ['笑死','屁','噁心死了','嘔嘔嘔嘔','你想太多了','Bullshit','夠囉','...','幽默','蛤?','我聽不見','3小','呵','你夠囉','媽媽說不能騙人','你好意思?']
@@ -191,6 +198,11 @@ def callback(request):
                         line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
                         TextSendMessage(text=metal())
+                        )
+                if ask == '油價':
+                    line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=oil_price())
                         )
                 if ask[0:2] == '$ ':
                     ask = ask[2:]

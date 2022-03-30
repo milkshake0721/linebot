@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import datetime
 from bs4 import BeautifulSoup
-import soupsieve
+import re
 import json
 import csv
 
@@ -76,6 +76,41 @@ def gettwstock(stockID):
     all = stockID + '  \n'+ sel['n'] + '\n' + str(round(float(now),2)) + ' (' + str(change_p) + '%)' + '\n===================\n' + '開盤價格 : '+ str(round(float(sel['o']),2)) + '\n===================' + '\n價格變動 : ' + str(change) + '\n昨日收盤 : '+ str(round(float(sel['y']),2)) + '\n今日最高 : ' + str(round(float(sel['h']),2)) + '\n今日最低 : '+ str(round(float(sel['l']),2)) + '\n==================='
     return all    
 
+'''
+<型別名稱>汽柴油零售</型別名稱>
+    <產品編號>113F 1209800</產品編號>
+    <產品名稱>98無鉛汽油</產品名稱>
+    <包裝>散裝</包裝>
+    <銷售對象>一般自用客戶 </銷售對象>
+    <交貨地點>中油自營站</交貨地點>
+    <計價單位>元/ 公升</計價單位>
+    <參考牌價>34.7</參考牌價>
+    <營業稅>5%</營業稅>
+    <貨物稅>內含</貨物稅>
+    <牌價生效時間>20220328</牌價生效時間>
+'''
+def oil_price():
+    url = 'http://vipmbr.cpc.com.tw/CPCSTN/ListPriceWebService.asmx/getCPCMainProdListPrice_XML'
+    r = requests.post(url)
+    tx = r.text
+    oil_name = {}
+    oil_98_h = tx.find('<產品名稱>')+6
+    oil_98_e = tx.find('</產品名稱>')
+    price_h = tx.find('<參考牌價>')+6
+    price_e = tx.find('</參考牌價>')
+    for i in range(5): 
+        name = tx[oil_98_h:oil_98_e]
+        price = tx[price_h:price_e]
+        oil_name[name] = price
+        oil_98_h = tx.find('<產品名稱>',oil_98_e)+6
+        oil_98_e = tx.find('</產品名稱>',oil_98_h)
+        price_h = tx.find('<參考牌價>',price_e)+6
+        price_e = tx.find('</參考牌價>',price_h)
+    all = '98無鉛汽油 |' + oil_name['98無鉛汽油'] + '元' + '\n95無鉛汽油 |' + oil_name['95無鉛汽油'] + '元' + '\n92無鉛汽油 |' + oil_name['92無鉛汽油'] + '元' + '\n99柴柴汽油 |' + oil_name['超級柴油'] + '元' + '\n58酒精汽油 |' + oil_name['酒精汽油'] + '元'
+
+    return all
+
+# print(oil_price())
 # def makepretty(ans):
 #     a = 0
 # num = '富邦公司治理'
