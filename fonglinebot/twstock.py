@@ -116,6 +116,32 @@ def eggprice():
     r = requests.get(url)
     egg = r.json()['Data'][0]['egg_TaijinPrice']
     return egg + ' 元/台斤'
+
+'''
+ "RS": "OK",
+  "Data": [
+    {
+      "TransDate": "2022/03/29",
+      "LunarCalendar": "廿七",
+      "RedFeather_N": "41.0",
+      "RedFeather_C": "42.0",
+      "RedFeather_S": "-",
+      "BlackFeather_S_M": "46.0",
+      "BlackFeather_S_F": "46.0"
+    }
+'''
+
+def chickenprice():
+    url = 'https://data.coa.gov.tw/api/v1/PoultryTransType_BoiledChicken_Eggs'
+    url_to_chicken = 'https://data.coa.gov.tw/api/v1/PoultryTransType_Chicken'
+    r = requests.get(url)
+    r_to = requests.get(url_to_chicken)
+    w_chicken = r.json()['Data'][0]['Store_KP_TaijinPrice']
+    r_chicken = r_to.json()['Data'][0]['RedFeather_N']
+    b_chicken = r_to.json()['Data'][0]['BlackFeather_S_F']
+
+    all = '一般白雞 ' + w_chicken + ' 元/台斤\n紅羽土雞 ' + r_chicken + ' 元/台斤\n黑羽土雞 ' + b_chicken + ' 元/台斤'
+    return all
 # print(oil_price())
 # def makepretty(ans):
 #     a = 0
