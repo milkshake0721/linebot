@@ -204,6 +204,11 @@ def callback(request):
                         event.reply_token,
                         TextSendMessage(text=oil_price())
                         )
+                if ask == '房價':
+                    line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text='很高 >w<')
+                        )
                 if ask[0:2] == '$ ':
                     ask = ask[2:]
                     ans = crypto(ask)
