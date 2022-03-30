@@ -106,3 +106,20 @@ def crypto_greed():
 
     all = '貪婪恐慌\n|   ' + str(dt['value'])+'   | \n'+dt['value_classification']
     return all
+
+
+def usdt():
+    max_url = 'https://max-api.maicoin.com/api/v2/tickers/usdttwd'
+    r = requests.get(max_url)
+    max = float(r.json()['last'])
+    bito_url = 'https://api.bitopro.com/v3/trades/usdt_twd'
+    bito_r = requests.get(bito_url)
+    # print(bito_r.json()['data'][0]['price'])
+    bito = float(bito_r.json()['data'][0]['price'])
+    ace_url = 'https://ace.io/polarisex/oapi/list/tradePrice'
+    ace_r = requests.get(ace_url)
+    # print(ace_r.json()['USDT/TWD']['last_price'])
+    ace = float(ace_r.json()['USDT/TWD']['last_price'])
+    all = 'Ace | '+ str(round(ace,2))+ '\nBito| ' + str(round(bito,2)) + '\nMax | ' + str(round(max,2)) 
+
+    return all

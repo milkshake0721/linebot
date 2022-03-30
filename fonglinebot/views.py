@@ -9,7 +9,7 @@ from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import MessageEvent, TextSendMessage, ImageSendMessage
 
 from .defineWTD import wtd
-from .crypto_get import crypto,gasfee,spot_margin,all_spot_margin,crypto_greed
+from .crypto_get import crypto,gasfee,spot_margin,all_spot_margin,crypto_greed,usdt
 from .stocksAPI import stockapi,currency,metal,get_greed_pic
 from .do_excel import Nick_lmao_time,check_Nick_lmao_time
 from .twstock import oil_price
@@ -136,6 +136,12 @@ def callback(request):
                     )
                 if  ask == 'gas' or ask == 'gas fee' or ask == 'gasfee':
                     ans = gasfee()
+                    line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=ans)
+                    )
+                if  ask == 'USDT 匯率' or ask == 'usdt匯率' or ask == 'USDT匯率'or ask == 'usdt 匯率' or ask == 'Usdt 匯率' or ask == 'Usdt匯率':
+                    ans = usdt()
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
                         TextSendMessage(text=ans)
