@@ -120,6 +120,6 @@ def usdt():
     ace_r = requests.get(ace_url)
     # print(ace_r.json()['USDT/TWD']['last_price'])
     ace = float(ace_r.json()['USDT/TWD']['last_price'])
-    all = 'Ace | '+ str(round(ace,2))+ '\nBito| ' + str(round(bito,2)) + '\nMax | ' + str(round(max,2)) 
+    all = 'Ace | '+ str(round(ace,2))+ '\nBito | ' + str(round(bito,2)) + '\nMax | ' + str(round(max,2)) 
 
     return all
