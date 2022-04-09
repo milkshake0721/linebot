@@ -183,7 +183,7 @@ def callback(request):
                         ImageSendMessage(original_content_url = url, preview_image_url = url)
                     )
                 if '鮑魚' in ask and ask_type == 'group' :
-                    if group_id == 'C3ab802df2f56bf2cb65206d0c7192699' or group_id == 'Cd847ab4f2bfd6886fe37bf194cb2d92c':
+                    if group_id == 'C28118069d07e5b9d2b1c7eb44bfd5121' or group_id == 'Cd847ab4f2bfd6886fe37bf194cb2d92c':
                         url = 'https://i.imgur.com/a0ezI7q.png'
                         #https://alternative.me/crypto/fear-and-greed-index.png
                         line_bot_api.reply_message(  # 回復圖片
