@@ -86,16 +86,13 @@ def callback(request):
                     )
                 if  ask == '香瓜' and userid == 'U1c1925ccd29c125ed845cc2db637f39b' :
                     # ans = 'Your ID is :' + userid + '💩'
-                    url = 'https://markets.money.cnn.com/Marketsdata/uploadhandler/z678f7d0azd283da5dca51434aad5398d0938eb5f4.png'
-                    #https://alternative.me/crypto/fear-and-greed-index.png
+                    # url = 'https://markets.money.cnn.com/Marketsdata/uploadhandler/z678f7d0azd283da5dca51434aad5398d0938eb5f4.png'
+                    url = 'https://alternative.me/crypto/fear-and-greed-index.png'
                     line_bot_api.reply_message(  # 回復圖片
                         event.reply_token,
                         ImageSendMessage(original_content_url = url, preview_image_url = url)
                     )
-                    # line_bot_api.reply_message(  # 回復訊息文字
-                    #     event.reply_token,
-                    #     TextSendMessage(text = str(ans) )
-                    # )
+                    
                 if  '逢好帥' in ask or ask == '我好帥' or ask == '我好漂亮' or ask == '我好美' or '尼克好醜' in ask :
                     good_list = ['沒綽','對的','我也這麼認為','你多說幾次也不會有人反駁你','沒有錯','我贊同你的想法']
                     if  userid == 'U0bdb890d03a5b755f3dbb67eafa74f5d' and ask != '尼克好醜'  :
