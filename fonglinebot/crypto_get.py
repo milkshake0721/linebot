@@ -1,4 +1,3 @@
-from pandas import NA
 import requests
 from bs4 import BeautifulSoup
 
@@ -8,6 +7,7 @@ def crypto(coin):
     url_history = 'http://ftx.com/api/markets/' + coin + '/USD/candles?resolution=2592000'
     r = requests.post(url)
     coin = coin.upper()
+    # print(r.json())
     if r.json()['success'] != True :
         all = gate_io(coin)
         return all
@@ -16,6 +16,7 @@ def crypto(coin):
         # print (sel)
         '''
         {"success":true,"result":{"name":"ETH/USDT","enabled":true,"postOnly":false,"priceIncrement":0.1,"sizeIncrement":0.001,"minProvideSize":0.001,"last":2585.4,"bid":2585.6,"ask":2585.7,"price":2585.6,"type":"spot","baseCurrency":"ETH","quoteCurrency":"USDT","underlying":null,"restricted":false,"highLeverageFeeExempt":true,"largeOrderThreshold":5000.0,"change1h":-0.004887811261209252,"change24h":-0.06145413626628916,"changeBod":-0.05299783906530418,"quoteVolume24h":63523496.6902,"volumeUsd24h":63543617.12254165}}
+        {'success': True, 'result': {'name': 'NEAR/USD', 'enabled': True, 'postOnly': True, 'priceIncrement': 0.001, 'sizeIncrement': 0.1, 'minProvideSize': 0.1, 'last': None, 'bid': 16.224, 'ask': 17.552, 'price': None, 'type': 'spot', 'baseCurrency': 'NEAR', 'quoteCurrency': 'USD', 'underlying': None, 'restricted': False, 'highLeverageFeeExempt': True, 'largeOrderThreshold': 5000.0, 'change1h': 0.0, 'change24h': 0.0, 'changeBod': 0.0, 'quoteVolume24h': 0.0, 'volumeUsd24h': 0.0, 'priceHigh24h': 0.0, 'priceLow24h': 0.0}}
         '''
         rh = requests.post(url_history)
 
@@ -23,21 +24,19 @@ def crypto(coin):
         history_high = 0
         try:
             history_low = sel_h[0]['low']
-        except:
-            history_low = 0
-
-        for i in range(len(sel_h)):
-            if sel_h[i]['high'] >  history_high:
-                history_high = sel_h[i]['high']
-            if sel_h[i]['low'] <  history_low:
-                history_low = sel_h[i]['low']
-        try:
+            for i in range(len(sel_h)):
+                if sel_h[i]['high'] >  history_high:
+                    history_high = sel_h[i]['high']
+                if sel_h[i]['low'] <  history_low:
+                    history_low = sel_h[i]['low']
             history_high2now = (float(sel['price']) - float(history_high)) / history_high *100
         except:
+            history_low = 0
             history_high2now = 0
 
         all = sel['name'] + '\n| 現價 | ' + str(sel['price']) + ' (' + str(round(float(sel['change24h'])*100,2)) + '%)' + '\n-------------------\n' + '| 最高回落 | ' + str(round(float(history_high2now),3)) + '%\n| 一小變動 | ' + str(round(float(sel['change1h'])*100,3)) + '%\n| 歷史高點 | ' + str(round(float(history_high),3)) + '\n| 歷史低點 | ' + str(round(float(history_low),3)) +  '\n-------------------\nUSD volume in past 24 hours : '+ str(round(float(sel['volumeUsd24h']),0)) 
         return all
+crypto('near')
 
 def gasfee():
     '''
