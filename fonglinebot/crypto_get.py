@@ -1,3 +1,4 @@
+from pandas import NA
 import requests
 from bs4 import BeautifulSoup
 
@@ -20,18 +21,23 @@ def crypto(coin):
 
         sel_h = rh.json()['result']
         history_high = 0
-        history_low = sel_h[0]['low']
+        try:
+            history_low = sel_h[0]['low']
+        except:
+            history_low = 0
+
         for i in range(len(sel_h)):
             if sel_h[i]['high'] >  history_high:
                 history_high = sel_h[i]['high']
             if sel_h[i]['low'] <  history_low:
                 history_low = sel_h[i]['low']
-
-        history_high2now = (float(sel['price']) - float(history_high)) / history_high *100
+        try:
+            history_high2now = (float(sel['price']) - float(history_high)) / history_high *100
+        except:
+            history_high2now = 0
 
         all = sel['name'] + '\n| 現價 | ' + str(sel['price']) + ' (' + str(round(float(sel['change24h'])*100,2)) + '%)' + '\n-------------------\n' + '| 最高回落 | ' + str(round(float(history_high2now),3)) + '%\n| 一小變動 | ' + str(round(float(sel['change1h'])*100,3)) + '%\n| 歷史高點 | ' + str(round(float(history_high),3)) + '\n| 歷史低點 | ' + str(round(float(history_low),3)) +  '\n-------------------\nUSD volume in past 24 hours : '+ str(round(float(sel['volumeUsd24h']),0)) 
         return all
-
 
 def gasfee():
     '''
