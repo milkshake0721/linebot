@@ -1,6 +1,21 @@
 import requests
 from bs4 import BeautifulSoup
 
+def gate_io(coin):
+    '''
+    {"quoteVolume":"34916.269532841","baseVolume":"89291720.559167","highestBid":"2594.45","high24hr":"2604.56","last":"2594.45",
+    "lowestAsk":"2594.46","elapsed":"4ms","result":"true","low24hr":"2493.34","percentChange":"0.57"}
+    '''
+    coin = coin.upper()
+    # url = 'https://data.gateapi.io/api2/1/marketlist'
+    url = 'https://data.gateapi.io/api2/1/ticker/' + coin + '_usdt'
+    r = requests.get(url)
+    sel = r.json()
+
+    ans = coin + '/USDT\n| 現價 | ' + str(sel['last']) + ' (' + sel['percentChange'] + '%)' + '\n-------------------\n' + '| high24hr | ' + sel['high24hr'] + '\n|  low24hr | ' + sel['low24hr'] + '\n-------------------\nUSD volume in past 24 hours : '+ sel['baseVolume']
+    return ans
+
+
 def crypto(coin):
     url = 'http://ftx.com/api/markets/'+ coin +'/USD'
     # url = 'http://ftx.com/api/markets/ETH/USDT'
@@ -8,7 +23,7 @@ def crypto(coin):
     r = requests.post(url)
     coin = coin.upper()
     # print(r.json())
-    if r.json()['success'] != True :
+    if r.json()['success'] != True or r.json()['result']['price'] == None :
         all = gate_io(coin)
         return all
     else:
@@ -36,7 +51,6 @@ def crypto(coin):
 
         all = sel['name'] + '\n| 現價 | ' + str(sel['price']) + ' (' + str(round(float(sel['change24h'])*100,2)) + '%)' + '\n-------------------\n' + '| 最高回落 | ' + str(round(float(history_high2now),3)) + '%\n| 一小變動 | ' + str(round(float(sel['change1h'])*100,3)) + '%\n| 歷史高點 | ' + str(round(float(history_high),3)) + '\n| 歷史低點 | ' + str(round(float(history_low),3)) +  '\n-------------------\nUSD volume in past 24 hours : '+ str(round(float(sel['volumeUsd24h']),0)) 
         return all
-crypto('near')
 
 def gasfee():
     '''
@@ -90,19 +104,6 @@ def all_spot_margin():
 # spot_margin('貸出 Btc')
 # all_spot_margin()
 
-def gate_io(coin):
-    '''
-    {"quoteVolume":"34916.269532841","baseVolume":"89291720.559167","highestBid":"2594.45","high24hr":"2604.56","last":"2594.45",
-    "lowestAsk":"2594.46","elapsed":"4ms","result":"true","low24hr":"2493.34","percentChange":"0.57"}
-    '''
-    coin = coin.upper()
-    # url = 'https://data.gateapi.io/api2/1/marketlist'
-    url = 'https://data.gateapi.io/api2/1/ticker/' + coin + '_usdt'
-    r = requests.get(url)
-    sel = r.json()
-
-    ans = coin + '/USDT\n| 現價 | ' + str(sel['last']) + ' (' + sel['percentChange'] + '%)' + '\n-------------------\n' + '| high24hr | ' + sel['high24hr'] + '\n|  low24hr | ' + sel['low24hr'] + '\n-------------------\nUSD volume in past 24 hours : '+ sel['baseVolume']
-    return ans
 
 def crypto_greed():
     url = 'https://api.alternative.me/fng/'
