@@ -58,10 +58,11 @@ def gasfee():
     "blockNum":14362667,"speed":0.4876316436867856,"safeLowWait":10.3,"avgWait":1.1,"fastWait":0.5,"fastestWait":0.4,
     "gasPriceRange":{"4":183.3,"6":183.3,"8":183.3,"10":183.3,"20":183.3,"30":183.3,"40":183.3,"50":183.3,"60":183.3,"70":183.3,"80":183.3,"90":183.3,"100":183.3,"110":183.3,"120":183.3,"130":183.3,"140":183.3,"150":183.3,"160":183.3,"170":183.3,"180":183.3,"190":183.3,"200":183.3,"220":183.3,"240":11.7,"245":10.3,"260":8.3,"280":6.3,"290":1.1,"300":0.9,"320":0.8,"340":0.6,"360":0.5,"380":0.5,"390":0.5,"400":0.4,"420":0.4,"440":0.4,"460":0.4,"480":0.4}}
     '''
-    url = 'http://ethgasstation.info/api/ethgasAPI.json?'
+    # url = 'http://ethgasstation.info/api/ethgasAPI.json?'
+    url = 'https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=YourApiKeyToken'
     r = requests.post(url)
-    sel = r.json()
-    fee = '|平均| ' + str(sel['average']/10) + '\n|最快| ' + str(sel['fastest']/10) + '\n|最慢| ' + str(sel['safeLow']/10)
+    sel = r.json()['result']
+    fee = '|平均| ' + str(int(sel['ProposeGasPrice'])) + '\n|最快| ' + str(int(sel['FastGasPrice'])) + '\n|最慢| ' + str(int(sel['SafeGasPrice']))
     return fee
 
 def spot_margin(coin):
