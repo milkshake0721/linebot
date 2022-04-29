@@ -6,6 +6,7 @@ import requests
 import datetime
 from bs4 import BeautifulSoup
 import json,re
+import fear_and_greed
 
 def stockapi(ID):
     ID = ID.upper()
@@ -82,15 +83,21 @@ def metal():
     return all
 
 def get_greed_pic():
-    url = 'https://money.cnn.com/data/fear-and-greed/'
-    r = requests.post(url)
-    soup = BeautifulSoup(r.text,"html.parser") #將網頁資料以html.parser
-    sel = soup.find( id = "needleChart") #取HTML標中的 <div class="title"></div> 中的<p>標籤存入sel
-    s = str(sel)
-    url_start = s.find('http')
-    url_end = s.find('.png')
-    pic_url = s[url_start:url_end+4]
-    # print(pic_url)
-    return pic_url
+    # url = 'https://money.cnn.com/data/fear-and-greed/'
+    # r = requests.post(url)
+    # soup = BeautifulSoup(r.text,"html.parser") #將網頁資料以html.parser
+    # sel = soup.find( id = "needleChart") #取HTML標中的 <div class="title"></div> 中的<p>標籤存入sel
+    # s = str(sel)
+    # url_start = s.find('http')
+    # url_end = s.find('.png')
+    # pic_url = s[url_start:url_end+4]
+    # # print(pic_url)
+
+    pic_url = fear_and_greed.get()
+
+    all = all = '貪婪恐慌\n|   ' + str(pic_url[0])+'   | \n'+pic_url[1]
+
+
+    return all
 
 # print(get_greed_pic())
