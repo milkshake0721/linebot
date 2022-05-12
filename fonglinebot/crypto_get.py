@@ -90,10 +90,14 @@ def all_spot_margin():
     sel = r.json()['result']
     find = ['USDT','USD','BTC','ETH','BNB']
     spot = {}
+    new_time = sel[0]['time']
+    print(new_time)
     for i in range(len(sel)):
         for k in range(len(find)):
-            if sel[i]['coin'] == find[k] :
+            if sel[i]['coin'] == find[k] and sel[i]['time'] == new_time:
                 spot[find[k]] = sel[i]
+                print(spot[find[k]])
+
 
     # rate = str(spot['rate']*24*365*100) + '%'
     # return rate
@@ -102,7 +106,7 @@ def all_spot_margin():
     return rate
 
 # spot_margin('貸出 Btc')
-# all_spot_margin()
+print(all_spot_margin())
 
 
 def crypto_greed():
