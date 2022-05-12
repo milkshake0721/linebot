@@ -78,11 +78,10 @@ def spot_margin(coin):
     for i in range(len(sel)):
         if sel[i]['coin'] == coin[0] :
             spot = sel[i]
-
+            break
     # print(spot['rate']*24*365*100)
     # rate = spot
     rate = str(round((spot['rate']*24*365*100),2)) + '%'
-    print(rate)
     return rate
 
 def all_spot_margin():
