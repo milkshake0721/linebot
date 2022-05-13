@@ -83,7 +83,7 @@ def spot_margin(coin):
     # rate = spot
     rate = str(round((spot['rate']*24*365*100),2)) + '%'
     return rate
-
+print(spot_margin('   luna'))
 def all_spot_margin():
     url = 'http://ftx.com/api/spot_margin/history'
     r = requests.post(url)
