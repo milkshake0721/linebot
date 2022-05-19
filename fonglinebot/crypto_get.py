@@ -127,7 +127,7 @@ def cryptoall():
         price.append(sel)
     all = 'BTC : ' + price[0] + '\nETH : ' + price[1] + '\nBNB : ' + price[2] + '\nSOL : ' + price[3] + '\nFTT : ' + price[4] + '\nGT  : ' + price[5] + '\nNear: ' +price[6]
     return all
-print(cryptoall())
+# print(cryptoall())
 def usdt():
     try:
         max_url = 'https://max-api.maicoin.com/api/v2/tickers/usdttwd'
