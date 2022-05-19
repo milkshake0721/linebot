@@ -9,7 +9,7 @@ from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import MessageEvent, TextSendMessage, ImageSendMessage
 
 from .defineWTD import wtd
-from .crypto_get import crypto,gasfee,spot_margin,all_spot_margin,crypto_greed,usdt
+from .crypto_get import crypto,gasfee,spot_margin,all_spot_margin,crypto_greed,usdt,cryptoall
 from .stocksAPI import stockapi,currency,metal,get_greed_pic
 from .do_excel import Nick_lmao_time,check_Nick_lmao_time
 from .twstock import oil_price,eggprice,chickenprice
@@ -229,6 +229,13 @@ def callback(request):
                         event.reply_token,
                         TextSendMessage(text='很高 >w<')
                         )
+                if ask == '幣價':
+                    ans = cryptoall()
+                    line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=ans)
+                    )
+                
                 if ask[0:2] == '$ ':
                     ask = ask[2:]
                     ans = crypto(ask)

@@ -117,7 +117,17 @@ def crypto_greed():
     all = '貪婪恐慌\n|   ' + str(dt['value'])+'   | \n'+dt['value_classification']
     return all
 
-
+def cryptoall():
+    coin = ['btc','eth','bnb','sol','ftt','gt']
+    price = []
+    for c in coin :
+        url = 'http://ftx.com/api/markets/'+ c +'/USD'
+        r = requests.post(url)
+        sel = str(r.json()['result']['price'])
+        price.append(sel)
+    all = 'BTC : ' + price[0] + '\nETH : ' + price[1] + '\nBNB : ' + price[2] + '\nSOL : ' + price[3] + '\nFTT : ' + price[4] + '\nGT  : ' + price[5]
+    return all
+# print(cryptoall())
 def usdt():
     try:
         max_url = 'https://max-api.maicoin.com/api/v2/tickers/usdttwd'
