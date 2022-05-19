@@ -118,16 +118,16 @@ def crypto_greed():
     return all
 
 def cryptoall():
-    coin = ['btc','eth','bnb','sol','ftt','gt']
+    coin = ['btc','eth','bnb','sol','ftt','gt','near']
     price = []
     for c in coin :
         url = 'http://ftx.com/api/markets/'+ c +'/USD'
         r = requests.post(url)
         sel = str(r.json()['result']['price'])
         price.append(sel)
-    all = 'BTC : ' + price[0] + '\nETH : ' + price[1] + '\nBNB : ' + price[2] + '\nSOL : ' + price[3] + '\nFTT : ' + price[4] + '\nGT  : ' + price[5]
+    all = 'BTC : ' + price[0] + '\nETH : ' + price[1] + '\nBNB : ' + price[2] + '\nSOL : ' + price[3] + '\nFTT : ' + price[4] + '\nGT  : ' + price[5] + '\nNear: ' +price[6]
     return all
-# print(cryptoall())
+print(cryptoall())
 def usdt():
     try:
         max_url = 'https://max-api.maicoin.com/api/v2/tickers/usdttwd'
