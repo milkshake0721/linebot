@@ -1,4 +1,4 @@
-import requests
+import requests,time
 from bs4 import BeautifulSoup
 
 def gate_io(coin):
@@ -85,10 +85,11 @@ def spot_margin(coin):
     return rate
 # print(spot_margin('   luna'))
 def all_spot_margin():
+    
     url = 'http://ftx.com/api/spot_margin/history'
     r = requests.post(url)
     sel = r.json()['result']
-    find = ['USDT','USD','BTC','ETH','BNB']
+    find = ['USDT','USD','BTC','ETH','BNB','DAI']
     spot = {}
     new_time = sel[0]['time']
     # print(new_time)
@@ -101,7 +102,7 @@ def all_spot_margin():
 
     # rate = str(spot['rate']*24*365*100) + '%'
     # return rate
-    rate = '|USDT|  ' + str(round(spot['USDT']['rate']*24*365*100,1)) + '%\n|USD  |  ' +str(round(spot['USD']['rate']*24*365*100,1)) +  '%\n|BTC  |  ' +str(round(spot['BTC']['rate']*24*365*100,1)) +  '%\n|ETH  |  ' + str(round(spot['ETH']['rate']*24*365*100,1)) +  '%\n|BNB  |  ' + str(round(spot['BNB']['rate']*24*365*100,1)) + '%'
+    rate = '|USDT|  ' + str(round(spot['USDT']['rate']*24*365*100,1)) + '%\n|USD  |  ' +str(round(spot['USD']['rate']*24*365*100,1)) +  '%\n|BTC  |  ' +str(round(spot['BTC']['rate']*24*365*100,1)) +  '%\n|ETH  |  ' + str(round(spot['ETH']['rate']*24*365*100,1)) +  '%\n|BNB  |  ' + str(round(spot['BNB']['rate']*24*365*100,1)) +  '%\n|DAI  |  ' + str(round(spot['DAI']['rate']*24*365*100,1))
 
     return rate
 
