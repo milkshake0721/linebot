@@ -131,7 +131,7 @@ def callback(request):
                         ImageSendMessage(original_content_url = no, preview_image_url = no)
                     )
                 if ask == '請打到以下地址':
-                    adress = 'SOL-Chain :\n4NJX81MbG2nf6oVydJqD9Qoot6ekEDsEjh2c96LZc6ZQ \n ETH-Chain :\nthatismy.eth'
+                    adress = 'SOL-Chain :\nthatismy.sol \n ETH-Chain :\nthatismy.eth'
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
                         TextSendMessage(text=adress)
