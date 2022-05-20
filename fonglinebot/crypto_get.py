@@ -99,7 +99,7 @@ def all_spot_margin():
          for i in range(len(sel)):
             if sel[i]['coin'] == find[k] and sel[i]['time'] == new_time:
                 spot[find[k]] = sel[i]
-                print(spot[find[k]])
+                # print(spot[find[k]])
 
 
     # rate = str(spot['rate']*24*365*100) + '%'
