@@ -93,8 +93,10 @@ def all_spot_margin():
     spot = {}
     new_time = sel[0]['time']
     # print(new_time)
-    for i in range(len(sel)):
-        for k in range(len(find)):
+    for k in range(len(find)):
+    # for i in range(len(sel)):
+        # for k in range(len(find)):
+         for i in range(len(sel)):
             if sel[i]['coin'] == find[k] and sel[i]['time'] == new_time:
                 spot[find[k]] = sel[i]
                 print(spot[find[k]])
@@ -107,7 +109,7 @@ def all_spot_margin():
     return rate
 
 # spot_margin('貸出 Btc')
-# print(all_spot_margin())
+print(all_spot_margin())
 
 
 def crypto_greed():
