@@ -104,7 +104,7 @@ def all_spot_margin():
 
     # rate = str(spot['rate']*24*365*100) + '%'
     # return rate
-    rate = '|USDT|  ' + str(round(spot['USDT']['rate']*24*365*100,1)) + '%\n|USD  |  ' +str(round(spot['USD']['rate']*24*365*100,1)) +  '%\n|BTC  |  ' +str(round(spot['BTC']['rate']*24*365*100,1)) +  '%\n|ETH  |  ' + str(round(spot['ETH']['rate']*24*365*100,1)) +  '%\n|BNB  |  ' + str(round(spot['BNB']['rate']*24*365*100,1)) +  '%\n|DAI   |  ' + str(round(spot['DAI']['rate']*24*365*100,1))
+    rate = '|USDT|  ' + str(round(spot['USDT']['rate']*24*365*100,1)) + '%\n|USD  |  ' +str(round(spot['USD']['rate']*24*365*100,1)) +  '%\n|BTC  |  ' +str(round(spot['BTC']['rate']*24*365*100,1)) +  '%\n|ETH  |  ' + str(round(spot['ETH']['rate']*24*365*100,1)) +  '%\n|BNB  |  ' + str(round(spot['BNB']['rate']*24*365*100,1)) +  '%\n|DAI    |  ' + str(round(spot['DAI']['rate']*24*365*100,1)) + '%'
 
     return rate
 
