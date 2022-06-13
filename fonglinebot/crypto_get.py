@@ -65,51 +65,48 @@ def gasfee():
     fee = '|平均| ' + str(int(sel['ProposeGasPrice'])) + '\n|最快| ' + str(int(sel['FastGasPrice'])) + '\n|最慢| ' + str(int(sel['SafeGasPrice']))
     return fee
 
+
 def spot_margin(coin):
     # print (coin)
     coin = coin[2:]
     coin = coin.upper()
     coin = coin.split()
     # print(type(coin))
-    url = 'http://ftx.com/api/spot_margin/history'
+    url = 'http://ftx.com/api/spot_margin/lending_rates'
     r = requests.post(url)
     sel = r.json()['result']
     spot = None
     for i in range(len(sel)):
         if sel[i]['coin'] == coin[0] :
             spot = sel[i]
+            # print(spot)
             break
-    # print(spot['rate']*24*365*100)
-    # rate = spot
-    rate = str(round((spot['rate']*24*365*100),2)) + '%'
+
+    rate ='現在 '+ str(round((spot['previous']*24*365*100),2)) + '%\n下次 '+ str(round((spot['estimate']*24*365*100),2))+'%'
+    # print(rate)
     return rate
-# print(spot_margin('   luna'))
+# spot_margin('貸出 BNB')
+
 def all_spot_margin():
-    
-    url = 'http://ftx.com/api/spot_margin/history'
+    url = 'http://ftx.com/api/spot_margin/lending_rates'
     r = requests.post(url)
     sel = r.json()['result']
-    find = ['USDT','USD','BTC','ETH','BNB','DAI']
+    find = ['USDT','USD','BTC','ETH','BNB']
     spot = {}
-    new_time = sel[0]['time']
-    # print(new_time)
-    for k in range(len(find)):
-    # for i in range(len(sel)):
-        # for k in range(len(find)):
-         for i in range(len(sel)):
-            if sel[i]['coin'] == find[k] and sel[i]['time'] == new_time:
+    # new_time = sel[0]['time']
+    r = ''
+    for i in range(len(sel)):
+        for k in range(len(find)):
+            if sel[i]['coin'] == find[k]:
                 spot[find[k]] = sel[i]
-                # print(spot[find[k]])
+                # print(find[k])
+                ra = str(round(sel[i]['estimate']*24*365*100,1))
+                # print(sel[i]['time'])
+                r = r + '|'+ find[k] +'|\t' + ra + '%\n'
+    # print(r)
+    # rate = '|USDT|  ' + str(round(spot['USDT']['rate']*24*365*100,1)) + '%\n|USD  |  ' +str(round(spot['USD']['rate']*24*365*100,1)) +  '%\n|BTC  |  ' +str(round(spot['BTC']['rate']*24*365*100,1)) +  '%\n|ETH  |  ' + str(round(spot['ETH']['rate']*24*365*100,1)) +  '%\n|BNB  |  ' + str(round(spot['BNB']['rate']*24*365*100,1)) + '%'
 
-
-    # rate = str(spot['rate']*24*365*100) + '%'
-    # return rate
-    rate = '|USDT|  ' + str(round(spot['USDT']['rate']*24*365*100,1)) + '%\n|USD  |  ' +str(round(spot['USD']['rate']*24*365*100,1)) +  '%\n|BTC  |  ' +str(round(spot['BTC']['rate']*24*365*100,1)) +  '%\n|ETH  |  ' + str(round(spot['ETH']['rate']*24*365*100,1)) +  '%\n|BNB  |  ' + str(round(spot['BNB']['rate']*24*365*100,1)) +  '%\n|DAI    |  ' + str(round(spot['DAI']['rate']*24*365*100,1)) + '%'
-
-    return rate
-
-# spot_margin('貸出 Btc')
-print(all_spot_margin())
+    return r
 
 
 def crypto_greed():
