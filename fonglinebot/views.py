@@ -231,7 +231,7 @@ def callback(request):
                         )
                 if ask == '幣價':
                     ran = [0,1]
-                    a = ['還問啊？','很低啦','OuO?','QAQ','別再問啦','記得多看少動啦']
+                    a = ['還問啊？','很低啦','OuO?','QAQ','很低 別再問啦>w<','記得多看少動啦']
                     cho = random.choices(ran,weights=(75,25))
                     if cho == 0:
                         ans = cryptoall()
