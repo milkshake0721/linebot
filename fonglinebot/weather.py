@@ -118,4 +118,3 @@ def ask_weather(place):
         ans = get_36h_weather(place)
         return ans
 
-print(ask_weather("北天氣"))
