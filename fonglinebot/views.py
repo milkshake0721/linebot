@@ -13,6 +13,7 @@ from .crypto_get import crypto,gasfee,spot_margin,all_spot_margin,crypto_greed,u
 from .stocksAPI import stockapi,currency,metal,get_greed_pic
 from .do_excel import Nick_lmao_time,check_Nick_lmao_time
 from .twstock import oil_price,eggprice,chickenprice
+from .weather import ask_weather
 import random
  
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
@@ -179,11 +180,13 @@ def callback(request):
                         event.reply_token,
                         TextSendMessage(text=ans)
                     )
-                    # url = get_greed_pic()
-                    # line_bot_api.reply_message(  # 回復圖片
-                    #     event.reply_token,
-                    #     ImageSendMessage(original_content_url = url, preview_image_url = url)
-                    # )
+                if '天氣'in ask and len(ask)<10:
+                    ans = ask_weather(ask)
+                    line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=ans)
+                    )
+                    
                 if '鮑魚' in ask and ask_type == 'group' :
                     if group_id == 'C28118069d07e5b9d2b1c7eb44bfd5121' or group_id == 'Cd847ab4f2bfd6886fe37bf194cb2d92c':
                         url = 'https://i.imgur.com/a0ezI7q.png'
