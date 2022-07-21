@@ -76,6 +76,13 @@ def callback(request):
                         event.reply_token,
                         TextSendMessage(text=com)
                     )
+                if  ask == '我要嫖娼' :
+                    command_list = ['👀','✂️🐔','🔪🐔','2000/1s','free','wow','15000/1d','ˊˇˋ','🧐','喀嚓','Nick很高興為您服務']
+                    com = random.choice(command_list)
+                    line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=com)
+                    )
                 if  ask == '戒指' or ask == '振宇啊':
                     if group_id != 'C7e2649b69e0ab80f01262051a886d96d':
                         break

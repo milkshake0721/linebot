@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 import requests
 
 
@@ -113,9 +114,18 @@ def ask_weather(place):
             place = place.replace(i, "")
         place = if_two_words(place)
         return week_weather(place)
+    # elif place in weather_station_list:
+    #     ans = station(place)
     else:
         place = if_two_words(place)
         ans = get_36h_weather(place)
         return ans
 
-# print(ask_weather("天氣"))
+# print(ask_weather("台北天氣"))
+
+# url = (
+#         "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-017?Authorization=CWB-EC9FB2AA-AEB7-48B6-8816-4993A9543232"
+#     )
+# r_weather = requests.get(url)
+# raw = r_weather.json()
+# print(raw)
