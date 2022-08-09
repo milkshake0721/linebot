@@ -158,20 +158,9 @@ def callback(request):
                     )
                 if  ask == 'USDT 匯率' or ask == 'usdt匯率' or ask == 'USDT匯率'or ask == 'usdt 匯率' or ask == 'Usdt 匯率' or ask == 'Usdt匯率':
                     ans = usdt()
-                    j = [
-                            {
-                                "type":"text",
-                                "text":ans
-                            },
-                            {
-                                "type":"text",
-                                "text":"May I help you?"
-                            }
-                        ]
-
                     line_bot_api.push_message(  # 回復訊息文字
                         event.reply_token,
-                        j
+                        TextSendMessage(text=ans)
                     )
                 if  ask[0:3] == '貸出 ' :
                     ans = spot_margin(ask)
