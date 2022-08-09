@@ -151,10 +151,7 @@ def usdt():
         ace = 9999
     ans = 'Ace | '+ str(round(ace,2))+ '\nBito | ' + str(round(bito,2)) + '\nMax | ' + str(round(max,2))
 
-    all = {
-            "type":"text",
-            "text":ans
-            }
+    all = ans
         
 
     return all
