@@ -8,7 +8,7 @@ from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import MessageEvent, TextSendMessage, ImageSendMessage
 
 from .defineWTD import wtd
-from .crypto_get import crypto,gasfee,spot_margin,all_spot_margin,crypto_greed,usdt,cryptoall
+from .crypto_get import crypto,gasfee,spot_margin,all_spot_margin,crypto_greed,usdt,cryptoall,usdt_ace
 from .stocksAPI import stockapi,currency,metal,get_greed_pic
 from .do_excel import Nick_lmao_time,check_Nick_lmao_time
 from .twstock import oil_price,eggprice,chickenprice
@@ -160,8 +160,11 @@ def callback(request):
                     ans = usdt()
                     line_bot_api.push_message(  # 回復訊息文字
                         userid,
-                        TextSendMessage(text=ans),
-                        timeout = 10000
+                        TextSendMessage(text=ans)
+                    )
+                    line_bot_api.push_message(  # 回復訊息文字
+                        userid,
+                        TextSendMessage(text=usdt_ace())
                     )
                 if  ask[0:3] == '貸出 ' :
                     ans = spot_margin(ask)

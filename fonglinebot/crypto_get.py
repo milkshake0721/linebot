@@ -142,6 +142,15 @@ def usdt():
         bito = float(bito_r.json()['data'][0]['price'])
     except:
         bito = 9999
+
+    ans = 'Bito | ' + str(round(bito,2)) + '\nMax | ' + str(round(max,2))
+
+    all = ans
+        
+
+    return all
+
+def usdt_ace():
     try:
         ace_url = 'http://ace.io/polarisex/oapi/list/tradePrice'
         ace_r = requests.post(ace_url,timeout=20,headers={'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.4 Safari/605.1.15'})
@@ -149,11 +158,11 @@ def usdt():
         ace = float(ace_r.json()['USDT/TWD']['last_price'])
     except:
         ace = 9999
-    ans = 'Ace | '+ str(round(ace,2))+ '\nBito | ' + str(round(bito,2)) + '\nMax | ' + str(round(max,2))
+    ans = 'Ace | '+ str(round(ace,2))
 
     all = ans
         
-
     return all
 
-print(usdt())
+
+print(usdt_ace())
