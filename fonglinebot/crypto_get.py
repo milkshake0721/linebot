@@ -133,19 +133,20 @@ def usdt():
         max_url = 'https://max-api.maicoin.com/api/v2/tickers/usdttwd'
         r = requests.get(max_url)
         max = float(r.json()['last'])
+        print(max)
     except:
         max = 9999
     try:
         bito_url = 'https://api.bitopro.com/v3/trades/usdt_twd'
         bito_r = requests.get(bito_url)
-        # print(bito_r.json()['data'][0]['price'])
+        print(bito_r.json()['data'][0]['price'])
         bito = float(bito_r.json()['data'][0]['price'])
     except:
         bito = 9999
     try:
         ace_url = 'https://ace.io/polarisex/oapi/list/tradePrice'
         ace_r = requests.get(ace_url)
-        print(ace_r.json())
+        # print(ace_r.json())
         ace = float(ace_r.json()['USDT/TWD']['last_price'])
     except:
         ace = 9999
@@ -153,4 +154,4 @@ def usdt():
 
     return all
 
-# print(usdt())
+print(usdt())
