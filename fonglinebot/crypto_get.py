@@ -143,8 +143,8 @@ def usdt():
     except:
         bito = 9999
     try:
-        ace_url = 'https://ace.io/polarisex/oapi/list/tradePrice'
-        ace_r = requests.get(ace_url,timeout=10)
+        ace_url = 'http://ace.io/polarisex/oapi/list/tradePrice'
+        ace_r = requests.post(ace_url,timeout=20,headers={'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.4 Safari/605.1.15'})
         # print(ace_r.json())
         ace = float(ace_r.json()['USDT/TWD']['last_price'])
     except:
