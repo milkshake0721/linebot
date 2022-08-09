@@ -156,7 +156,7 @@ def callback(request):
                         event.reply_token,
                         TextSendMessage(text=ans)
                     )
-                if  ask == 'USDT 匯率' or ask == 'usdt匯率' or ask == 'USDT匯率'or ask == 'usdt 匯率' or ask == 'Usdt 匯率' or ask == 'Usdt匯率':
+                if  ask == 'USDT 匯率' or ask == 'usdt匯率' or ask == 'USDT匯率'or ask == 'usdt 匯率' or ask == 'Usdt 匯率' or ask == 'Usdt匯率' and  userid != "Udeadbeefdeadbeefdeadbeefdeadbeef":
                     ans = usdt()
                     line_bot_api.push_message(  # 回復訊息文字
                         event.reply_token,
