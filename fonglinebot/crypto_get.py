@@ -149,8 +149,13 @@ def usdt():
         ace = float(ace_r.json()['USDT/TWD']['last_price'])
     except:
         ace = 9999
-    all = 'Ace | '+ str(round(ace,2))+ '\nBito | ' + str(round(bito,2)) + '\nMax | ' + str(round(max,2)) 
+    ans = 'Ace | '+ str(round(ace,2))+ '\nBito | ' + str(round(bito,2)) + '\nMax | ' + str(round(max,2))
+
+    all = {
+            "type":"text",
+            "text":ans
+        }
 
     return all
 
-# print(usdt())
+print(usdt())
