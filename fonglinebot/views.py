@@ -160,7 +160,8 @@ def callback(request):
                     ans = usdt()
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
-                        TextSendMessage(text=ans)
+                        TextSendMessage(text=ans),
+                        timeout=10000
                     )
                 if  ask[0:3] == '貸出 ' :
                     ans = spot_margin(ask)
