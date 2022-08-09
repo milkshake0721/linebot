@@ -154,13 +154,13 @@ def callback(request):
                     ans = gasfee()
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
-                        messages=ans
+                        TextSendMessage(text=ans)
                     )
                 if  ask == 'USDT 匯率' or ask == 'usdt匯率' or ask == 'USDT匯率'or ask == 'usdt 匯率' or ask == 'Usdt 匯率' or ask == 'Usdt匯率':
                     ans = usdt()
                     line_bot_api.push_message(  # 回復訊息文字
-                        event.reply_token,
-                        TextSendMessage(text=ans)
+                        to = event.reply_token,
+                        message = ans
                     )
                 if  ask[0:3] == '貸出 ' :
                     ans = spot_margin(ask)
