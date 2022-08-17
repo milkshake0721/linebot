@@ -41,11 +41,11 @@ def currency():
     jpy = str(round(1/qu['JPY'],3))
     eur = str(round(1/qu['EUR'],3))
     rmb = str(round(1/qu['CNY'],3))
-    rub = str(round(1/qu['RUB'],3))
-    all = '美金 : ' + usd + '\n日幣 : '+ jpy +'\n歐元 : ' + eur + '\n人民幣:' + rmb  + '\n盧布 : ' + rub
+    aud = str(round(1/qu['AUD'],3))
+    all = '美金 : ' + usd + '\n日幣 : '+ jpy +'\n歐元 : ' + eur + '\n人民幣:' + rmb  + '\n澳幣 : ' + aud
     # print('美金 : ' + usd + '\n日幣 : '+ jpy +'\n歐元 : ' + eur )
     return all
-# print(currency())
+print(currency())
 
 def metal():
     url = 'https://api.metals.live/v1/spot'

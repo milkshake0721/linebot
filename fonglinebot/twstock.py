@@ -113,6 +113,7 @@ def oil_price():
 def eggprice():
     # /api/v1/PoultryTransType_BoiledChicken_Eggs?Start_time=交易日期(起)&Start_time=交易日期(起)&End_time=交易日期(迄)&Start_time=交易日期(起)&End_time=交易日期(迄)
     url = 'https://data.coa.gov.tw/api/v1/PoultryTransType_BoiledChicken_Eggs'
+    #'/api/v1/PoultryTransType_BoiledChicken_Eggs'
     r = requests.get(url)
     egg = r.json()['Data'][0]['egg_TaijinPrice']
     return egg + ' 元/台斤'
