@@ -146,9 +146,14 @@ def callback(request):
                 if  ask == '分' :
                     no_list = ['https://i.imgur.com/fTPyUxt.jpeg','https://i.imgur.com/T6rpwPA.jpeg','https://i.imgur.com/WTLsPY4.jpeg']
                     no = random.choice(no_list)
-                    line_bot_api.reply_message(  # 回復圖片
+                    line_bot_api.reply_message(  # 回復圖片 https://i.imgur.com/fm6G0G2.jpeg
                         event.reply_token,
                         ImageSendMessage(original_content_url = no, preview_image_url = no)
+                    )
+                if  ask == '乞丐超人' :
+                    line_bot_api.reply_message(  # 回復圖片 
+                        event.reply_token,
+                        ImageSendMessage(original_content_url = 'https://i.imgur.com/fm6G0G2.jpeg', preview_image_url = 'https://i.imgur.com/fm6G0G2.jpeg')
                     )
                 if  ask == 'gas' or ask == 'gas fee' or ask == 'gasfee':
                     ans = gasfee()
