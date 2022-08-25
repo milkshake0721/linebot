@@ -24,7 +24,7 @@ def pay():
         a = response.json()['data']['regularMarketPrice']
         an.append(a)
 
-    ans = 'S&P  {}\nDOW  {}\nNAS  {}'.format(an[0],an[1],an[2])
+    ans = 'S&P  : {}\nDOW  : {}\nNAS  : {}'.format(an[0],an[1],an[2])
     return ans
 
 def pay_oil():
