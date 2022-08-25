@@ -101,9 +101,9 @@ def callback(request):
                     )
                     
                 if  '逢好帥' in ask or ask == '我好帥' or ask == '我好漂亮' or ask == '我好美' or '尼克好醜' in ask :
-                    good_list = ['沒綽','對的','我也這麼認為','你多說幾次也不會有人反駁你','沒有錯','我贊同你的想法']
-                    if  userid == 'U0bdb890d03a5b755f3dbb67eafa74f5d' and ask != '尼克好醜'  :
-                        good_list = ['笑死','屁','噁心死了','嘔嘔嘔嘔','你想太多了','Bullshit','夠囉','...','幽默','蛤?','我聽不見','3小','呵','你夠囉','媽媽說不能騙人','你好意思?']
+                    good_list = ['沒綽','對的','我也這麼認為','你多說幾次也不會有人反駁你','沒有錯','我贊同你的想法','您說得對','您最棒了']
+                    if  userid == 'U0bdb890d03a5b755f3dbb67eafa74f5d' and ask != '尼克好醜' and ask != '逢好帥' :
+                        good_list = ['笑死','屁','噁心死了','嘔嘔嘔嘔','你想太多了','Bullshit','夠囉','...','幽默','蛤?','我聽不見','3小','呵','你夠囉','媽媽說不能騙人','你好意思?','爛死了','好爛']
                     ans = random.choice(good_list)
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
@@ -138,7 +138,7 @@ def callback(request):
                         ImageSendMessage(original_content_url = no, preview_image_url = no)
                     )
                 if ask == '請打到以下地址':
-                    adress = 'SOL-Chain : thatismy.sol \nETH-Chain : thatismy.eth'
+                    adress = 'SOL-Chain : thatismy.sol \nETH-Chain : thatismy.eth \nBNB-Chain : thatismy.bnb'
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
                         TextSendMessage(text=adress)
