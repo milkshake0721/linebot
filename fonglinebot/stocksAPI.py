@@ -8,27 +8,49 @@ from bs4 import BeautifulSoup
 import json,re
 import fear_and_greed
 
+def pay():
+    url = "https://yahoo-finance97.p.rapidapi.com/stock-info"
+    index_all = ['^GSPC','^DJI','^IXIC']
+    an = []
+    for i in index_all:
+        payload = "symbol=" + i + '&period=1d'
+        headers = {
+            "content-type": "application/x-www-form-urlencoded",
+            "X-RapidAPI-Key": "ece950ca5fmsh02f019c5d4464efp1afb3bjsndb9ae3b18724",
+            "X-RapidAPI-Host": "yahoo-finance97.p.rapidapi.com"
+        }
+
+        response = requests.request("POST", url, data=payload, headers=headers)
+        a = response.json()['data']['regularMarketPrice']
+        an.append(a)
+
+    ans = 'S&P 500 {}\nDOW 30  {}\nNASDAQ  {}'.format(an[0],an[1],an[2])
+    return ans
+
 def stockapi(ID):
-    ID = ID.upper()
-    datetime_dt = datetime.datetime.today()
-    today = datetime_dt.strftime("%Y-%m-%d")
-    oneday = datetime.timedelta(days=1)
-    yesterday = datetime_dt - oneday
-    tomarrow = datetime_dt + oneday
-    yesterday = yesterday.strftime("%Y-%m-%d")
-    tomarrow = tomarrow.strftime("%Y-%m-%d")
-    finnhub_client = finnhub.Client(api_key="c8k6sqaad3i8fk1kn8ag")
-    ans = finnhub_client.quote(ID)
-    # print(ans)
-    news = finnhub_client.company_news(ID, _from = yesterday , to = today)
-    # print(news)
-    if news == []:
-        news = [{'headline':'','url':''}]
-        news[0]['headline'] = 'N/A'
-        news[0]['url'] = 'N/A'
-    ans.pop('t')
-    # all = news[0]['url']
-    all = ID + ' ( ' +str(ans['dp']) + '% )\n現在價格 : ' + str(ans['c']) + '\n-------------------\n變動價格 : ' + str(ans['d']) + '\n今日最高 : ' + str(ans['h']) + '\n今日最低 : '+ str(ans['l']) + '\n開市價格 : '+ str(ans['o']) + '\n上次閉市 : '+ str(ans['pc']) + '\n-------------------\n新聞 : '+ news[0]['headline']+ '\n' + news[0]['url']
+    if ID == '我要指數':
+        all = pay()
+    else:
+        ID = ID.upper()
+        datetime_dt = datetime.datetime.today()
+        today = datetime_dt.strftime("%Y-%m-%d")
+        oneday = datetime.timedelta(days=1)
+        yesterday = datetime_dt - oneday
+        tomarrow = datetime_dt + oneday
+        yesterday = yesterday.strftime("%Y-%m-%d")
+        tomarrow = tomarrow.strftime("%Y-%m-%d")
+        finnhub_client = finnhub.Client(api_key="c8k6sqaad3i8fk1kn8ag")
+        ans = finnhub_client.quote(ID)
+        # print(ans)
+        news = finnhub_client.company_news(ID, _from = yesterday , to = today)
+        # print(news)
+        if news == []:
+            news = [{'headline':'','url':''}]
+            news[0]['headline'] = 'N/A'
+            news[0]['url'] = 'N/A'
+        ans.pop('t')
+        # all = news[0]['url']
+        all = ID + ' ( ' +str(ans['dp']) + '% )\n現在價格 : ' + str(ans['c']) + '\n-------------------\n變動價格 : ' + str(ans['d']) + '\n今日最高 : ' + str(ans['h']) + '\n今日最低 : '+ str(ans['l']) + '\n開市價格 : '+ str(ans['o']) + '\n上次閉市 : '+ str(ans['pc']) + '\n-------------------\n新聞 : '+ news[0]['headline']+ '\n' + news[0]['url']
     return all
 
 # print(stockapi('hl'))
@@ -45,7 +67,7 @@ def currency():
     all = '美金 : ' + usd + '\n日幣 : '+ jpy +'\n歐元 : ' + eur + '\n人民幣:' + rmb  + '\n澳幣 : ' + aud
     # print('美金 : ' + usd + '\n日幣 : '+ jpy +'\n歐元 : ' + eur )
     return all
-print(currency())
+# print(currency())
 
 def metal():
     url = 'https://api.metals.live/v1/spot'
@@ -83,21 +105,15 @@ def metal():
     return all
 
 def get_greed_pic():
-    # url = 'https://money.cnn.com/data/fear-and-greed/'
-    # r = requests.post(url)
-    # soup = BeautifulSoup(r.text,"html.parser") #將網頁資料以html.parser
-    # sel = soup.find( id = "needleChart") #取HTML標中的 <div class="title"></div> 中的<p>標籤存入sel
-    # s = str(sel)
-    # url_start = s.find('http')
-    # url_end = s.find('.png')
-    # pic_url = s[url_start:url_end+4]
-    # # print(pic_url)
-
     pic_url = fear_and_greed.get()
 
     all = all = '貪婪恐慌\n|   ' + str(pic_url[0])+'   | \n'+pic_url[1]
 
-
     return all
 
 # print(get_greed_pic())
+
+
+# print(stockapi('我要指數'))
+# pay('CL=F')
+# pay('CL=F')

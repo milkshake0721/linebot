@@ -7,6 +7,21 @@ import re
 import json
 import csv
 
+def pay(query):
+    url = "https://yahoo-finance97.p.rapidapi.com/stock-info"
+
+    payload = "symbol=" + query + '&period=1d'
+    headers = {
+        "content-type": "application/x-www-form-urlencoded",
+        "X-RapidAPI-Key": "ece950ca5fmsh02f019c5d4464efp1afb3bjsndb9ae3b18724",
+        "X-RapidAPI-Host": "yahoo-finance97.p.rapidapi.com"
+    }
+
+    response = requests.request("POST", url, data=payload, headers=headers)
+    a = response.json()
+    # print(a)
+    return a['data']['regularMarketPrice']
+
 def conv_to_list(obj):
     '''
     將物件轉換為list
@@ -50,7 +65,10 @@ def date_get_today(with_time=False):
 
 
 def gettwstock(stockID):
-    if stockID[0] <= '9':
+    if stockID == 0 or stockID == '加權':
+        return pay('^TWII')
+
+    elif stockID[0] <= '9':
         pass
     else:
         with open('fonglinebot/stocks.csv', mode='r') as infile:
@@ -153,4 +171,4 @@ def chickenprice():
 # print(a['證券代號'] == num)
 # print(a['證券名稱'])
 # print(gettwstock('2330'))
-# print(gettwstock('富邦公司治理'))
+# print(gettwstock(0))
