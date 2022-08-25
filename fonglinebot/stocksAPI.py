@@ -27,9 +27,30 @@ def pay():
     ans = 'S&P  {}\nDOW  {}\nNAS  {}'.format(an[0],an[1],an[2])
     return ans
 
+def pay_oil():
+    url = "https://yahoo-finance97.p.rapidapi.com/stock-info"
+    index_all = ['CL=F','BZ=F']
+    an = []
+    for i in index_all:
+        payload = "symbol=" + i + '&period=1d'
+        headers = {
+            "content-type": "application/x-www-form-urlencoded",
+            "X-RapidAPI-Key": "ece950ca5fmsh02f019c5d4464efp1afb3bjsndb9ae3b18724",
+            "X-RapidAPI-Host": "yahoo-finance97.p.rapidapi.com"
+        }
+
+        response = requests.request("POST", url, data=payload, headers=headers)
+        a = response.json()['data']['regularMarketPrice']
+        an.append(a)
+
+    ans = '原油 : {}\n布倫特原油 : {}'.format(an[0],an[1])
+    return ans
+
 def stockapi(ID):
     if ID == '我要指數':
         all = pay()
+    elif ID == '我要油':
+        all = pay_oil()
     else:
         ID = ID.upper()
         datetime_dt = datetime.datetime.today()
@@ -114,6 +135,6 @@ def get_greed_pic():
 # print(get_greed_pic())
 
 
-# print(stockapi('我要指數'))
+# print(stockapi('我要油'))
 # pay('CL=F')
 # pay('CL=F')
