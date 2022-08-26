@@ -134,10 +134,11 @@ def weather_in_english(query):
     days = 1
     try:
         days = int(query[query.find(' '):])
+        query = query[:query.find(' ')]
         if days > 14:
             days = 7
     except:pass
-    query = query[:query.find(' ')]
+    
     BaseURL = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/'
 
     ApiKey='82W8W5QY9JMFUHV9AKHLTN792'
@@ -194,6 +195,6 @@ def weather_in_english(query):
 
     # print(all)
     return all
-# bb = 'w Tokyo '
-# print(bb[:2])
-# print(weather_in_english(bb[2:]))
+bb = 'w Tokyo 2'
+print(bb[:2])
+print(weather_in_english(bb[2:]))
