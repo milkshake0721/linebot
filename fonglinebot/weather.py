@@ -131,12 +131,10 @@ def ask_weather(place):
 # print(raw)
 def weather_in_english(query):
     # This is the core of our weather query URL
-    try:
-        days = int(query[query.find(' '):])
-        if days > 14:
-            days = 7
-    except:
-        days = 1
+    days = 1
+    days = int(query[query.find(' '):])
+    if days > 14:
+        days = 7
     query = query[:query.find(' ')]
     BaseURL = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/'
 
