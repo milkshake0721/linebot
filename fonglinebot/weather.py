@@ -129,3 +129,71 @@ def ask_weather(place):
 # r_weather = requests.get(url)
 # raw = r_weather.json()
 # print(raw)
+def weather_in_english(query):
+    # This is the core of our weather query URL
+    try:
+        days = int(query[query.find(' '):])
+        if days > 14:
+            days = 7
+    except:
+        days = 1
+    query = query[:query.find(' ')]
+    BaseURL = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/'
+
+    ApiKey='82W8W5QY9JMFUHV9AKHLTN792'
+    #UnitGroup sets the units of the output - us or metric
+    UnitGroup ='metric'
+
+    #Location for the weather data
+    Location = query
+    StartDate = ''
+    EndDate=''
+    ContentType="json"
+    #include sections
+    #values include days,hours,current,alerts
+    Include="days"
+    # print('')
+    # print(' - Requesting weather : ')
+    #basic query including location
+    ApiQuery=BaseURL + Location
+
+    #append the start and end date if present
+    if (len(StartDate)):
+        ApiQuery+="/"+StartDate
+        if (len(EndDate)):
+            ApiQuery+="/"+EndDate
+    #Url is completed. Now add query parameters (could be passed as GET or POST)
+    ApiQuery+="?"
+    #append each parameter as necessary
+    if (len(UnitGroup)):
+        ApiQuery+="&unitGroup="+UnitGroup
+    if (len(ContentType)):
+        ApiQuery+="&contentType="+ContentType
+    if (len(Include)):
+        ApiQuery+="&include="+Include
+    ApiQuery+="&key="+ApiKey
+    r_weather = requests.get(ApiQuery).json()
+    all = '{}\n\n'.format(r_weather['resolvedAddress'])
+    if days == 1:
+        for i in range(days):
+            all += '{}\n\n'.format(r_weather['days'][i]['datetime'])
+            all += '氣溫{}~{}度\n'.format(r_weather['days'][i]['tempmax'],r_weather['days'][i]['tempmin'])
+            all += '體感{}~{}度\n\n'.format(r_weather['days'][i]['feelslikemax'],r_weather['days'][i]['feelslikemin'])
+            all += '日出時間{}\n日落時間{}\n'.format(r_weather['days'][i]['sunrise'],r_weather['days'][i]['sunset'])
+            all += '{}，降雨機率{}%\n'.format(r_weather['days'][i]['conditions'],r_weather['days'][i]['precipprob'])
+            all += '{}\n'.format(r_weather['days'][i]['description'])
+    else:
+        for i in range(days):
+            all += '{}\n\n'.format(r_weather['days'][i]['datetime'])
+            all += '氣溫{}~{}度\n'.format(r_weather['days'][i]['tempmax'],r_weather['days'][i]['tempmin'])
+            all += '體感{}~{}度\n\n'.format(r_weather['days'][i]['feelslikemax'],r_weather['days'][i]['feelslikemin'])
+            all += '{}，降雨機率{}%\n'.format(r_weather['days'][i]['conditions'],r_weather['days'][i]['precipprob'])
+            all += '\n'
+    # print(datetime)
+    # all = '{}\n'.format(r_weather['resolvedAddress'] )
+
+    # print(all)
+    return all
+# bb = 'w Tokyo '
+# print(bb[:2])
+# print(weather_in_english(bb[2:]))

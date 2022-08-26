@@ -12,7 +12,7 @@ from .crypto_get import crypto,gasfee,spot_margin,all_spot_margin,crypto_greed,u
 from .stocksAPI import stockapi,currency,metal,get_greed_pic
 from .do_excel import Nick_lmao_time,check_Nick_lmao_time
 from .twstock import oil_price,eggprice,chickenprice,gweei
-from .weather import ask_weather
+from .weather import ask_weather,weather_in_english
 import random
  
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
@@ -39,6 +39,8 @@ def callback(request):
                     ask = event.message.text
                 except:
                     break
+                if ask == None :
+                    break
                 userid = event.source.user_id
                 ask_type = event.source.type
                 if ask_type == 'group':
@@ -52,8 +54,6 @@ def callback(request):
                         event.reply_token,
                         ImageSendMessage(original_content_url = url, preview_image_url = url)
                     )
-                if ask == None :
-                    break
                 if '啪' in ask :
                     pa_list = ['https://i.imgur.com/E7SYgOa.jpeg','https://i.imgur.com/ah7Ubom.jpeg','https://i.imgur.com/EEA8c3n.jpg','https://imgur.com/X0T8vb7.jpg','https://imgur.com/9BUZdx5.jpg']
                     pa = random.choice(pa_list)
@@ -304,6 +304,11 @@ def callback(request):
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
                         TextSendMessage(text=wtd(ask))
+                    )
+                if ask[:2] == 'w ':
+                    line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=weather_in_english(ask[2:]))
                     )
                 else:
                     pass
