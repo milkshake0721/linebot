@@ -11,7 +11,7 @@ from .defineWTD import wtd
 from .crypto_get import crypto,gasfee,spot_margin,all_spot_margin,crypto_greed,usdt,cryptoall
 from .stocksAPI import stockapi,currency,metal,get_greed_pic
 from .do_excel import Nick_lmao_time,check_Nick_lmao_time
-from .twstock import oil_price,eggprice,chickenprice
+from .twstock import oil_price,eggprice,chickenprice,gweei
 from .weather import ask_weather
 import random
  
@@ -45,7 +45,7 @@ def callback(request):
                         group_id = event.source.group_id
                         print('\n\nRoomID : ',group_id)
                 print(userid,'say',ask,'\n')
-                imgurl_dict = {'安息吧': 'https://imgur.com/3ni4dLZ.jpg', 'GameFi_gg': 'https://imgur.com/tTANEnl.jpg', '我我也要': 'https://imgur.com/tm9o6TG.jpg', '安詳': 'https://imgur.com/1rRH53I.jpg', 'Crypto_gg': 'https://imgur.com/Z2p7HOh.jpg', '養我 拜託': 'https://imgur.com/AIe5Z5h.jpg', 'NFT_gg': 'https://imgur.com/2SBJ8nf.jpg', '你們說話啊': 'https://imgur.com/2XU9RKi.jpg', '偽娘': 'https://imgur.com/97lUJLO.jpg', '我有錢': 'https://imgur.com/Z1coA4X.jpg', '格局太小': 'https://imgur.com/1uqEueN.jpg', '男生才不會懷孕': 'https://imgur.com/08QcLGe.jpg', '偷嚕': 'https://imgur.com/Y1n2MrC.jpg', '快幫我': 'https://imgur.com/bri3fEZ.jpg', '抽獎我全要': 'https://imgur.com/TcbghMV.jpg', 'DeFi_gg': 'https://imgur.com/XxS2NKx.jpg', '小錢啦': 'https://imgur.com/LsHU0vY.jpg', '看戲': 'https://imgur.com/sZ7VuHU.jpg', '有bug不影響': 'https://imgur.com/wj0jSy4.jpg', '群友賺錢': 'https://imgur.com/OdDWtBq.jpg', 'dddd': 'https://imgur.com/LteluhE.jpg', '誇張喔': 'https://imgur.com/Y3qNhLK.jpg', '槍硬': 'https://imgur.com/CYynAR0.jpg', '弄死你們': 'https://imgur.com/Dn8AJUR.jpg', 'A9': 'https://imgur.com/zIMOe6v.jpg', '就是你啦': 'https://imgur.com/wfWULIp.jpg', '沒輸過': 'https://imgur.com/losMbzR.jpg', '正能量': 'https://imgur.com/kvPv9xX.jpg', 'a9': 'https://imgur.com/BMYhZEw.jpg', '不懂不要碰': 'https://imgur.com/dvIs4d3.jpg', '沒有，滾': 'https://imgur.com/cWZd3Hg.jpg', '獨色色': 'https://imgur.com/ihqqkvY.jpg', '愣': 'https://imgur.com/NNKuQEt.jpg', '你多長': 'https://imgur.com/zo5YkYQ.jpg', 'g8虧爛': 'https://imgur.com/ItXpW6a.jpg', '有輸過': 'https://imgur.com/60QYgJd.jpg', '大餅10w': 'https://imgur.com/9UiJukx.jpg', '仰望大佬': 'https://imgur.com/uCXmPYI.jpg', '好傷人': 'https://imgur.com/l93qEHE.jpg', '....': 'https://imgur.com/ApGIQa9.jpg', '我閉嘴': 'https://imgur.com/uXATqeD.jpg', '我的盤古': 'https://imgur.com/LYUxVCA.jpg', '不拉盤？': 'https://imgur.com/HjAOHS1.jpg', '!?': 'https://imgur.com/UpITfMs.jpg', '????': 'https://imgur.com/2uls8gi.jpg', '便宜啦': 'https://imgur.com/9xpIKr3.jpg','不想上班':'https://i.imgur.com/LOS5ZAC.png'}
+                imgurl_dict = {'安息吧': 'https://imgur.com/3ni4dLZ.jpg', 'GameFi_gg': 'https://imgur.com/tTANEnl.jpg', '我我也要': 'https://imgur.com/tm9o6TG.jpg', '安詳': 'https://imgur.com/1rRH53I.jpg', 'Crypto_gg': 'https://imgur.com/Z2p7HOh.jpg', '養我 拜託': 'https://imgur.com/AIe5Z5h.jpg', 'NFT_gg': 'https://imgur.com/2SBJ8nf.jpg', '你們說話啊': 'https://imgur.com/2XU9RKi.jpg', '偽娘': 'https://imgur.com/97lUJLO.jpg', '我有錢': 'https://imgur.com/Z1coA4X.jpg', '格局太小': 'https://imgur.com/1uqEueN.jpg', '男生才不會懷孕': 'https://imgur.com/08QcLGe.jpg', '偷嚕': 'https://imgur.com/Y1n2MrC.jpg', '快幫我': 'https://imgur.com/bri3fEZ.jpg', '抽獎我全要': 'https://imgur.com/TcbghMV.jpg', 'DeFi_gg': 'https://imgur.com/XxS2NKx.jpg', '小錢啦': 'https://imgur.com/LsHU0vY.jpg', '看戲': 'https://imgur.com/sZ7VuHU.jpg', '有bug不影響': 'https://imgur.com/wj0jSy4.jpg', '群友賺錢': 'https://imgur.com/OdDWtBq.jpg', 'dddd': 'https://imgur.com/LteluhE.jpg', '誇張喔': 'https://imgur.com/Y3qNhLK.jpg', '槍硬': 'https://imgur.com/CYynAR0.jpg', '弄死你們': 'https://imgur.com/Dn8AJUR.jpg', 'A9': 'https://imgur.com/zIMOe6v.jpg', '就是你啦': 'https://imgur.com/wfWULIp.jpg', '沒輸過': 'https://imgur.com/losMbzR.jpg', '正能量': 'https://imgur.com/kvPv9xX.jpg', 'a9': 'https://imgur.com/BMYhZEw.jpg', '不懂不要碰': 'https://imgur.com/dvIs4d3.jpg', '沒有，滾': 'https://imgur.com/cWZd3Hg.jpg', '獨色色': 'https://imgur.com/ihqqkvY.jpg', '愣': 'https://imgur.com/NNKuQEt.jpg', '你多長': 'https://imgur.com/zo5YkYQ.jpg', 'g8虧爛': 'https://imgur.com/ItXpW6a.jpg', '有輸過': 'https://imgur.com/60QYgJd.jpg', '大餅10w': 'https://imgur.com/9UiJukx.jpg', '仰望大佬': 'https://imgur.com/uCXmPYI.jpg', '好傷人': 'https://imgur.com/l93qEHE.jpg', '....': 'https://imgur.com/ApGIQa9.jpg', '我閉嘴': 'https://imgur.com/uXATqeD.jpg', '我的盤古': 'https://imgur.com/LYUxVCA.jpg', '不拉盤？': 'https://imgur.com/HjAOHS1.jpg', '!?': 'https://imgur.com/UpITfMs.jpg', '????': 'https://imgur.com/2uls8gi.jpg', '便宜啦': 'https://imgur.com/9xpIKr3.jpg','不想上班':'https://i.imgur.com/LOS5ZAC.png','昨天不是賠錢過': 'https://imgur.com/Bm20XC7.jpg', '召喚牛牛': 'https://imgur.com/YNaCUz5.jpg', '下輩子一起抄底': 'https://imgur.com/es9fr7O.jpg', '我是廢物': 'https://imgur.com/XISXl3F.jpg', '突然好難受': 'https://imgur.com/z6WgrUF.jpg', '我好餓啊': 'https://imgur.com/2dQ7rao.jpg', '目光呆滯': 'https://imgur.com/b3nwIkT.jpg', '要爆了': 'https://imgur.com/makcgQF.jpg', '你不是還有生命嗎': 'https://imgur.com/pUBqVG1.jpg', '轉帳中': 'https://imgur.com/4bIQyY8.jpg', '再也不梭了': 'https://imgur.com/9uBMqsi.jpg', '我好想贏': 'https://imgur.com/RWMF4BB.jpg', '美股用日幣計價': 'https://imgur.com/0MLxGSX.jpg', '噴了噴了': 'https://imgur.com/5Qec4jb.jpg', '錢錢飛了': 'https://imgur.com/lzlroVJ.jpg', 'First time?': 'https://imgur.com/9oOA1cn.jpg', '熊市做研究': 'https://imgur.com/x4z7429.jpg', '幣價動態清零': 'https://imgur.com/XrMOtXi.jpg', '退錢啊': 'https://imgur.com/Z5Hulrr.jpg', '=.=': 'https://imgur.com/gK1Sv5Q.jpg', '下輩子當狗': 'https://imgur.com/0vi5ZEs.jpg', '新手賠錢': 'https://imgur.com/uNDjP8w.jpg', '哭啊': 'https://imgur.com/N0p7YpQ.jpg', '每一秒都在蒸發': 'https://imgur.com/OCa1swf.jpg', '盈利呢': 'https://imgur.com/NHRoXGl.jpg', ':l': 'https://imgur.com/9fFKdd5.jpg', '可4我沒錢': 'https://imgur.com/8L3lrQP.jpg', '握草': 'https://imgur.com/CuNJirz.jpg', 'v起來啊': 'https://imgur.com/5FeLG5u.jpg', 'wiwi995': 'https://imgur.com/veRPPCA.jpg', '99sol': 'https://imgur.com/DRyl5Zs.jpg', '\\|/': 'https://imgur.com/VUPJCcd.jpg', '沒了': 'https://imgur.com/X0T8vb7.jpg', '公園還有位子嗎': 'https://imgur.com/dfyjj8s.jpg', '<3': 'https://imgur.com/IgKGAIG.jpg', '給我都好': 'https://imgur.com/Rv3EqDV.jpg', '吐血': 'https://imgur.com/if7kIqf.jpg', '快抄底': 'https://imgur.com/NxOyJev.jpg', '被現實打醒': 'https://imgur.com/7h5cZ85.jpg', '跌下去虧死你': 'https://imgur.com/jTtcDyy.jpg', '我為什麼會在這裡': 'https://imgur.com/F6RzD2r.jpg', '還錢': 'https://imgur.com/uhCyUos.jpg', 'Q.Q': 'https://imgur.com/tMiuelC.jpg', '都沒了': 'https://imgur.com/9BUZdx5.jpg'}
                 if ask in imgurl_dict:
                     url = imgurl_dict[ask]
                     line_bot_api.reply_message(  # 回復圖片
@@ -55,7 +55,7 @@ def callback(request):
                 if ask == None :
                     break
                 if '啪' in ask :
-                    pa_list = ['https://i.imgur.com/E7SYgOa.jpeg','https://i.imgur.com/ah7Ubom.jpeg','https://i.imgur.com/EEA8c3n.jpg']
+                    pa_list = ['https://i.imgur.com/E7SYgOa.jpeg','https://i.imgur.com/ah7Ubom.jpeg','https://i.imgur.com/EEA8c3n.jpg','https://imgur.com/X0T8vb7.jpg','https://imgur.com/9BUZdx5.jpg']
                     pa = random.choice(pa_list)
                     line_bot_api.reply_message(  # 回復圖片
                         event.reply_token,
@@ -266,6 +266,13 @@ def callback(request):
                 if ask[0:2] == '$ ':
                     ask = ask[2:]
                     ans = crypto(ask)
+                    line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=ans)
+                    )
+                if ask[0:2] == '櫃 ':
+                    ask = ask[2:]
+                    ans = gweei(ask)
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
                         TextSendMessage(text=ans)

@@ -2,25 +2,23 @@ import requests
 import pandas as pd
 import numpy as np
 import datetime
-from bs4 import BeautifulSoup
+import yfinance as yf
 import re
 import json
 import csv
 
 def pay(query):
-    url = "https://yahoo-finance97.p.rapidapi.com/stock-info"
-
-    payload = "symbol=" + query + '&period=1d'
-    headers = {
-        "content-type": "application/x-www-form-urlencoded",
-        "X-RapidAPI-Key": "ece950ca5fmsh02f019c5d4464efp1afb3bjsndb9ae3b18724",
-        "X-RapidAPI-Host": "yahoo-finance97.p.rapidapi.com"
-    }
-
-    response = requests.request("POST", url, data=payload, headers=headers)
-    a = response.json()
+    ticker = yf.Ticker(query)
+    a = ticker.info
     # print(a)
-    return a['data']['regularMarketPrice']
+    all = query + '  \n'+ a['shortName'] + '\n現在價格 : ' + str(a['regularMarketPrice']) + '\n===================\n' + '開盤價格 : '+ str(a['regularMarketOpen']) + '\n===================' + '\n價格變動 : ' + str(a['regularMarketPrice']-a['regularMarketPreviousClose']) + '\n昨日收盤 : '+ str(a['regularMarketPreviousClose']) + '\n今日最高 : ' + str(a['regularMarketDayHigh']) + '\n今日最低 : '+ str(a['regularMarketDayLow']) + '\n==================='
+
+    return all
+
+def gweei(query):
+    q = query + '.TWO'
+    return pay(q)
+# print(gweei('4743'))
 
 def conv_to_list(obj):
     '''

@@ -7,44 +7,31 @@ import datetime
 from bs4 import BeautifulSoup
 import json,re
 import fear_and_greed
+import yfinance as yf
 
 def pay():
-    url = "https://yahoo-finance97.p.rapidapi.com/stock-info"
     index_all = ['^GSPC','^DJI','^IXIC']
     an = []
     for i in index_all:
-        payload = "symbol=" + i + '&period=1d'
-        headers = {
-            "content-type": "application/x-www-form-urlencoded",
-            "X-RapidAPI-Key": "ece950ca5fmsh02f019c5d4464efp1afb3bjsndb9ae3b18724",
-            "X-RapidAPI-Host": "yahoo-finance97.p.rapidapi.com"
-        }
-
-        response = requests.request("POST", url, data=payload, headers=headers)
-        a = response.json()['data']['regularMarketPrice']
+        ticker = yf.Ticker(i)
+        a = ticker.info['regularMarketPrice']
         an.append(a)
 
     ans = 'S&P  : {}\nDOW  : {}\nNAS  : {}'.format(an[0],an[1],an[2])
     return ans
+# print(pay())
 
 def pay_oil():
-    url = "https://yahoo-finance97.p.rapidapi.com/stock-info"
     index_all = ['CL=F','BZ=F']
     an = []
     for i in index_all:
-        payload = "symbol=" + i + '&period=1d'
-        headers = {
-            "content-type": "application/x-www-form-urlencoded",
-            "X-RapidAPI-Key": "ece950ca5fmsh02f019c5d4464efp1afb3bjsndb9ae3b18724",
-            "X-RapidAPI-Host": "yahoo-finance97.p.rapidapi.com"
-        }
-
-        response = requests.request("POST", url, data=payload, headers=headers)
-        a = response.json()['data']['regularMarketPrice']
+        ticker = yf.Ticker(i)
+        a = ticker.info['regularMarketPrice']
         an.append(a)
 
     ans = '原油 : {}\n布倫特原油 : {}'.format(an[0],an[1])
     return ans
+# print(pay_oil())
 
 def stockapi(ID):
     if ID == '我要指數':
