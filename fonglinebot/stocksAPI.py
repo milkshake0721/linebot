@@ -34,9 +34,9 @@ def pay_oil():
 # print(pay_oil())
 
 def stockapi(ID):
-    if ID == '我要指數':
+    if ID == '指數':
         all = pay()
-    elif ID == '我要油':
+    elif ID == '油':
         all = pay_oil()
     else:
         ID = ID.upper()
