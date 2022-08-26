@@ -195,6 +195,6 @@ def weather_in_english(query):
 
     # print(all)
     return all
-bb = 'w Tokyo 2'
-print(bb[:2])
-print(weather_in_english(bb[2:]))
+# bb = 'w Tokyo 2'
+# print(bb[:2])
+# print(weather_in_english(bb[2:]))
