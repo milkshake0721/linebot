@@ -113,7 +113,7 @@ def callback(request):
                         ImageSendMessage(original_content_url = url, preview_image_url = url)
                     )
                 if ask == '梗圖列表':
-                    ans = '安息\nGameFi_gg\n我我也要\n安詳\nCrypto_gg\n養我 拜託\nNFT_gg\n你們說話啊\n偽娘\n我有錢\n格局太小\n男生才不會懷孕\n偷嚕\n快幫我\n抽獎我全要\nDeFi_gg\n小錢啦\n看戲\n有bug不影響\n群友賺錢\ndddd\n誇張喔\n槍硬\n弄死你們\nA9\n就是你啦\n沒輸過\n正能量\na9\n不懂不要碰\n沒有，滾\n獨色色\n愣\n你多長\ng8虧爛\n有輸過\n大餅10w\n仰望大佬\n好傷人\n....\n我閉嘴\n我的盤古\n不拉盤？\n!?\n????\n便宜啦\n昨天不是賠錢過\n召喚牛牛\n下輩子一起抄底\n我是廢物\n突然好難受\n我好餓啊\n目光呆滯\n要爆了\n你不是還有生命嗎\n轉帳中\n再也不梭了\n我好想贏\n美股用日幣計價\n噴了噴了\n錢錢飛了\nFirst time?\n熊市做研究\n幣價動態清零\n退錢啊\nQ_Q\n下輩子當狗\n新手賠錢\n哭啊\n每一秒都在蒸發\n盈利呢\n:l\n可4我沒錢\n握草\nv起來啊\nwiwi995\n99sol\n\|/\n沒了\n公園還有位子嗎\n<3\n給我都好\n吐血\n快抄底\n被現實打醒\n跌下去虧死你\n我為什麼會在這裡\n還錢\nQ.Q\n都沒了'
+                    ans = '安息吧\nGameFi_gg\n我我也要\n安詳\nCrypto_gg\n養我 拜託\nNFT_gg\n你們說話啊\n偽娘\n我有錢\n格局太小\n男生才不會懷孕\n偷嚕\n快幫我\n抽獎我全要\nDeFi_gg\n小錢啦\n看戲\n有bug不影響\n群友賺錢\ndddd\n誇張喔\n槍硬\n弄死你們\nA9\n就是你啦\n沒輸過\n正能量\na9\n不懂不要碰\n沒有，滾\n獨色色\n愣\n你多長\ng8虧爛\n有輸過\n大餅10w\n仰望大佬\n好傷人\n....\n我閉嘴\n我的盤古\n不拉盤？\n!?\n????\n便宜啦\n昨天不是賠錢過\n召喚牛牛\n下輩子一起抄底\n我是廢物\n突然好難受\n我好餓啊\n目光呆滯\n要爆了\n你不是還有生命嗎\n轉帳中\n再也不梭了\n我好想贏\n美股用日幣計價\n噴了噴了\n錢錢飛了\nFirst time?\n熊市做研究\n幣價動態清零\n退錢啊\nQ_Q\n下輩子當狗\n新手賠錢\n哭啊\n每一秒都在蒸發\n盈利呢\n:l\n可4我沒錢\n握草\nv起來啊\nwiwi995\n99sol\n\|/\n沒了\n公園還有位子嗎\n<3\n給我都好\n吐血\n快抄底\n被現實打醒\n跌下去虧死你\n我為什麼會在這裡\n還錢\nQ.Q\n都沒了'
                     line_bot_api.reply_message(  # 回復圖片
                         event.reply_token,
                         TextSendMessage(text = ans )
