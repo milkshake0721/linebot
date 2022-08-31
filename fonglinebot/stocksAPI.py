@@ -1,11 +1,6 @@
-from genericpath import exists
-from re import A
-from aiohttp import request
 import finnhub
 import requests
 import datetime
-from bs4 import BeautifulSoup
-import json,re
 import fear_and_greed
 import yfinance as yf
 
@@ -73,7 +68,7 @@ def currency():
     rmb = str(round(1/qu['CNY'],3))
     aud = str(round(1/qu['AUD'],3))
     all = '美金 : ' + usd + '\n日幣 : '+ jpy +'\n歐元 : ' + eur + '\n人民幣:' + rmb  + '\n澳幣 : ' + aud
-    # print('美金 : ' + usd + '\n日幣 : '+ jpy +'\n歐元 : ' + eur )
+
     return all
 # print(currency())
 
@@ -109,7 +104,6 @@ def metal():
             except:
                 continue
 
-    # all = '黃金 : ' + str(gold) + '\n白銀 : ' + str(silver) + '\n白金 : ' + str(platinum) + '\n鈀鈀 : ' + str(palladium)
     return all
 
 def get_greed_pic():
@@ -120,8 +114,4 @@ def get_greed_pic():
     return all
 
 # print(get_greed_pic())
-
-
 # print(stockapi('我要油'))
-# pay('CL=F')
-# pay('CL=F')

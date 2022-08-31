@@ -1,8 +1,8 @@
-import sys
-import datetime
+#純粹計算Nick笑死次數
 
+import datetime
 import pygsheets
-import gspread
+
 gc = pygsheets.authorize(service_file='fonglinebot/LineBot.json')
 sht = gc.open_by_url(
 'https://docs.google.com/spreadsheets/d/1jmZpDVYvshyUN5JP1-YcqDYcwgcJR7aDsCpFIvzpbY0/'
@@ -10,10 +10,6 @@ sht = gc.open_by_url(
 
 tday = datetime.date.today()
 wks_list = sht.worksheets()
-#選取by順序
-# wks = sht.sheet1
-# print(wks)
-#更新名稱
 
 def Nick_lmao_time():
     if str(sht.sheet1.cell('A2').value) != str(tday)  :

@@ -2,10 +2,6 @@ import requests,time
 from bs4 import BeautifulSoup
 
 def gate_io(coin):
-    '''
-    {"quoteVolume":"34916.269532841","baseVolume":"89291720.559167","highestBid":"2594.45","high24hr":"2604.56","last":"2594.45",
-    "lowestAsk":"2594.46","elapsed":"4ms","result":"true","low24hr":"2493.34","percentChange":"0.57"}
-    '''
     coin = coin.upper()
     # url = 'https://data.gateapi.io/api2/1/marketlist'
     url = 'https://data.gateapi.io/api2/1/ticker/' + coin + '_usdt'
@@ -18,7 +14,6 @@ def gate_io(coin):
 
 def crypto(coin):
     url = 'http://ftx.com/api/markets/'+ coin +'/USD'
-    # url = 'http://ftx.com/api/markets/ETH/USDT'
     url_history = 'http://ftx.com/api/markets/' + coin + '/USD/candles?resolution=2592000'
     r = requests.post(url)
     coin = coin.upper()
@@ -29,10 +24,6 @@ def crypto(coin):
     else:
         sel = r.json()['result']
         # print (sel)
-        '''
-        {"success":true,"result":{"name":"ETH/USDT","enabled":true,"postOnly":false,"priceIncrement":0.1,"sizeIncrement":0.001,"minProvideSize":0.001,"last":2585.4,"bid":2585.6,"ask":2585.7,"price":2585.6,"type":"spot","baseCurrency":"ETH","quoteCurrency":"USDT","underlying":null,"restricted":false,"highLeverageFeeExempt":true,"largeOrderThreshold":5000.0,"change1h":-0.004887811261209252,"change24h":-0.06145413626628916,"changeBod":-0.05299783906530418,"quoteVolume24h":63523496.6902,"volumeUsd24h":63543617.12254165}}
-        {'success': True, 'result': {'name': 'NEAR/USD', 'enabled': True, 'postOnly': True, 'priceIncrement': 0.001, 'sizeIncrement': 0.1, 'minProvideSize': 0.1, 'last': None, 'bid': 16.224, 'ask': 17.552, 'price': None, 'type': 'spot', 'baseCurrency': 'NEAR', 'quoteCurrency': 'USD', 'underlying': None, 'restricted': False, 'highLeverageFeeExempt': True, 'largeOrderThreshold': 5000.0, 'change1h': 0.0, 'change24h': 0.0, 'changeBod': 0.0, 'quoteVolume24h': 0.0, 'volumeUsd24h': 0.0, 'priceHigh24h': 0.0, 'priceLow24h': 0.0}}
-        '''
         rh = requests.post(url_history)
 
         sel_h = rh.json()['result']
@@ -53,12 +44,6 @@ def crypto(coin):
         return all
 
 def gasfee():
-    '''
-    {"fast":390,"fastest":480,"safeLow":245,"average":290,"block_time":11,
-    "blockNum":14362667,"speed":0.4876316436867856,"safeLowWait":10.3,"avgWait":1.1,"fastWait":0.5,"fastestWait":0.4,
-    "gasPriceRange":{"4":183.3,"6":183.3,"8":183.3,"10":183.3,"20":183.3,"30":183.3,"40":183.3,"50":183.3,"60":183.3,"70":183.3,"80":183.3,"90":183.3,"100":183.3,"110":183.3,"120":183.3,"130":183.3,"140":183.3,"150":183.3,"160":183.3,"170":183.3,"180":183.3,"190":183.3,"200":183.3,"220":183.3,"240":11.7,"245":10.3,"260":8.3,"280":6.3,"290":1.1,"300":0.9,"320":0.8,"340":0.6,"360":0.5,"380":0.5,"390":0.5,"400":0.4,"420":0.4,"440":0.4,"460":0.4,"480":0.4}}
-    '''
-    # url = 'http://ethgasstation.info/api/ethgasAPI.json?'
     url = 'https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=YourApiKeyToken'
     r = requests.post(url)
     sel = r.json()['result']
@@ -103,8 +88,6 @@ def all_spot_margin():
                 ra = str(round(sel[i]['estimate']*24*365*100,1))
                 # print(sel[i]['time'])
                 r = r + '|'+ find[k] +'|\t' + ra + '%\n'
-    # print(r)
-    # rate = '|USDT|  ' + str(round(spot['USDT']['rate']*24*365*100,1)) + '%\n|USD  |  ' +str(round(spot['USD']['rate']*24*365*100,1)) +  '%\n|BTC  |  ' +str(round(spot['BTC']['rate']*24*365*100,1)) +  '%\n|ETH  |  ' + str(round(spot['ETH']['rate']*24*365*100,1)) +  '%\n|BNB  |  ' + str(round(spot['BNB']['rate']*24*365*100,1)) + '%'
 
     return r
 
