@@ -1,3 +1,4 @@
+from time import time
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.views.decorators.csrf import csrf_exempt
@@ -13,7 +14,7 @@ from .stocksAPI import stockapi,currency,metal,get_greed_pic
 from .do_excel import Nick_lmao_time,check_Nick_lmao_time
 from .twstock import oil_price,eggprice,chickenprice,gweei
 from .weather import ask_weather,weather_in_english
-import random
+import random,time
  
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
@@ -87,6 +88,15 @@ def callback(request):
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
                         TextSendMessage(text=com)
+                    )
+                if  ask == '孟霖告白' :
+                    now_time = time.localtime()
+                    mont = 12 - now_time.tm_mon
+                    days = 25 - now_time.tm_mday
+                    ans = '距離告白還有{}個月又{}天'.format(mont,days)
+                    line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=ans)
                     )
                 if  '我要嫖' in ask or ask == '我要半套' or ask == '我要全套':
                     command_list = ['👀','✂️🐔','🔪🐔','2000/1s','free','wow','15000/1d','ˊˇˋ','🧐','喀嚓','Nick很高興為您服務']
