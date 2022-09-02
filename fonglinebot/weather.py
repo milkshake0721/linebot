@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 import requests
-from apikey import WEATHER_APIKEY
+from .apikey import WEATHER_APIKEY
 
 week = ["這週", "本周", "下週", "這周", "下周", "本週"]
 loc = [

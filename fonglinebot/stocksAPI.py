@@ -3,7 +3,7 @@ import requests
 import datetime
 import fear_and_greed
 import yfinance as yf
-from apikey import STOCKAPIKEY,CURRENCYKEY
+from .apikey import STOCKAPIKEY,CURRENCYKEY
 
 def pay():
     index_all = ['^GSPC','^DJI','^IXIC']
