@@ -3,6 +3,7 @@ import requests
 import datetime
 import fear_and_greed
 import yfinance as yf
+from apikey import STOCKAPIKEY,CURRENCYKEY
 
 def pay():
     index_all = ['^GSPC','^DJI','^IXIC']
@@ -42,7 +43,7 @@ def stockapi(ID):
         tomarrow = datetime_dt + oneday
         yesterday = yesterday.strftime("%Y-%m-%d")
         tomarrow = tomarrow.strftime("%Y-%m-%d")
-        finnhub_client = finnhub.Client(api_key="c8k6sqaad3i8fk1kn8ag")
+        finnhub_client = finnhub.Client(api_key=STOCKAPIKEY)
         ans = finnhub_client.quote(ID)
         # print(ans)
         news = finnhub_client.company_news(ID, _from = yesterday , to = today)
@@ -59,7 +60,7 @@ def stockapi(ID):
 # print(stockapi('hl'))
 
 def currency():
-    finnhub_client = finnhub.Client(api_key="sandbox_c8k6qfaad3i8fk1kn7c0")
+    finnhub_client = finnhub.Client(api_key=CURRENCYKEY)
     _currency = finnhub_client.forex_rates(base = 'TWD')
     qu = _currency['quote']
     usd = str(round(1/qu['USD'],3))

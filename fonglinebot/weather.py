@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 import requests
-
+from apikey import WEATHER_APIKEY
 
 week = ["這週", "本周", "下週", "這周", "下周", "本週"]
 loc = [
@@ -141,7 +141,7 @@ def weather_in_english(query):
     
     BaseURL = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/'
 
-    ApiKey='82W8W5QY9JMFUHV9AKHLTN792'
+    ApiKey=WEATHER_APIKEY
     #UnitGroup sets the units of the output - us or metric
     UnitGroup ='metric'
 
@@ -195,6 +195,6 @@ def weather_in_english(query):
 
     # print(all)
     return all
-# bb = 'w Tokyo 2'
+bb = 'w Tokyo 2'
 # print(bb[:2])
-# print(weather_in_english(bb[2:]))
+print(weather_in_english(bb[2:]))
