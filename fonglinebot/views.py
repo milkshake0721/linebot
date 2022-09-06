@@ -249,7 +249,7 @@ def callback(request):
                 if ask == '匯率' :
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
-                        TextSendMessage(text=currency())
+                        TextSendMessage(text=twexrate())
                     )    
                 if ask == '我要黃金' :
                     ran = [0,1]
