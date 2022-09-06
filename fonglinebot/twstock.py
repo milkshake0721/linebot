@@ -143,7 +143,7 @@ def twexrate():
                 ans += '即期    買          賣\n'
                 # print(i[0],i[3],i[13])
             if j!= 0 :
-                ans += '{} : \t {}\t{}\n'.format(i[0],'%.4f'%float(i[3]),'%.4f'%float(i[13]))
+                ans += '{} : \t{} \t {}\n'.format(i[0],i[3],i[13])
                 # print(i[0],float(i[3]),float(i[13]))
         j+=1
     return ans
