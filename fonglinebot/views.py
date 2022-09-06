@@ -12,7 +12,7 @@ from .defineWTD import wtd
 from .crypto_get import crypto,gasfee,spot_margin,all_spot_margin,crypto_greed,usdt,cryptoall
 from .stocksAPI import stockapi,currency,metal,get_greed_pic
 from .do_excel import Nick_lmao_time,check_Nick_lmao_time
-from .twstock import oil_price,eggprice,chickenprice,gweei
+from .twstock import oil_price,eggprice,chickenprice,gweei,twexrate
 from .weather import ask_weather,weather_in_english
 import random,time
  
@@ -117,10 +117,14 @@ def callback(request):
                 if  ask == '香瓜' and userid == 'U1c1925ccd29c125ed845cc2db637f39b' :
                     # ans = 'Your ID is :' + userid + '💩'
                     # url = 'https://markets.money.cnn.com/Marketsdata/uploadhandler/z678f7d0azd283da5dca51434aad5398d0938eb5f4.png'
-                    url = 'https://alternative.me/crypto/fear-and-greed-index.png'
-                    line_bot_api.reply_message(  # 回復圖片
+                    # url = 'https://alternative.me/crypto/fear-and-greed-index.png'
+                    # line_bot_api.reply_message(  # 回復圖片
+                    #     event.reply_token,
+                    #     ImageSendMessage(original_content_url = url, preview_image_url = url)
+                    # )
+                    line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
-                        ImageSendMessage(original_content_url = url, preview_image_url = url)
+                        TextSendMessage(text = twexrate() )
                     )
                 if ask == '梗圖列表':
                     ans = '安息吧\nGameFi_gg\n我我也要\n安詳\nCrypto_gg\n養我 拜託\nNFT_gg\n你們說話啊\n偽娘\n我有錢\n格局太小\n男生才不會懷孕\n偷嚕\n快幫我\n抽獎我全要\nDeFi_gg\n小錢啦\n看戲\n有bug不影響\n群友賺錢\ndddd\n誇張喔\n槍硬\n弄死你們\nA9\n就是你啦\n沒輸過\n正能量\na9\n不懂不要碰\n沒有，滾\n獨色色\n愣\n你多長\ng8虧爛\n有輸過\n大餅10w\n仰望大佬\n好傷人\n....\n我閉嘴\n我的盤古\n不拉盤？\n!?\n????\n便宜啦\n昨天不是賠錢過\n召喚牛牛\n下輩子一起抄底\n我是廢物\n突然好難受\n我好餓啊\n目光呆滯\n要爆了\n你不是還有生命嗎\n轉帳中\n再也不梭了\n我好想贏\n美股用日幣計價\n噴了噴了\n錢錢飛了\nFirst time?\n熊市做研究\n幣價動態清零\n退錢啊\nQ_Q\n下輩子當狗\n新手賠錢\n哭啊\n每一秒都在蒸發\n盈利呢\n:l\n可4我沒錢\n握草\nv起來啊\nwiwi995\n99sol\n\|/\n沒了\n公園還有位子嗎\n<3\n給我都好\n吐血\n快抄底\n被現實打醒\n跌下去虧死你\n我為什麼會在這裡\n還錢\nQ.Q\n都沒了'

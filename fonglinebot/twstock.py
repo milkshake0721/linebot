@@ -1,7 +1,7 @@
 import requests
 import datetime
 import yfinance as yf
-import csv
+import csv,urllib.request
 
 def pay(query):
     ticker = yf.Ticker(query)
@@ -128,6 +128,25 @@ def chickenprice():
 
     all = '一般白雞 ' + w_chicken + ' 元/台斤\n紅羽土雞 ' + r_chicken + ' 元/台斤\n黑羽土雞 ' + b_chicken + ' 元/台斤'
     return all
+
+def twexrate():
+    ans = ''
+    url = 'https://rate.bot.com.tw/xrt/flcsv/0/day'
+    webpage = urllib.request.urlopen(url)
+    data = csv.reader(webpage.read().decode('utf-8').splitlines())
+    j=0
+    for i in data:
+        if i[3]=='0.00000':
+            pass
+        else:
+            if j == 0:
+                ans += '{}\t{}\t{}\n'.format(i[0],i[3],i[13])
+                # print(i[0],i[3],i[13])
+            if j!= 0 :
+                ans += '{}\t{}\t{}\n'.format(i[0],float(i[3]),float(i[13]))
+                # print(i[0],float(i[3]),float(i[13]))
+        j+=1
+    return ans
 # print(oil_price())
 # def makepretty(ans):
 #     a = 0
