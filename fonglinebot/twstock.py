@@ -140,7 +140,8 @@ def twexrate():
             pass
         else:
             if j == 0:
-                ans += '{}\t跟你買\t賣你\n'.format(i[0])
+                # ans += '{}\t\t賣你\n'.format(i[0])
+                pass
                 # print(i[0],i[3],i[13])
             if j!= 0 :
                 ans += '{} : \t {}\n'.format(i[0],float(i[13]))
