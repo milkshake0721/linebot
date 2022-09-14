@@ -134,6 +134,7 @@ def twexrate():
     url = 'https://rate.bot.com.tw/xrt/flcsv/0/day'
     webpage = urllib.request.urlopen(url)
     data = csv.reader(webpage.read().decode('utf-8').splitlines())
+    diction = {'USD':'美金','HKD':'港幣','GBP':'英鎊','AUD':'澳幣','CAD':'加大','SGD':'新幣','CHF':'法郎','JPY':'日幣','ZAR':'南非','SEK':'瑞典','NZD':'紐元','THB':'泰幣','PHP':'菲賓','IDR':'印尼','EUR':'歐元','KRW':'韓元','VND':'越盾','MYR':'馬來膜','CNY':'人民'}
     j=0
     for i in data:
         if i[3]=='0.00000':
@@ -143,7 +144,7 @@ def twexrate():
                 ans += '即期    買          賣\n'
                 # print(i[0],i[3],i[13])
             if j!= 0 :
-                ans += '{} : \t{} \t {}\n'.format(i[0],i[3],i[13])
+                ans += '{} : \t {}\t{}\n'.format(diction[i[0]],i[3],i[13])
                 # print(i[0],float(i[3]),float(i[13]))
         j+=1
     return ans
