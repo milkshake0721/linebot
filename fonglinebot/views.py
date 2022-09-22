@@ -71,17 +71,12 @@ def callback(request):
                         TextSendMessage(text=com)
                     )
                 if ask == '指令列表':
-                    ans = '《查股市》\n◇美股\n「us 指數/tsla/amzn…」\n「美股貪婪」\n◇台股\n「tw 加權/台積電/2330…」\n\n《查幣圈》\n「$ btc/eth…」\n「gas/gas fee/gasfee」\n「usdt匯率」\n「匯率」\n「貸出 btc/eth…」\n「放貸利率」\n「幣圈貪婪」\n\n《查鏈遊》\n「!lms」\n「!stepn」\n\n《查物價》\n「我要黃金」\n「蛋價」\n「豬價」\n「雞價」\n「油價」\n「房價」\n\n《天氣》\n「台北天氣」\n「台中下週天氣」\n「w tokyo 2」(數字代表天數)\n\n《Meme》\n「啪」\n「分」\n「腳麻了」\n「我想學英文」\n「尼克笑死幾次」\n'
+                    ans = '《查股市》\n◇美股\n「us 指數/tsla/amzn…」\n「美股貪婪」\n◇台股\n「tw 加權/台積電/2330…」\n\n《查幣圈》\n「$ btc/eth…」\n「gas/gas fee/gasfee」\n「usdt匯率」\n「匯率」\n「貸出 btc/eth…」\n「放貸利率」\n「幣圈貪婪」\n\n《查鏈遊》\n「!lms」\n「!stepn」\n\n《查物價》\n「我要黃金」\n「蛋價」\n「豬價」\n「雞價」\n「油價」\n「房價」\n\n《天氣》\n「台北天氣」\n「台中下週天氣」\n「w tokyo 2」(數字代表天數)\n\n《Meme》\n「啪」\n「分」\n「腳麻了」\n「尼克笑死幾次」\n'
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
                         TextSendMessage(text=ans)
                     )
-                if ask == '我想學英文' :
-                    com = 'Let me speak 學英文來賺錢！\nhttps://www.rayskyinvest.com/64390/let-me-speak-lms'
-                    line_bot_api.reply_message(  # 回復訊息文字
-                        event.reply_token,
-                        TextSendMessage(text=com)
-                    )
+
                 if  ask == '孟霖啊' :
                     command_list = ['小雞雞怎麼了?','脖子出來','脖子還舒服嗎？','脊椎脊椎脊椎脊椎脊椎脊椎','小JJ','3mm','脊椎 x_x','喀嚓']
                     com = random.choice(command_list)
