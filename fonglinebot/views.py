@@ -83,21 +83,13 @@ def callback(request):
                         TextSendMessage(text=com)
                     )
                 if  ask == '孟霖啊' :
-                    command_list = ['小雞雞怎麼了?','脖子出來','脖子還舒服嗎？','2030之前都單身吧','脊椎脊椎脊椎脊椎脊椎脊椎','2030🤔','小JJ','3mm','脊椎 x_x','喀嚓']
+                    command_list = ['小雞雞怎麼了?','脖子出來','脖子還舒服嗎？','脊椎脊椎脊椎脊椎脊椎脊椎','小JJ','3mm','脊椎 x_x','喀嚓']
                     com = random.choice(command_list)
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
                         TextSendMessage(text=com)
                     )
-                if  ask == '孟霖告白' :
-                    now_time = time.localtime()
-                    mont = 12 - now_time.tm_mon
-                    days = 25 - now_time.tm_mday
-                    ans = '距離告白還有{}個月又{}天'.format(mont,days)
-                    line_bot_api.reply_message(  # 回復訊息文字
-                        event.reply_token,
-                        TextSendMessage(text=ans)
-                    )
+                
                 if  '我要嫖' in ask or ask == '我要半套' or ask == '我要全套':
                     command_list = ['👀','✂️🐔','🔪🐔','2000/1s','free','wow','15000/1d','ˊˇˋ','🧐','喀嚓','Nick很高興為您服務']
                     com = random.choice(command_list)
