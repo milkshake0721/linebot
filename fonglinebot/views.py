@@ -262,7 +262,7 @@ def callback(request):
                         event.reply_token,
                         TextSendMessage(text='很高 >w<')
                         )
-                if ask == '幣價' or ask == '1u4ru84':
+                if ask == '幣價' or ask == '1u4ru84' or ask == '🫴🏻':
                     # ran = [0,1]
                     # a = ['還問啊？','很低啦','OuO?','QAQ','很低 別再問啦>w<','記得多看少動啦']
                     # cho = random.choices(ran,weights=(75,25))
