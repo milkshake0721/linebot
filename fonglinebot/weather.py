@@ -180,16 +180,16 @@ def weather_in_english(query):
     if days == 1:
         for i in range(days):
             all += '{}\n\n'.format(r_weather['days'][i]['datetime'])
-            all += '氣溫{}~{}度\n'.format(r_weather['days'][i]['tempmax'],r_weather['days'][i]['tempmin'])
-            all += '體感{}~{}度\n\n'.format(r_weather['days'][i]['feelslikemax'],r_weather['days'][i]['feelslikemin'])
+            all += '氣溫{}~{}度\n'.format(r_weather['days'][i]['tempmin'],r_weather['days'][i]['tempmax'])
+            all += '體感{}~{}度\n\n'.format(r_weather['days'][i]['feelslikemin'],r_weather['days'][i]['feelslikemax'])
             all += '日出時間{}\n日落時間{}\n'.format(r_weather['days'][i]['sunrise'],r_weather['days'][i]['sunset'])
             all += '{}，降雨機率{}%\n'.format(r_weather['days'][i]['conditions'],r_weather['days'][i]['precipprob'])
             all += '{}\n'.format(r_weather['days'][i]['description'])
     else:
         for i in range(days):
             all += '{}\n\n'.format(r_weather['days'][i]['datetime'])
-            all += '氣溫{}~{}度\n'.format(r_weather['days'][i]['tempmax'],r_weather['days'][i]['tempmin'])
-            all += '體感{}~{}度\n\n'.format(r_weather['days'][i]['feelslikemax'],r_weather['days'][i]['feelslikemin'])
+            all += '氣溫{}~{}度\n'.format(r_weather['days'][i]['tempmin'],r_weather['days'][i]['tempmax'])
+            all += '體感{}~{}度\n\n'.format(r_weather['days'][i]['feelslikemin'],r_weather['days'][i]['feelslikemax'])
             all += '{}，降雨機率{}%\n'.format(r_weather['days'][i]['conditions'],r_weather['days'][i]['precipprob'])
             all += '\n'
     # print(datetime)
