@@ -54,3 +54,4 @@ urllib3==1.26.8
 userpath==1.8.0
 yarl==1.7.2
 yfinance==0.1.74
+python-dotenv==0.21.0

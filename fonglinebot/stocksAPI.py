@@ -3,7 +3,9 @@ import requests
 import datetime
 import fear_and_greed
 import yfinance as yf
-from .apikey import STOCKAPIKEY,CURRENCYKEY
+import os 
+from dotenv import load_dotenv
+load_dotenv()
 
 def pay():
     index_all = ['^GSPC','^DJI','^IXIC']
@@ -43,7 +45,7 @@ def stockapi(ID):
         tomarrow = datetime_dt + oneday
         yesterday = yesterday.strftime("%Y-%m-%d")
         tomarrow = tomarrow.strftime("%Y-%m-%d")
-        finnhub_client = finnhub.Client(api_key=STOCKAPIKEY)
+        finnhub_client = finnhub.Client(api_key=os.getenv("STOCKAPIKEY"))
         ans = finnhub_client.quote(ID)
         # print(ans)
         news = finnhub_client.company_news(ID, _from = yesterday , to = today)
@@ -59,19 +61,6 @@ def stockapi(ID):
 
 # print(stockapi('hl'))
 
-def currency():
-    finnhub_client = finnhub.Client(api_key=CURRENCYKEY)
-    _currency = finnhub_client.forex_rates(base = 'TWD')
-    qu = _currency['quote']
-    usd = str(round(1/qu['USD'],3))
-    jpy = str(round(1/qu['JPY'],3))
-    eur = str(round(1/qu['EUR'],3))
-    rmb = str(round(1/qu['CNY'],3))
-    aud = str(round(1/qu['AUD'],3))
-    all = '美金 : ' + usd + '\n日幣 : '+ jpy +'\n歐元 : ' + eur + '\n人民幣:' + rmb  + '\n澳幣 : ' + aud
-
-    return all
-# print(currency())
 
 def metal():
     url = 'https://api.metals.live/v1/spot'
