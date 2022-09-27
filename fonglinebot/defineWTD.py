@@ -1,6 +1,6 @@
 from .twstock import gettwstock
 import pprint
-from .stocksAPI import stockapi,currency
+from .stocksAPI import stockapi
 def wtd(query):
     if query[0:3] == 'tw ' or query[0:3] == 'TW ' or query[0:3] == 'Tw ':
         query = query[3:]
