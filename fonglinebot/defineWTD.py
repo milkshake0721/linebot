@@ -18,10 +18,6 @@ def wtd(query):
         ans = stockapi(query)
         return ans
 
-    elif query == '匯率':
-        ans = currency()
-        return ans
-
     else:
         ans = None
         pass
