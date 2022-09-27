@@ -10,7 +10,7 @@ from linebot.models import MessageEvent, TextSendMessage, ImageSendMessage
 
 from .defineWTD import wtd
 from .crypto_get import crypto,gasfee,spot_margin,all_spot_margin,crypto_greed,usdt,cryptoall
-from .stocksAPI import stockapi,currency,metal,get_greed_pic
+from .stocksAPI import stockapi,metal,get_greed_pic
 from .do_excel import Nick_lmao_time,check_Nick_lmao_time
 from .twstock import oil_price,eggprice,chickenprice,gweei,twexrate
 from .weather import ask_weather,weather_in_english
