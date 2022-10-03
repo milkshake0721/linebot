@@ -27,7 +27,7 @@ def ask_heat(que):
             # if now_point == 100:break
     if ans not in possible:possible.append(ans)
 
-    if len(possible) < 6 :
+    if len(possible) < 5 :
         for i in range(len(possible)):
             if i  == len(possible)-1:
                 finall_ans += read_c_[possible[i]][:-1]
@@ -54,4 +54,4 @@ def ask_heat(que):
                 finall_ans += read_c_[race_list[i]] + '\n'
     return finall_ans
 
-# print(ask_heat('牛排'))
+print(ask_heat('牛排'))
