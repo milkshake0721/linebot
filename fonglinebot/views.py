@@ -14,6 +14,7 @@ from .stocksAPI import stockapi,metal,get_greed_pic
 from .do_excel import Nick_lmao_time,check_Nick_lmao_time
 from .twstock import oil_price,eggprice,chickenprice,gweei,twexrate
 from .weather import ask_weather,weather_in_english
+from .heat import ask_heat
 import random,time
  
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
@@ -274,7 +275,13 @@ def callback(request):
                         event.reply_token,
                         TextSendMessage(text=ans)
                     )
-                
+                if ask[0:3] == '熱量 ':
+                    ask = ask[3:]
+                    ans = ask_heat(ask)
+                    line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=ans)
+                    )
                 if ask[0:2] == '$ ':
                     ask = ask[2:]
                     ans = crypto(ask)
