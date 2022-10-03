@@ -29,7 +29,10 @@ def ask_heat(que):
 
     if len(possible) < 6 :
         for i in range(len(possible)):
-            finall_ans += read_c_[possible[i]] + '\n'
+            if i  == len(possible)-1:
+                finall_ans += read_c_[possible[i]][:-1]
+            else:
+                finall_ans += read_c_[possible[i]] + '\n'
     else:
         race_list = [0,0]
         for i in possible:
@@ -45,7 +48,10 @@ def ask_heat(que):
 
         for i in range(len(race_list)):
             if i == 0:continue
-            finall_ans += read_c_[race_list[i]] + '\n'
+            if i == len(race_list)-1:
+                finall_ans += read_c_[race_list[i]][:-1]
+            else:
+                finall_ans += read_c_[race_list[i]] + '\n'
     return finall_ans
 
-print(ask_heat('Nick'))
+print(ask_heat('牛排'))
