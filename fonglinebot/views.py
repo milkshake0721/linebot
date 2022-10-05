@@ -135,6 +135,21 @@ def callback(request):
                         event.reply_token,
                         TextSendMessage(text=egg)
                     )
+                if '要吃啥' in ask or '要吃什麼' in ask:
+                    dinner_list = "披薩 法料 熱炒 火鍋 水餃 鍋貼 炒飯 地瓜 麵線 滷味 水果 牛排 義大利麵 夜市 麵包 粥 泡麵 土 墨西哥捲餅 咖哩飯 牛肉麵 陽春麵 丼飯 壽司 鰻魚飯 炸豬排 滷肉飯 排骨便當 雞排 瑞典肉丸 漢堡包 帕尼尼 壽喜燒 燒烤 咖啡廳 千層麵 拉麵 刀削麵 龍蝦 頤宮".split()
+                    lunch_list = "披薩 法料 熱炒 火鍋 水餃 鍋貼 地瓜 炒飯 麵線 滷味 水果 水果 牛排 義大利麵 麵包 粥 泡麵 土 墨西哥捲餅 咖哩飯 牛肉麵 陽春麵 丼飯 壽司 鰻魚飯 炸豬排 滷肉飯 排骨便當 雞排 瑞典肉丸 漢堡包 帕尼尼 壽喜燒 燒烤 咖啡廳 千層麵 拉麵 刀削麵 龍蝦 頤宮".split()
+                    breakfast = "蛋餅 燒餅 油條 蔥抓餅 蔥油餅 羊肉湯 巧克力/花生厚片 麵線 鐵板麵 漢堡包 三明治 水果 麵包 帕尼尼 果習 粥 包子 饅頭 土 鹹豆漿".split()
+                    if '早餐'in ask:
+                        food = random.choice(breakfast)
+                    elif '午餐'in ask:
+                        food = random.choice(lunch_list)
+                    elif '晚餐'in ask:
+                        food = random.choice(dinner_list)
+                    else:break     
+                    line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=food)
+                    )
                 if ask == '雞價':
                     chicken = chickenprice()
                     line_bot_api.reply_message(  # 回復訊息文字
