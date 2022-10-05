@@ -77,6 +77,40 @@ def callback(request):
                         event.reply_token,
                         TextSendMessage(text=ans)
                     )
+                if '米其林' in ask and '找' in ask:
+                    taipeimi_list = [["教父牛排","De Nuit","富錦樹台菜香檳（松山）","金蓬萊遵古台菜","Impromptu by Paul Lee","謙安和","吉兆割烹壽司","LONGTAIL","明福台菜海產","米香","渥達尼斯磨坊","山海樓","牡丹","明壽司","鮨野村","鮨隆","T+T","天香樓","雅閣","Holt","巴黎廳 1930 X 高山英紀","欣葉 鐘菜","壽司芳","彧割烹"],["L’ATELIER de Joël Robuchon 侯布雄","logy","RAW","祥雲龍吟","態芮 Tairroir","請客樓"],["頤宮"]]
+                    taichungmi_list = [["鹽之華","Forchetta","俺達的肉屋","澀"],["JL Studio"],["沒那東西"]]
+                    kaoshung_list = [["Liberté","承Sho"],["沒那東西"],["沒那東西"]]
+                    allmi_list = [taipeimi_list[0]+taichungmi_list[0]+kaoshung_list[0],taipeimi_list[1]+taichungmi_list[1],taipeimi_list[2]]
+
+                    res_list = [[],[],[]]
+                    if '台北' in ask or '高雄以外' in ask or '台中以外' in ask and '台北以外'not in ask:
+                        res_list = taipeimi_list
+                    elif '台中' in ask or '台北以外' in ask :
+                        res_list = taichungmi_list
+                    elif '高雄' in ask :
+                        res_list = kaoshung_list
+                    elif '彰化' not in ask and '新北' not in ask and '基隆' not in ask and '桃園' not in ask and '新竹' not in ask and '苗栗' not in ask and '南投' not in ask and '雲林' not in ask and '嘉義' not in ask and '花蓮' not in ask and '台東' not in ask and '宜蘭' not in ask and '屏東' not in ask and '台南' not in ask :
+                        res_list= allmi_list
+                    elif '彰化' in ask or '新北'  in ask or '基隆'  in ask or '桃園'  in ask or '新竹'  in ask or '苗栗'  in ask or '南投'  in ask or '雲林'  in ask or '嘉義'  in ask or '花蓮'  in ask or '台東'  in ask or '宜蘭'  in ask or '屏東'  in ask or '台南'  in ask :
+                        res_list= [['米其林沙漠'],['米其林沙漠'],['米其林沙漠']]
+                    if '一星' in ask:
+                        ans = random.choice(res_list[0])
+                    elif '二星' in ask:
+                        ans = random.choice(res_list[1])
+                    elif '三星' in ask:
+                        ans = random.choice(res_list[2])
+                    else:
+                        l = res_list[0]+res_list[1]+res_list[2]
+                        if l ==[]:
+                            ans = '去問google啦'
+                        else:
+                            ans = (random.choice(l))
+
+                    line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=ans)
+                    )
 
                 if  ask == '孟霖啊' :
                     command_list = ['小雞雞怎麼了?','脖子出來','脖子還舒服嗎？','脊椎脊椎脊椎脊椎脊椎脊椎','小JJ','3mm','脊椎 x_x','喀嚓']
