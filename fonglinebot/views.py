@@ -102,6 +102,7 @@ def callback(request):
                         ans = random.choice(res_list[2])
                     else:
                         l = res_list[0]+res_list[1]+res_list[2]
+                        while '沒那東西' in l :l.pop()
                         if l ==[]:
                             ans = '去問google啦'
                         else:
