@@ -180,6 +180,8 @@ def callback(request):
                         food = random.choice(lunch_list)
                     elif '晚餐'in ask:
                         food = random.choice(dinner_list)
+                    elif '宵夜' in ask:
+                        food = '還吃啊'
                     else:break     
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
