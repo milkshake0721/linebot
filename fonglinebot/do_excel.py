@@ -3,7 +3,7 @@
 import datetime
 import pygsheets
 
-gc = pygsheets.authorize(service_file='fonglinebot/LineBot.json')
+gc = pygsheets.authorize(service_file='LineBot.json')
 sht = gc.open_by_url(
 'https://docs.google.com/spreadsheets/d/1jmZpDVYvshyUN5JP1-YcqDYcwgcJR7aDsCpFIvzpbY0/'
 )
