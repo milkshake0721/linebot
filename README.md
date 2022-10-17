@@ -1,6 +1,7 @@
 # linebot
 This is my Linebot
 結合了 台股、美股、加密貨幣、熱量查詢、天氣查詢、台灣米其林查詢等功能的機器人
+
     《查股市》
     ◇美股
     「us 指數/tsla/amzn…」
@@ -34,7 +35,12 @@ This is my Linebot
     「台中下週天氣」
     「w tokyo 2」(數字代表天數)(查國外天氣用的)
 
+    《熱量》
+    「熱量 拿鐵咖啡」
+    「熱量 牛排」
+
     《Meme》
+    「梗圖列表」
     「啪」
     「分」
     「腳麻了」
@@ -42,11 +48,10 @@ This is my Linebot
 
 
 
-
-
 Need to add .env & LineBot.json to the root directory.
 
 
 .env :
+
       WEATHER_APIKEY='get from weather.visualcrossing.com'
       STOCKAPIKEY='get from finnhub'
