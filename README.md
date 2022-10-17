@@ -1,7 +1,7 @@
 # linebot
-This is my Linebot
 
-LineBot的ID : @761uhtjp
+## LineBot ID : @761uhtjp
+### 歡迎加來使用~
 
 
 結合了 台股、美股、加密貨幣、熱量查詢、天氣查詢、台灣米其林查詢等功能的機器人
