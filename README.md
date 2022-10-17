@@ -58,8 +58,9 @@
 
 
 
-Need to add .env & LineBot.json to the root directory.
+## Need to add .env & LineBot.json to the root directory.
 
+Linebot.json是放google表單的使用認證，我純粹拿來計算我朋友在聊天室「笑死」幾次用的，可以自行再開發其他用途或直接拿掉🤣
 
 .env :
 
