@@ -1,6 +1,4 @@
-# linebot
-
-## LineBot ID : @761uhtjp
+# LineBot ID : @761uhtjp
 ### 歡迎加來使用~
 
 
