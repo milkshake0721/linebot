@@ -11,11 +11,13 @@ from linebot.models import MessageEvent, TextSendMessage, ImageSendMessage
 from .defineWTD import wtd
 from .crypto_get import crypto,gasfee,spot_margin,all_spot_margin,crypto_greed,usdt,cryptoall
 from .stocksAPI import stockapi,metal,get_greed_pic
-from .do_excel import Nick_lmao_time,check_Nick_lmao_time
+from .coolfuction import nick_counter,ask_nick_lmao
 from .twstock import oil_price,eggprice,chickenprice,gweei,twexrate
 from .weather import ask_weather,weather_in_english
 from .heat import ask_heat
-import random,time
+from .chat import gpt,img,set_room,img_big,mean_gpt,normal_gpt,stt,JP_gpt,girl_gpt
+import fonglinebot.game_center as gc
+import random,time,json
  
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
@@ -40,11 +42,23 @@ def callback(request):
                 try :
                     ask = event.message.text
                 except:
+                    print(event.message)
+                    if  "audio" == event.message.type:
+                        message_content = line_bot_api.get_message_content(event.message.id)
+                        with open('aaaa.m4a', 'wb') as fd:
+                            for chunk in message_content.iter_content():
+                                fd.write(chunk)
+                        ans = stt('aaaa.m4a')
+                        line_bot_api.reply_message(  # 回復訊息文字
+                            event.reply_token,
+                            TextSendMessage(text=ans)
+                        )
                     break
                 if ask == None :
                     break
                 userid = event.source.user_id
                 ask_type = event.source.type
+                group_id = 0 
                 if ask_type == 'group':
                         group_id = event.source.group_id
                         print('\n\nRoomID : ',group_id)
@@ -56,6 +70,90 @@ def callback(request):
                         event.reply_token,
                         ImageSendMessage(original_content_url = url, preview_image_url = url)
                     )
+                if ask == '設定房間id':
+                    set_room(group_id)
+                    line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text='Done')
+                    )
+                if group_id == 'Ce06b90b70fcf5800313c88f1e7c9562e':     #chatGPT_JP
+                    if ask[0] == '!' or ask[0] == '！':
+                        return
+                    elif ask[0] == '0':
+                        ans = JP_gpt(ask,150,'Ce06b90b70fcf5800313c88f1e7c9562e')
+                        line_bot_api.reply_message(  # 回復訊息文字
+                            event.reply_token,
+                            TextSendMessage(text=ans)
+                        )
+                    # elif ask[0] == '3':
+                    #     ans = JP_gpt(ask,150,'Ce06b90b70fcf5800313c88f1e7c9562e')
+                    #     line_bot_api.reply_message(  # 回復訊息文字
+                    #         event.reply_token,
+                    #         TextSendMessage(text=ans)
+                    #     )
+                    else:
+                        ans = JP_gpt(ask,90,'Ce06b90b70fcf5800313c88f1e7c9562e')
+                        line_bot_api.reply_message(  # 回復訊息文字
+                            event.reply_token,
+                            TextSendMessage(text=ans)
+                        )
+                if group_id in ['C4f5b0949dbaf9af067cca2d171cb7621','Cefae500cec989d24d2f7f5c37bd673d8']:#openAI
+                    if ask[0] == '1':
+                        return
+                    elif ask[0] == '2':
+                        ans = mean_gpt(ask[1:],80)
+                        line_bot_api.reply_message(  # 回復訊息文字
+                            event.reply_token,
+                            TextSendMessage(text=ans)
+                        )
+                    elif ask[0] == '3':
+                        ans = normal_gpt(ask[1:],200)
+                        line_bot_api.reply_message(  # 回復訊息文字
+                            event.reply_token,
+                            TextSendMessage(text=ans)
+                        )
+                    elif ask[0] == '4':
+                        ans = girl_gpt(ask[1:],80)
+                        line_bot_api.reply_message(  # 回復訊息文字
+                            event.reply_token,
+                            TextSendMessage(text=ans)
+                        )
+                    elif ask[0] == '5':
+                        ans = normal_gpt(ask[1:],500)
+                        line_bot_api.reply_message(  # 回復訊息文字
+                            event.reply_token,
+                            TextSendMessage(text=ans)
+                        )
+                    elif ask[0] == '7':
+                        ans = img(ask[1:],256)
+                        if 'https' not in ans:
+                            line_bot_api.reply_message(  # 回復訊息文字
+                            event.reply_token,
+                            TextSendMessage(text=ans)
+                            )
+                        else:
+                            line_bot_api.reply_message(  # 回復圖片
+                                event.reply_token,
+                                ImageSendMessage(original_content_url = ans, preview_image_url = ans)
+                            )  
+                    elif ask[0] == '9':
+                        ans = img_big(ask[1:])
+                        if 'https' not in ans:
+                            line_bot_api.reply_message(  # 回復訊息文字
+                            event.reply_token,
+                            TextSendMessage(text=ans)
+                            )
+                        else:
+                            line_bot_api.reply_message(  # 回復圖片
+                                event.reply_token,
+                                ImageSendMessage(original_content_url = ans, preview_image_url = ans)
+                            )  
+                    else:
+                        ans = gpt(ask,200,group_id)
+                        line_bot_api.reply_message(  # 回復訊息文字
+                            event.reply_token,
+                            TextSendMessage(text=ans)
+                        )
                 if '啪' in ask :
                     pa_list = ['https://i.imgur.com/E7SYgOa.jpeg','https://i.imgur.com/ah7Ubom.jpeg','https://i.imgur.com/EEA8c3n.jpg','https://imgur.com/X0T8vb7.jpg','https://imgur.com/9BUZdx5.jpg']
                     pa = random.choice(pa_list)
@@ -64,12 +162,18 @@ def callback(request):
                         ImageSendMessage(original_content_url = pa, preview_image_url = pa)
                     )
                 if '笑死' in ask and userid == 'U0bdb890d03a5b755f3dbb67eafa74f5d' and ask != '尼克笑死幾次':
-                    Nick_lmao_time()
+                    nick_counter()
                 if ask == '尼克笑死幾次' :
-                    com = check_Nick_lmao_time()
+                    ans = ask_nick_lmao()
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
-                        TextSendMessage(text=com)
+                        TextSendMessage(text=ans)
+                    )
+                if ask[0] == '/':
+                    ans = gc.check_cmd(userid,ask[1:])
+                    line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=ans)
                     )
                 if ask == '指令列表':
                     ans = '《查股市》\n◇美股\n「us 指數/tsla/amzn…」\n「美股貪婪」\n◇台股\n「tw 加權/台積電/2330…」\n\n《查幣圈》\n「$ btc/eth…」\n「gas/gas fee/gasfee」\n「usdt匯率」\n「匯率」\n「貸出 btc/eth…」\n「放貸利率」\n「幣圈貪婪」\n\n《查鏈遊》\n「!lms」\n「!stepn」\n\n《查物價》\n「我要黃金」\n「蛋價」\n「豬價」\n「雞價」\n「油價」\n「房價」\n\n《天氣》\n「台北天氣」\n「台中下週天氣」\n「w tokyo 2」(數字代表天數)\n\n《Meme》\n「啪」\n「分」\n「腳麻了」\n「尼克笑死幾次」\n'
@@ -138,13 +242,7 @@ def callback(request):
                         TextSendMessage(text=com)
                     )
                 if  ask == '香瓜' and userid == 'U1c1925ccd29c125ed845cc2db637f39b' :
-                    # ans = 'Your ID is :' + userid + '💩'
-                    # url = 'https://markets.money.cnn.com/Marketsdata/uploadhandler/z678f7d0azd283da5dca51434aad5398d0938eb5f4.png'
-                    # url = 'https://alternative.me/crypto/fear-and-greed-index.png'
-                    # line_bot_api.reply_message(  # 回復圖片
-                    #     event.reply_token,
-                    #     ImageSendMessage(original_content_url = url, preview_image_url = url)
-                    # )
+                    
                     line_bot_api.reply_message(  # 回復訊息文字
                         event.reply_token,
                         TextSendMessage(text = twexrate() )
@@ -327,6 +425,53 @@ def callback(request):
                         event.reply_token,
                         TextSendMessage(text=ans)
                     )
+                if ask[0:3] == '聊天 ':
+                    ask = ask[3:]
+                    ans = gpt(ask,130,group_id)
+                    line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=ans)
+                    )
+                if ask[0:4] == '小聊天 ':
+                    ask = ask[4:]
+                    ans = mean_gpt(ask,130)
+                    line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=ans)
+                    )
+                if ask[0:4] == '大聊天 ':
+                    ask = ask[4:]
+                    ans = gpt(ask,3000,group_id)
+                    line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=ans)
+                    )
+                if ask[0:3] == '產圖 ':
+                    ask = ask[3:]
+                    ans = img(ask,'256')
+                    if 'https' not in ans:
+                        line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=ans)
+                        )
+                    else:
+                        line_bot_api.reply_message(  # 回復圖片
+                            event.reply_token,
+                            ImageSendMessage(original_content_url = ans, preview_image_url = ans)
+                        )  
+                if ask[0:3] == '大圖 ':
+                    ask = ask[3:]
+                    ans = img(ask,'1024')
+                    if 'https' not in ans:
+                        line_bot_api.reply_message(  # 回復訊息文字
+                        event.reply_token,
+                        TextSendMessage(text=ans)
+                        )
+                    else:
+                        line_bot_api.reply_message(  # 回復圖片
+                            event.reply_token,
+                            ImageSendMessage(original_content_url = ans, preview_image_url = ans)
+                        ) 
                 if ask[0:3] == '熱量 ':
                     ask = ask[3:]
                     ans = ask_heat(ask)

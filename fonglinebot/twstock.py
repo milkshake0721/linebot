@@ -3,18 +3,39 @@ import datetime
 import yfinance as yf
 import csv,urllib.request
 
-def pay(query):
-    ticker = yf.Ticker(query)
-    a = ticker.info
-    # print(a)
-    all = query + '  \n'+ a['shortName'] + '\n現在價格 : ' + str(a['regularMarketPrice']) + '\n===================\n' + '開盤價格 : '+ str(a['regularMarketOpen']) + '\n===================' + '\n價格變動 : ' + str(a['regularMarketPrice']-a['regularMarketPreviousClose']) + '\n昨日收盤 : '+ str(a['regularMarketPreviousClose']) + '\n今日最高 : ' + str(a['regularMarketDayHigh']) + '\n今日最低 : '+ str(a['regularMarketDayLow']) + '\n==================='
+def gweei(stockID):
+    if stockID == 0 or stockID == '加權':
+        link = 'http://mis.twse.com.tw/stock/api/getStockInfo.jsp?json=1&delay=0&ex_ch=otc_o00.tw'
 
-    return all
+    elif stockID[0] <= '9':
+        link = 'http://mis.twse.com.tw/stock/api/getStockInfo.jsp?json=1&delay=0&ex_ch=otc_'+ str(stockID) +'.tw'
+        pass
+    else:
+        with open('fonglinebot/gweei.csv', mode='r') as infile:
+            reader = csv.reader(infile)
+            with open('coors_new.csv', mode='w') as outfile:
+                writer = csv.writer(outfile)
+                mydict = {rows[2]:rows[1] for rows in reader}
+        stockID = mydict[stockID]
 
-def gweei(query):
-    q = query + '.TWO'
-    return pay(q)
-# print(gweei('4743'))
+        link = 'http://mis.twse.com.tw/stock/api/getStockInfo.jsp?json=1&delay=0&ex_ch=otc_'+ str(stockID) +'.tw'
+
+    # link = 'http://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch=tse_2330.tw&json=1&delay=0'
+    # print(link)
+    r = requests.post(link)
+    sel = r.json()['msgArray'][0]
+    if sel['z'] == '-' :
+        now = now = sel['a'][:6]
+    else:
+        now = sel['z']
+    change = (float(now)) - (float(sel['o']))
+    change = round(change, 2)
+    change_p = (float(now) - float(sel['o'])) / float(sel['o']) * 100
+    change_p = round(change_p, 2)
+    all = stockID + '  \n'+ sel['n'] + '\n' + str(round(float(now),2)) + ' (' + str(change_p) + '%)' + '\n===================\n' + '開盤價格 : '+ str(round(float(sel['o']),2)) + '\n===================' + '\n價格變動 : ' + str(change) + '\n昨日收盤 : '+ str(round(float(sel['y']),2)) + '\n今日最高 : ' + str(round(float(sel['h']),2)) + '\n今日最低 : '+ str(round(float(sel['l']),2)) + '\n==================='
+    return all    
+
+# print(gweei('加權'))
 
 def conv_to_list(obj):
     '''
@@ -60,9 +81,10 @@ def date_get_today(with_time=False):
 
 def gettwstock(stockID):
     if stockID == 0 or stockID == '加權':
-        return pay('^TWII')
+        link = 'http://mis.twse.com.tw/stock/api/getStockInfo.jsp?json=1&delay=0&ex_ch=tse_t00.tw'
 
     elif stockID[0] <= '9':
+        link = 'http://mis.twse.com.tw/stock/api/getStockInfo.jsp?json=1&delay=0&ex_ch=tse_'+ str(stockID) +'.tw'
         pass
     else:
         with open('fonglinebot/stocks.csv', mode='r') as infile:
@@ -72,7 +94,7 @@ def gettwstock(stockID):
                 mydict = {rows[1]:rows[0] for rows in reader}
         stockID = mydict[stockID]
 
-    link = 'http://mis.twse.com.tw/stock/api/getStockInfo.jsp?json=1&delay=0&ex_ch=tse_'+ str(stockID) +'.tw'
+        link = 'http://mis.twse.com.tw/stock/api/getStockInfo.jsp?json=1&delay=0&ex_ch=tse_'+ str(stockID) +'.tw'
     # link = 'http://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch=tse_2330.tw&json=1&delay=0'
     # print(link)
     r = requests.post(link)
@@ -157,5 +179,5 @@ def twexrate():
 # print (a)
 # print(a['證券代號'] == num)
 # print(a['證券名稱'])
-# print(gettwstock('2330'))
+# print(gettwstock('加權'))
 # print(gettwstock(0))

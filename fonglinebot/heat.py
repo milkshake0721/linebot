@@ -54,4 +54,4 @@ def ask_heat(que):
                 finall_ans += read_c_[race_list[i]] + '\n'
     return finall_ans
 
-print(ask_heat('牛排'))
+# print(ask_heat('牛排'))

@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ft)cg_3x+w5o(2rem=q@h2f#wa3*p)f7dtw5z3-*@x#rnhwcr$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -32,7 +32,8 @@ LINE_CHANNEL_ACCESS_TOKEN = 'wkmsQ+omNtiJk3oQRFa3t2EUKETXlACq8tbtaNFT6AmPYhPU0WA
 LINE_CHANNEL_SECRET = '6ddfa77ef3f1c725e726bd8482d64294'
 
 ALLOWED_HOSTS = [
-    'fonglinebot.herokuapp.com'
+    'fonglinebot.herokuapp.com',
+    '127.0.0.1'
 ]
 
 # Application definition

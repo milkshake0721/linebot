@@ -13,34 +13,31 @@ def gate_io(coin):
 
 
 def crypto(coin):
-    url = 'http://ftx.com/api/markets/'+ coin +'/USD'
-    url_history = 'http://ftx.com/api/markets/' + coin + '/USD/candles?resolution=2592000'
-    r = requests.post(url)
+    
     coin = coin.upper()
-    # print(r.json())
-    if r.json()['success'] != True or r.json()['result']['price'] == None :
+    url_b = 'https://api.binance.com/api/v3/ticker/price?symbol='+ coin +'USDT'
+    url24h = 'https://api.binance.com/api/v3/ticker/24hr?symbol='+ coin +'USDT' #/api/v3/klines
+    urlk = 'https://data.binance.com/api/v3/klines?symbol=' + coin +'USDT&interval=1M'
+
+    r = requests.get(url24h)
+    # print(r.json()) 
+    if r.json() == {'code': -1121, 'msg': 'Invalid symbol.'} :
         all = gate_io(coin)
         return all
     else:
-        sel = r.json()['result']
+        rk = requests.get(urlk)
+        sellla = rk.json()
+        big_one = 0
+        small_one = 99999999
+        for i in sellla:
+            if float(i[2]) > big_one:big_one=float(i[2])
+            if float(i[3]) < small_one:small_one=float(i[3])
+
+        sel = r.json()
         # print (sel)
-        rh = requests.post(url_history)
-
-        sel_h = rh.json()['result']
-        history_high = 0
-        try:
-            history_low = sel_h[0]['low']
-            for i in range(len(sel_h)):
-                if sel_h[i]['high'] >  history_high:
-                    history_high = sel_h[i]['high']
-                if sel_h[i]['low'] <  history_low:
-                    history_low = sel_h[i]['low']
-            history_high2now = (float(sel['price']) - float(history_high)) / history_high *100
-        except:
-            history_low = 0
-            history_high2now = 0
-
-        all = sel['name'] + '\n| 現價 | ' + str(sel['price']) + ' (' + str(round(float(sel['change24h'])*100,2)) + '%)' + '\n-------------------\n' + '| 最高回落 | ' + str(round(float(history_high2now),3)) + '%\n| 一小變動 | ' + str(round(float(sel['change1h'])*100,3)) + '%\n| 歷史高點 | ' + str(round(float(history_high),3)) + '\n| 歷史低點 | ' + str(round(float(history_low),3)) +  '\n-------------------\nUSD volume in past 24 hours : '+ str(round(float(sel['volumeUsd24h']),0)) 
+        name = sel['symbol']
+        name = name.replace('USDT','')
+        all = name + '\n| 現價 | ' + str(float(sel['lastPrice'])) + ' (' + str(round(float(sel['priceChangePercent']),2)) + '%)' + '\n-------------------\n' + '| 加加減減 | ' + str(round(float(sel['priceChange']),2)) +  '\n| 歷史高點 | ' + str(big_one) + '\n| 最高回落 | ' + str(round((-100*(1 - (round(float(sel['lastPrice']),2)/big_one))),2)) + ' %\n| 歷史低點 | ' + str(small_one) +  '\n-------------------\nUSD volume in past 24 hours : '+ str(round(float(sel['quoteVolume']),0)) 
         return all
 
 def gasfee():
@@ -101,14 +98,22 @@ def crypto_greed():
     return all
 
 def cryptoall():
-    coin = ['btc','eth','bnb','sol','ftt','gt','near']
+    coin = ['BTCUSDT','ETHUSDT','BNBUSDT','SOLUSDT','FTTUSDT','GTUSDT','NEARUSDT']
     price = []
-    for c in coin :
-        url = 'http://ftx.com/api/markets/'+ c +'/USD'
-        r = requests.post(url)
-        sel = str(r.json()['result']['price'])
-        price.append(sel)
-    all = 'BTC : ' + price[0] + '\nETH : ' + price[1] + '\nBNB : ' + price[2] + '\nSOL : ' + price[3] + '\nFTT : ' + price[4] + '\nGT  : ' + price[5] + '\nNear: ' +price[6]
+    url = 'https://api.binance.com/api/v3/ticker/price'
+    r = requests.get(url).json()
+    # print(r)
+    for i in r:
+        # print(i['symbol'])
+        if i['symbol'] in coin:
+            price.append(i)
+    # print(price)
+    all = ''
+    for c in price:
+        all += c['symbol'] + ' : ' + str(round(float(c['price']),2)) + '\n'
+    
+    all = all.replace('USDT','')
+    # all = 'BTC : ' + price[0] + '\nETH : ' + price[1] + '\nBNB : ' + price[2] + '\nSOL : ' + price[3] + '\nFTT : ' + price[4] + '\nGT  : ' + price[5] + '\nNear: ' +price[6]
     return all
 # print(cryptoall())
 def usdt():
@@ -139,4 +144,4 @@ def usdt():
 
     return all
 
-# print(usdt())
+# print(crypto('btc'))

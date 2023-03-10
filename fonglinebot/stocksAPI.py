@@ -97,9 +97,29 @@ def metal():
     return all
 
 def get_greed_pic():
-    pic_url = fear_and_greed.get()
-
-    all = all = '貪婪恐慌\n|   ' + str(pic_url[0])+'   | \n'+pic_url[1]
+    url = 'https://production.dataviz.cnn.io/index/fearandgreed/graphdata'
+    greed = requests.get(
+        url,
+        headers={
+                "User-Agent" : "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.2 Safari/605.1.15"
+                }
+            )
+    # print(greed.json())
+    score = str(round(greed.json()['fear_and_greed']['score'],2))
+    rating = str(greed.json()['fear_and_greed']['rating'])
+    oneweek = str(greed.json()['fear_and_greed']['previous_1_week'])
+    onemounth = str(round(greed.json()['fear_and_greed']['previous_1_month'],2))
+    sp500 = str(greed.json()['market_momentum_sp500']['data'][-1]['y'])
+    sp500_m = str(round(greed.json()['market_momentum_sp500']['score'],2))
+    sp500_rating = str(greed.json()['market_momentum_sp500']['rating'])
+    put_call_options_s = str(round(greed.json()['put_call_options']['score'],2))
+    put_call_options_r = str(greed.json()['put_call_options']['rating'])
+    all = ('貪婪恐慌\n|   ' + score +'   | \n' + rating + '\n一週前 : ' + oneweek + 
+           '\n一個月前 : ' + onemounth + '\n\nsp500 : {}\n    {},{} \n'.format(sp500,sp500_rating,sp500_m) + 
+            '\n看漲期權 : {},{}'.format(put_call_options_r,put_call_options_s)+
+            '\n避險需求 : {},{}'.format(str(greed.json()['safe_haven_demand']['rating']),str(round(greed.json()['safe_haven_demand']['score'],2)))+
+            '\n垃圾債需求 : {},{}'.format(str(greed.json()['junk_bond_demand']['rating']),str(round(greed.json()['junk_bond_demand']['score'],2)))
+            )
 
     return all
 
