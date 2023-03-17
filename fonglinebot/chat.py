@@ -312,6 +312,37 @@ def girl_gpt(query,tokens):
     ans = ans.replace('\n\n','',1)
     return ans
 
+def emoji_gpt(query,tokens):
+
+    url = 'https://api.openai.com/v1/chat/completions'
+
+    messages=[
+        {"role": "user", "content": "這是一個劇本：你扮演一位人類女性，你要用人類女性的說話方式回覆我所有問題，知道的話說[知道]"},
+        {"role": "assistant", "content": "知道"},
+        {"role": "user", "content": "你之後說的每句話後面都要加上[😀、😡、😢、😆]其中一個表情"},
+        {"role": "assistant", "content": "知道了😀"},
+        {"role": "user", "content": query}
+        ]
+
+    body = {
+        "model": "gpt-3.5-turbo",
+        "messages": messages,
+        "max_tokens": tokens,
+        "temperature": 0.6,
+
+    }
+    ans = requests.post(url=url,headers=auth, json=body)
+    ans = ans.json()
+    if 'error' in ans : 
+        ans = requests.post(url=url,headers=auth, json=body)
+        ans = ans.json()
+        if 'error' in ans : 
+            return ans['error']['message']
+
+    ans = ans["choices"][0]["message"]['content']
+    ans = ans.replace('\n\n','',1)
+    return ans
+
 
 
 def stt(audio):

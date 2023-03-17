@@ -15,7 +15,7 @@ from .coolfuction import nick_counter,ask_nick_lmao
 from .twstock import oil_price,eggprice,chickenprice,gweei,twexrate
 from .weather import ask_weather,weather_in_english
 from .heat import ask_heat
-from .chat import gpt,img,set_room,img_big,mean_gpt,normal_gpt,stt,JP_gpt,girl_gpt
+from .chat import gpt,img,set_room,img_big,mean_gpt,normal_gpt,stt,JP_gpt,girl_gpt,emoji_gpt
 import fonglinebot.game_center as gc
 import random,time,json
  
@@ -120,6 +120,12 @@ def callback(request):
                         )
                     elif ask[0] == '5':
                         ans = normal_gpt(ask[1:],500)
+                        line_bot_api.reply_message(  # 回復訊息文字
+                            event.reply_token,
+                            TextSendMessage(text=ans)
+                        )
+                    elif ask[0] == '6':
+                        ans = emoji_gpt(ask[1:],80)
                         line_bot_api.reply_message(  # 回復訊息文字
                             event.reply_token,
                             TextSendMessage(text=ans)
